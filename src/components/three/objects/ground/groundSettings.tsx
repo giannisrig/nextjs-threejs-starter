@@ -12,7 +12,7 @@ const groundSettings: GroundSettings = {
   geometry: new Vector2(1000, 1000),
   position: new Vector3(0, 0, 0),
   rotation: new Euler(-Math.PI / 2, 0, 0),
-  color: new Color(0x65a0b3),
+  color: new Color(0x000000),
 };
 
 export default groundSettings;

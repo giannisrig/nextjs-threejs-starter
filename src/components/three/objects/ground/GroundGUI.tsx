@@ -8,7 +8,7 @@ const GroundGUI = () => {
     geometry: { value: groundSettings.geometry.toArray(), step: 0.1 },
     position: { value: groundSettings.position.toArray(), step: 0.1 },
     rotation: { value: [groundSettings.rotation.x, groundSettings.rotation.y, groundSettings.rotation.z], step: 0.1 },
-    color: { value: "black" },
+    color: { value: "#" + groundSettings.color.getHexString() },
   });
 
   // Create a GroundSettings type object

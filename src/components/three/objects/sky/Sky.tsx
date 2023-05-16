@@ -1,55 +1,34 @@
-import { Mesh } from "three";
+import { Mesh, ShaderMaterialParameters } from "three";
 import * as THREE from "three";
 import { useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import skyShader from "@/components/three/objects/sky/skyShader";
+import skySettings, { SkySettings } from "@/components/three/objects/sky/skySettings";
+import SkyGUI from "@/components/three/objects/sky/SkyGUI";
 
-// Define the sky shader
-const skyShader = {
-  name: "SkyNewShader",
-  side: 1,
-  uniforms: {
-    topColor: { value: new THREE.Color(0x65a0b3) },
-    middleColor: { value: new THREE.Color(0xfee592) },
-    bottomColor: { value: new THREE.Color(0xe09d86) },
-    offset: { value: 400 },
-    exponent: { value: 0.6 },
-  },
-  vertexShader: `
-    varying vec3 vWorldPosition;
-    void main() {
-      vec4 worldPosition = modelMatrix * vec4(position, 1.0);
-      vWorldPosition = worldPosition.xyz;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-  fragmentShader: `
-    uniform vec3 topColor;
-    uniform vec3 bottomColor;
-    uniform float offset;
-    uniform float exponent;
-    varying vec3 vWorldPosition;
-    void main() {
-      float h = normalize(vWorldPosition + offset).y;
-      gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
-    }
-  `,
-};
-
-const Sky = () => {
+const Sky = ({ showGUI = false }) => {
   const ref = useRef<Mesh>();
 
-  useFrame((state, delta) => {
-    // ref.current.position.y = 10 + Math.sin(state.clock.elapsedTime) * 3;
-    // ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z += delta;
-    // ref.current.material.uniforms.rayleigh.value += 0.01 + Math.sin(state.clock.elapsedTime);
-    // ref.current.material.uniforms.sunPosition.value = new Vector3(500, 150, Math.abs(Math.sin(state.clock.elapsedTime)) * 3, 0);
-  });
+  // Set up the settings for the ground plane and use GUI controls if enabled
+  const settings: SkySettings = showGUI ? SkyGUI() : skySettings;
+
+  // Define the sky shader
+  const shaderSettings: ShaderMaterialParameters = {
+    name: "SkyNewShader",
+    side: THREE.BackSide,
+    uniforms: {
+      topColor: { value: settings.uniforms.topColor },
+      bottomColor: { value: settings.uniforms.bottomColor },
+      offset: { value: settings.uniforms.offset },
+      exponent: { value: settings.uniforms.exponent },
+    },
+    vertexShader: skyShader.vertexShader,
+    fragmentShader: skyShader.fragmentShader,
+  };
 
   return (
-    <mesh ref={ref} position={[0, 0, 0]}>
-      <boxBufferGeometry args={[1000, 1000, 1000]} />
-      <shaderMaterial args={[skyShader]} />
-      {/*<meshStandardMaterial color="hotpink" attach={"material"} />*/}
+    <mesh ref={ref} position={[settings.position.x, settings.position.y, settings.position.z]}>
+      <boxBufferGeometry args={[settings.geometry.x, settings.geometry.y, settings.geometry.z]} />
+      <shaderMaterial args={[shaderSettings]} />
     </mesh>
   );
 };

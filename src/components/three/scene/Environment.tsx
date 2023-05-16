@@ -6,6 +6,7 @@ import Ground from "@/components/three/objects/ground/Ground";
 const Environment = () => {
   return (
     <>
+      <Sky showGUI={true} />
       <Ground showGUI={true} />
     </>
   );
