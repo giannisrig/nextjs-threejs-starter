@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import Scene from "@/components/three/scene/Scene";
+import MainScene from "@/components/three/scene/MainScene";
 import cameraSettings from "@/libs/three/cameraSettings";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
-import { threeRatTunnel } from "@/components/three/threeTunnel/threeRatTunnel";
 import { Preload } from "@react-three/drei";
+import { ThreeTunnelOutput } from "@/components/three/threeTunnel/ThreeTunnelOutput";
+import DynamicScenes from "@/components/three/scene/DynamicScenes";
 
 const ThreeCanvas = () => {
   return (
@@ -22,9 +23,10 @@ const ThreeCanvas = () => {
     >
       <Suspense fallback={null}>
         <SceneHelper cameraGUI={true} orbitControls={true} grid={true} axes={true} stats={true} />
-        <Scene />
+        <MainScene />
+        <DynamicScenes />
         {/* Render anything sent through the tunnel! */}
-        <threeRatTunnel.Out />
+        <ThreeTunnelOutput />
         <Preload all />
       </Suspense>
     </Canvas>

@@ -3,12 +3,14 @@ import { combineReducers, Reducer } from "@reduxjs/toolkit";
 import mobileMenuReducer from "@/slices/mobileMenuSlice";
 import overlayReducer from "@/slices/overlaySlice";
 import sceneReducer from "@/slices/sceneSlice";
+import loadingReducer from "@/slices/loadingSlice";
 
 // Define your reducers here
 const rootReducer: Reducer = combineReducers({
   mobileMenu: mobileMenuReducer,
   overlay: overlayReducer,
   scene: sceneReducer,
+  loading: loadingReducer,
 });
 
 const combinedReducer = (state: any, action: any) => {

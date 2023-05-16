@@ -1,22 +1,25 @@
 import Layout from "@/components/layout/Layout";
 import Head from "next/head";
-import ThreeCanvas from "@/components/three/ThreeCanvas";
-import Box2 from "@/components/three/objects/Box2";
 import React, { useEffect } from "react";
-import { ThreeTunnel } from "@/components/three/threeTunnel/ThreeTunnel";
-import dynamic from "next/dynamic";
-import { setScene2 } from "@/slices/sceneSlice";
-import { useAppDispatch } from "@/libs/store/store";
-const DynamicBox2 = dynamic(() => import("@/components/three/objects/Box2"), {
-  loading: () => null,
-  ssr: false,
-});
+import { setScene2Loading } from "@/slices/sceneSlice";
+import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
+import { setLoading } from "@/slices/loadingSlice";
+
 export default function Test() {
   const dispatch = useAppDispatch();
+  const selector = useAppSelector;
+  const scene2Loaded = selector((state: RootState) => state.scene.scene2Loaded); // updated
+  const mainSceneLoaded = selector((state: RootState) => state.scene.mainSceneLoaded); // updated
 
   useEffect(() => {
-    dispatch(setScene2(true));
+    dispatch(setScene2Loading(true));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (mainSceneLoaded && scene2Loaded) {
+      dispatch(setLoading(false));
+    }
+  }, [scene2Loaded, mainSceneLoaded, dispatch]);
 
   return (
     <Layout>
@@ -24,13 +27,7 @@ export default function Test() {
         <title>Test Page | Demo Project by Giannis Riganas</title>
         <meta name="description" content="A starter demo app built with Next.js" />
       </Head>
-      <div className="relative h-screen">
-        <div className="absolute left-0 top-0 z-1 h-screen w-full">
-          <ThreeTunnel>
-            <DynamicBox2 />
-          </ThreeTunnel>
-        </div>
-      </div>
+      <div className="relative h-screen" />
     </Layout>
   );
 }
