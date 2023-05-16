@@ -1,5 +1,4 @@
 import { Euler, Vector3 } from "three";
-import * as THREE from "three";
 
 interface CameraSettings {
   position: Vector3;
@@ -12,8 +11,8 @@ interface CameraSettings {
 }
 
 const cameraSettings: CameraSettings = {
-  position: new THREE.Vector3(28, 17, 125),
-  rotation: new THREE.Euler(0, 0, 0, "XYZ"),
+  position: new Vector3(28, 17, 125),
+  rotation: new Euler(0, 0, 0, "XYZ"),
   fov: 75,
   near: 0.1,
   far: 1000,

@@ -3,12 +3,12 @@ import { useControls } from "leva";
 import { PerspectiveCamera } from "three";
 import cameraSettings from "@/libs/three/cameraSettings";
 
-const CameraControls = () => {
+const CameraGUI = () => {
   // Get the Scene camera
   const { camera } = useThree();
 
   // Set up the camera controls GUI from leva
-  const { position, rotation, fov, zoom, near, far, focus } = useControls({
+  const { position, rotation, fov, zoom, near, far, focus } = useControls("Camera Settings", {
     position: { value: cameraSettings.position.toArray(), step: 0.1 },
     rotation: { value: [cameraSettings.rotation.x, cameraSettings.rotation.y, cameraSettings.rotation.z], step: 0.1 },
     fov: { value: cameraSettings.fov, min: 0, max: 180, step: 1 },
@@ -33,4 +33,4 @@ const CameraControls = () => {
   return null;
 };
 
-export default CameraControls;
+export default CameraGUI;

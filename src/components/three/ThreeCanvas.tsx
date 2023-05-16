@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Scene from "@/components/three/scene/Scene";
 import cameraSettings from "@/libs/three/cameraSettings";
-import ThreeHelper from "@/components/three/helpers/ThreeHelper";
+import SceneHelper from "@/components/three/helpers/SceneHelper";
 
 const ThreeCanvas = () => {
   return (
@@ -18,8 +18,8 @@ const ThreeCanvas = () => {
       }}
     >
       <Suspense fallback={null}>
+        <SceneHelper cameraGUI={true} orbitControls={true} grid={true} axes={true} stats={true} />
         <Scene />
-        <ThreeHelper />
       </Suspense>
     </Canvas>
   );
