@@ -29,7 +29,8 @@
     "react-redux": "^8.0.5",
     "react-use": "^17.4.0",
     "three": "0.151.3",
-    "three-stdlib": "^2.21.11"
+    "three-stdlib": "^2.21.11",
+    "tunnel-rat": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.16.2",

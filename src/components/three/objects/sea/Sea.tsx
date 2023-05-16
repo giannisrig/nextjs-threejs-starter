@@ -38,7 +38,7 @@ const Sea = () => {
     [gl.encoding, waterNormals]
   );
   useFrame((state, delta) => (ref.current.material.uniforms.time.value += delta * 0.2));
-  return <customWater ref={ref} args={[geom, config]} position={[0, -5, 0]} rotation-x={-Math.PI / 2} />;
+  return <customWater ref={ref} args={[geom, config]} position={[0, -4, 0]} rotation-x={-Math.PI / 2} />;
 };
 
 export default Sea;
