@@ -1,10 +1,8 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import Scene from "@/components/three/scene/Scene";
-import SceneHelper from "@/components/three/helpers/SceneHelper";
-import CameraControls from "@/components/three/helpers/CameraControls";
 import cameraSettings from "@/libs/three/cameraSettings";
+import ThreeHelper from "@/components/three/helpers/ThreeHelper";
 
 const ThreeCanvas = () => {
   return (
@@ -21,10 +19,8 @@ const ThreeCanvas = () => {
     >
       <Suspense fallback={null}>
         <Scene />
+        <ThreeHelper />
       </Suspense>
-      <CameraControls />
-      <OrbitControls />
-      <SceneHelper />
     </Canvas>
   );
 };
