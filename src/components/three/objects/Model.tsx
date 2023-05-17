@@ -4,7 +4,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import React, { useRef, useState } from "react";
 import { useAppDispatch } from "@/libs/store/store";
-import { setScene1Loaded } from "@/slices/sceneSlice";
+import { setScene1Loaded } from "@/slices/threeSlice";
 
 const Model = () => {
   const [modelLoaded, setModelLoaded] = useState(false);

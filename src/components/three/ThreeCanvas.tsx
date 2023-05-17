@@ -4,6 +4,8 @@ import MainScene from "@/components/three/scene/MainScene";
 import LazyLoadedModels from "@/components/three/scene/LazyLoadedModels";
 import cameraSettings from "@/libs/three/cameraSettings";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
+import CameraMan from "@/components/three/scene/CameraMan";
+import { Vector3 } from "three";
 
 const ThreeCanvas = () => {
   const onCanvasCreated = (canvas) => {
@@ -31,8 +33,8 @@ const ThreeCanvas = () => {
         <SceneHelper cameraGUI={true} orbitControls={true} grid={true} axes={true} stats={true} />
         <MainScene />
         <LazyLoadedModels />
+        <CameraMan zoom={false} targetPosition={new Vector3(0, 0, 120)} cameraPosition={new Vector3(0, 14, 0)} />
       </Suspense>
-      {/* Wrap the Lazy loaded Models in a Suspense so that there's no glitch while loading with GTLF */}
     </Canvas>
   );
 };

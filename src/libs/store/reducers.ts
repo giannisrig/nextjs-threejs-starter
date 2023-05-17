@@ -2,14 +2,14 @@ import { HYDRATE } from "next-redux-wrapper";
 import { combineReducers, Reducer } from "@reduxjs/toolkit";
 import mobileMenuReducer from "@/slices/mobileMenuSlice";
 import overlayReducer from "@/slices/overlaySlice";
-import sceneReducer from "@/slices/sceneSlice";
+import threeReducer from "@/slices/threeSlice";
 import loadingReducer from "@/slices/loadingSlice";
 
 // Define your reducers here
 const rootReducer: Reducer = combineReducers({
   mobileMenu: mobileMenuReducer,
   overlay: overlayReducer,
-  scene: sceneReducer,
+  three: threeReducer,
   loading: loadingReducer,
 });
 

@@ -2,7 +2,7 @@ import { Mesh } from "three";
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useAppDispatch } from "@/libs/store/store";
-import { setScene2Loaded } from "@/slices/sceneSlice";
+import { setScene2Loaded } from "@/slices/threeSlice";
 
 const Box = () => {
   const ref = useRef<Mesh>();

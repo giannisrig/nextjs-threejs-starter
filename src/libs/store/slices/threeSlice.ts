@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface SceneState {
+interface ThreeAppState {
   mainSceneLoaded: boolean;
   scene1Loading: boolean;
   scene1Loaded: boolean;
@@ -8,7 +8,7 @@ interface SceneState {
   scene2Loaded: boolean;
 }
 
-const initialState: SceneState = {
+const initialState: ThreeAppState = {
   mainSceneLoaded: false,
   scene1Loading: false,
   scene1Loaded: false,
@@ -16,8 +16,8 @@ const initialState: SceneState = {
   scene2Loaded: false,
 };
 
-export const sceneSlice = createSlice({
-  name: "scene",
+export const threeSlice = createSlice({
+  name: "three",
   initialState,
   reducers: {
     setMainSceneLoaded(state, action: PayloadAction<boolean>) {
@@ -39,5 +39,5 @@ export const sceneSlice = createSlice({
 });
 
 export const { setMainSceneLoaded, setScene1Loading, setScene1Loaded, setScene2Loading, setScene2Loaded } =
-  sceneSlice.actions;
-export default sceneSlice.reducer;
+  threeSlice.actions;
+export default threeSlice.reducer;

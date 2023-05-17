@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
-import { setScene1Loading } from "@/slices/sceneSlice";
+import { setScene1Loading } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
 
 const Scene1 = () => {
   const dispatch = useAppDispatch();
   const selector = useAppSelector;
-  const scene1Loaded = selector((state: RootState) => state.scene.scene1Loaded); // updated
-  const mainSceneLoaded = selector((state: RootState) => state.scene.mainSceneLoaded); // updated
+  const scene1Loaded = selector((state: RootState) => state.three.scene1Loaded); // updated
+  const mainSceneLoaded = selector((state: RootState) => state.three.mainSceneLoaded); // updated
 
   // Start loading the scene 1
   useEffect(() => {

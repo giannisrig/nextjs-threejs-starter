@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "@/libs/store/store";
 import { useEffect, useState } from "react";
-import { setScene1Loading } from "@/slices/sceneSlice";
+import { setScene1Loading } from "@/slices/threeSlice";
 export default function Logo() {
   const dispatch = useAppDispatch();
 

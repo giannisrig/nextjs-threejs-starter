@@ -1,6 +1,6 @@
 import { Euler, Vector3 } from "three";
 
-interface CameraSettings {
+export interface CameraSettings {
   position: Vector3;
   rotation: Euler;
   fov: number;

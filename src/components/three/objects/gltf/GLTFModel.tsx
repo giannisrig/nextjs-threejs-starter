@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import * as Three from "three";
 import { GLTF } from "three-stdlib";
 import { useAppDispatch } from "@/libs/store/store";
-import { setScene1Loaded } from "@/slices/sceneSlice";
+import { setScene1Loaded } from "@/slices/threeSlice";
 
 type GLTFResult = GLTF & {
   nodes: {
