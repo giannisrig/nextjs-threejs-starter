@@ -11,7 +11,8 @@ interface CameraSettings {
 }
 
 const cameraSettings: CameraSettings = {
-  position: new Vector3(28, 17, 125),
+  // position: new Vector3(28, 17, 125),
+  position: new Vector3(180, 14, 0),
   rotation: new Euler(0, 0, 0, "XYZ"),
   fov: 75,
   near: 0.1,
