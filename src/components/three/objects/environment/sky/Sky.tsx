@@ -6,12 +6,13 @@ import skySettings, { SkySettings } from "./skySettings";
 import SkyGUI from "./SkyGUI";
 
 const Sky = ({ showGUI = false }) => {
+  // Ref item for our Sky
   const ref = useRef<Mesh>();
 
   // Set up the settings for the ground plane and use GUI controls if enabled
   const settings: SkySettings = showGUI ? SkyGUI() : skySettings;
 
-  // Define the sky shader
+  // Set up the sky shader settings
   const shaderSettings: ShaderMaterialParameters = {
     name: "SkyNewShader",
     side: THREE.BackSide,

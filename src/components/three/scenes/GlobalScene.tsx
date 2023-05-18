@@ -12,7 +12,7 @@ const GlobalScene = () => {
   useEffect(() => {
     // Set up the loading action data
     const loadingAction: ThreeStateLoadingAction = {
-      scene: 0,
+      scene: 0, // We assign the global scene as zero in the state
       value: true,
     };
 
