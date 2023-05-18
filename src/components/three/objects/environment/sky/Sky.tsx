@@ -1,9 +1,9 @@
 import { Mesh, ShaderMaterialParameters } from "three";
 import * as THREE from "three";
 import { useRef } from "react";
-import skyShader from "@/components/three/objects/sky/skyShader";
-import skySettings, { SkySettings } from "@/components/three/objects/sky/skySettings";
-import SkyGUI from "@/components/three/objects/sky/SkyGUI";
+import skyShader from "./skyShader";
+import skySettings, { SkySettings } from "./skySettings";
+import SkyGUI from "./SkyGUI";
 
 const Sky = ({ showGUI = false }) => {
   const ref = useRef<Mesh>();

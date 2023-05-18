@@ -1,7 +1,7 @@
-import Sky from "@/components/three/objects/sky/Sky";
+import Sky from "@/components/three/objects/environment/sky/Sky";
 import React from "react";
-import Sea from "@/components/three/objects/sea/Sea";
-import Ground from "@/components/three/objects/ground/Ground";
+import Sea from "@/components/three/objects/environment/sea/Sea";
+import Ground from "@/components/three/objects/environment/ground/Ground";
 
 const Environment = () => {
   return (

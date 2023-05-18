@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import Box2 from "@/components/three/objects/Box2";
+import Box from "@/components/three/objects/common/Box";
 import Scene from "@/components/three/containers/Scene";
 import { RootState, useAppSelector } from "@/libs/store/store";
 import { ThreeSceneState } from "@/types/three/state";
@@ -15,7 +15,7 @@ const Scene2 = () => {
   return (
     <Scene scene={scene} deps={objectsDependencies}>
       <Suspense>
-        <Box2 stateScene={scene} name={objectsDependencies[0]} />
+        <Box stateScene={scene} name={objectsDependencies[0]} />
       </Suspense>
     </Scene>
   );

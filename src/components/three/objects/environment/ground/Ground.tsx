@@ -1,6 +1,6 @@
 import { Plane } from "@react-three/drei";
 import GroundGUI from "./GroundGUI";
-import groundSettings, { GroundSettings } from "@/components/three/objects/ground/groundSettings";
+import groundSettings, { GroundSettings } from "./groundSettings";
 
 const Ground = ({ showGUI = false }) => {
   // Set up the settings for the ground plane and use GUI controls if enabled
