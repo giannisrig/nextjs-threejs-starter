@@ -13,7 +13,7 @@ const threeSettings: ThreeSettings = {
       focus: 20,
     },
     cameraman: {
-      zoom: false,
+      action: false,
       targetPosition: new Vector3(0, 2, 0),
     },
   },

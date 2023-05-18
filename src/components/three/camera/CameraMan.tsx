@@ -2,12 +2,24 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import CameraControls from "camera-controls";
 import * as THREE from "three";
-import cameraSettings from "@/libs/three/cameraSettings";
+import { DefaultCameramanSettings } from "@/types/three/settings";
+import { RootState, useAppSelector } from "@/libs/store/store";
+import { PerspectiveCamera } from "three";
 
 CameraControls.install({ THREE });
 
-function CameraMan({ zoom, targetPosition, cameraPosition }) {
-  const camPos = new THREE.Vector3();
+interface CameraManProps {
+  cameraman: DefaultCameramanSettings;
+}
+
+function CameraMan({ cameraman }: CameraManProps) {
+  console.log("cameraman running:", cameraman);
+
+  // Get the cameraman state
+  const defaultCameraman: DefaultCameramanSettings = useAppSelector(
+    (state: RootState) => state.three.default.cameraman as DefaultCameramanSettings
+  );
+
   const look = new THREE.Vector3();
 
   // Get the ThreeJS camera
@@ -19,15 +31,28 @@ function CameraMan({ zoom, targetPosition, cameraPosition }) {
   // Set up the camera controls
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [camera, gl.domElement]);
 
+  // if (camera instanceof PerspectiveCamera) {
+  //   // update camera properties
+  //   camera.position.set(...position);
+  //   camera.rotation.set(...rotation);
+  //   camera.fov = fov;
+  //   camera.zoom = zoom;
+  //   camera.near = near;
+  //   camera.far = far;
+  //   camera.focus = focus;
+  //   camera.updateProjectionMatrix();
+  // }
+
   // Return RAF to handle the cameraman controls
   return useFrame((state, delta) => {
     // zoom ? pos.set(focus.x, focus.y, focus.z + 5) : pos.set(10, 5, 40);
-    zoom ? look.set(targetPosition.x, targetPosition.y, targetPosition.z - 0.2) : look.set(0, 2, 0);
-    zoom && cameraPosition
-      ? camPos.set(cameraPosition.x, cameraPosition.y, cameraPosition.z)
-      : camPos.set(state.camera.position.x, state.camera.position.y, state.camera.position.z);
-    // state.camera.position.lerp(pos, 0.5);
-    // state.camera.updateProjectionMatrix();
+    cameraman.action
+      ? look.set(cameraman.targetPosition.x, cameraman.targetPosition.y, cameraman.targetPosition.z - 0.2)
+      : look.set(
+          defaultCameraman.targetPosition.x,
+          defaultCameraman.targetPosition.y,
+          defaultCameraman.targetPosition.z
+        );
 
     // Documentation: https://yomotsu.github.io/camera-controls/classes/CameraControls.html#lerpLookAt
     // Camera man will look at

@@ -21,7 +21,7 @@ export interface DefaultCameraSettings {
 }
 
 export interface DefaultCameramanSettings {
-  zoom: boolean;
+  action: boolean;
   targetPosition: Vector3;
 }
 

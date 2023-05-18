@@ -28,6 +28,10 @@ const initialState: ThreeState = {
   cameraman: threeSettings.default.cameraman,
   activeScene: null,
   scenes: scenes,
+  default: {
+    camera: threeSettings.default.camera,
+    cameraman: threeSettings.default.cameraman,
+  },
 };
 
 export const threeSlice = createSlice({
