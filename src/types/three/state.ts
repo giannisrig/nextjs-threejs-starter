@@ -7,7 +7,7 @@ export interface ThreeSceneState extends ThreeSceneSettings {
 }
 
 export interface CameraState extends DefaultCameraSettings {
-  action: boolean;
+  name: string;
 }
 export interface CameramanState extends DefaultCameramanSettings {
   action: boolean;

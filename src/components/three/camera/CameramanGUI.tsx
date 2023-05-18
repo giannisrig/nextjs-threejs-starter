@@ -9,6 +9,8 @@ const CameramanGUI = () => {
     return state.three.cameraman;
   });
 
+  // console.log("cameramanGUI updated", cameramanState);
+
   // Set up the Cameraman controls GUI from leva
   // We will use the state values as the initial ones
   const { action, targetPosition } = useControls("Cameraman Settings", {

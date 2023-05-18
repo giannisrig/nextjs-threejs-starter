@@ -10,8 +10,7 @@ const CameraGUI = () => {
   });
 
   // Set up the camera controls GUI from leva
-  const { action, position, rotation, fov, zoom, near, far, focus } = useControls("Camera Settings", {
-    action: { value: cameraState.action },
+  const { position, rotation, fov, zoom, near, far, focus } = useControls("Camera Settings", {
     position: { value: cameraState.position.toArray(), step: 1 },
     rotation: { value: [cameraState.rotation.x, cameraState.rotation.y, cameraState.rotation.z], step: 1 },
     fov: { value: cameraState.fov, min: 1, max: 180, step: 1 },
@@ -22,7 +21,7 @@ const CameraGUI = () => {
   });
 
   const cameraSettings: CameraState = {
-    action: action,
+    name: cameraState.name,
     position: new Vector3(...position),
     rotation: new Euler(...rotation),
     fov: fov,

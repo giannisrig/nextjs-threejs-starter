@@ -5,15 +5,17 @@ import { OrbitControls } from "@react-three/drei";
 import { RootState, useAppSelector } from "@/libs/store/store";
 import CameramanGUI from "@/components/three/camera/CameramanGUI";
 import { CameramanState, CameraState, ThreeState } from "@/types/three/state";
-import Camera from "@/components/three/camera/Camera";
 
-const CameraControls = ({ cameraGUI = false, useCameraman = true, cameramanGUI = false, orbitControls = false }) => {
+const CameraControls = ({ showGUI = false, useCameraman = true, orbitControls = false }) => {
   // Get the camera and cameraman state
   const { camera, cameraman } = useAppSelector((state: RootState) => state.three as ThreeState);
+  console.log("data before GUI", { camera, cameraman });
 
   // Set up the settings for the cameraman and use GUI controls if enabled
-  const cameraState: CameraState = cameraGUI ? CameraGUI() : camera;
-  const cameramanState: CameramanState = cameramanGUI ? CameramanGUI() : cameraman;
+  const cameramanState: CameramanState = showGUI ? CameramanGUI() : cameraman;
+  const cameraState: CameraState = showGUI ? CameraGUI() : camera;
+
+  console.log("data after GUI", { cameraState, cameramanState });
 
   return (
     <>

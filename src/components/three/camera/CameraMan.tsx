@@ -14,6 +14,8 @@ interface CameraManProps {
 }
 
 function CameraMan({ cameramanState, cameraState }: CameraManProps) {
+  console.log("cameraman updated", { cameramanState, cameraState });
+
   // Get the default cameraman state
   const defaultCameraman: CameramanState = useAppSelector(
     (state: RootState) => state.three.default.cameraman as CameramanState
@@ -26,25 +28,24 @@ function CameraMan({ cameramanState, cameraState }: CameraManProps) {
   const { camera, gl } = useThree();
 
   // Get the action trigger
-  const { action } = cameraState;
-  const cameraAction = action;
+  const action = cameramanState.action;
 
   const updateCamera = () => {
     // Make sure we have a perspective camera
     if (camera instanceof PerspectiveCamera) {
       // Update camera properties based on when the action is triggered or not
       // Ff the action is not triggered then we show the default camera settings
-      cameraAction
+      action
         ? camera.position.set(cameraState.position.x, cameraState.position.y, cameraState.position.z)
         : camera.position.set(defaultCamera.position.x, defaultCamera.position.y, defaultCamera.position.z);
-      cameraAction
+      action
         ? camera.rotation.set(cameraState.rotation.x, cameraState.rotation.y, cameraState.rotation.z)
         : camera.rotation.set(defaultCamera.rotation.x, defaultCamera.rotation.y, defaultCamera.rotation.z);
-      camera.fov = cameraAction ? cameraState.fov : defaultCamera.fov;
-      camera.zoom = cameraAction ? cameraState.zoom : defaultCamera.zoom;
-      camera.near = cameraAction ? cameraState.near : defaultCamera.near;
-      camera.far = cameraAction ? cameraState.far : defaultCamera.far;
-      camera.focus = cameraAction ? cameraState.focus : defaultCamera.focus;
+      camera.fov = action ? cameraState.fov : defaultCamera.fov;
+      camera.zoom = action ? cameraState.zoom : defaultCamera.zoom;
+      camera.near = action ? cameraState.near : defaultCamera.near;
+      camera.far = action ? cameraState.far : defaultCamera.far;
+      camera.focus = action ? cameraState.focus : defaultCamera.focus;
 
       // Update the projection, must be called after any change of the camera params
       // Read more: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera.updateProjectionMatrix
@@ -60,10 +61,29 @@ function CameraMan({ cameramanState, cameraState }: CameraManProps) {
 
   // Return RAF to handle the cameraman controls
   return useFrame((state, delta) => {
-    updateCamera();
+    // Make sure we have a perspective camera
+    if (camera instanceof PerspectiveCamera) {
+      // Update camera properties based on when the action is triggered or not
+      // Ff the action is not triggered then we show the default camera settings
+      action
+        ? camera.position.set(cameraState.position.x, cameraState.position.y, cameraState.position.z)
+        : camera.position.set(defaultCamera.position.x, defaultCamera.position.y, defaultCamera.position.z);
+      action
+        ? camera.rotation.set(cameraState.rotation.x, cameraState.rotation.y, cameraState.rotation.z)
+        : camera.rotation.set(defaultCamera.rotation.x, defaultCamera.rotation.y, defaultCamera.rotation.z);
+      camera.fov = action ? cameraState.fov : defaultCamera.fov;
+      camera.zoom = action ? cameraState.zoom : defaultCamera.zoom;
+      camera.near = action ? cameraState.near : defaultCamera.near;
+      camera.far = action ? cameraState.far : defaultCamera.far;
+      camera.focus = action ? cameraState.focus : defaultCamera.focus;
+
+      // Update the projection, must be called after any change of the camera params
+      // Read more: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera.updateProjectionMatrix
+      camera.updateProjectionMatrix();
+    }
 
     // zoom ? pos.set(focus.x, focus.y, focus.z + 5) : pos.set(10, 5, 40);
-    cameramanState.action
+    action
       ? look.set(
           cameramanState.targetPosition.x,
           cameramanState.targetPosition.y,
