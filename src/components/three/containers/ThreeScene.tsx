@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
-import { setSceneLoading } from "@/slices/threeSlice";
+import { setActiveScene, setSceneLoading } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
 import { ThreeSceneState, ThreeStateLoadingAction } from "@/types/three";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
@@ -47,15 +47,19 @@ const ThreeScene = ({ sceneIndex, children }: ThreeSceneProps) => {
 
   // Remove the loading screen when scene is loaded
   useEffect(() => {
-    // If the loading screen is removed return
-    if (!loading) return;
-
     // When both the global scene and the current one have loaded set the LoadingScreen to false
     if (globalSceneState.isLoaded && sceneState.isLoaded) {
-      console.log("Current page scene and global scene have loaded, we can remove the loading screen");
-      dispatch(setLoading(false));
+      console.log("Current page scene and global scene have loaded");
+
+      if (loading) {
+        dispatch(setLoading(false));
+        console.log("Remove the loading screen");
+      }
+
+      console.log("Set active scene: ", sceneState.name);
+      dispatch(setActiveScene(sceneIndex));
     }
-  }, [globalSceneState, sceneState, dispatch, loading]);
+  }, [globalSceneState, sceneState, dispatch, loading, sceneIndex]);
 
   return <>{children}</>;
 };

@@ -20,12 +20,15 @@ const threeSettings: ThreeSettings = {
   scenes: [
     {
       name: "GlobalScene",
+      objectsDependencies: [],
     },
     {
-      name: "Scene 1",
+      name: "Scene1",
+      objectsDependencies: ["Scene1GltfModel"],
     },
     {
       name: "Scene2",
+      objectsDependencies: ["Box2"],
     },
   ],
 };

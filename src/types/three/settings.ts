@@ -48,6 +48,7 @@ export interface ThreeSceneSettings {
   name: string;
   camera?: SceneCameraSettings;
   cameraman?: SceneCameramanSettings;
+  objectsDependencies: string[];
 }
 
 export interface ThreeSettings {
