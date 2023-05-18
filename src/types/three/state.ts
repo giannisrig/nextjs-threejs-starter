@@ -1,9 +1,4 @@
-import {
-  DefaultCameramanSettings,
-  DefaultCameraSettings,
-  ThreeDefaultSettings,
-  ThreeSceneSettings,
-} from "@/types/three";
+import { DefaultCameramanSettings, DefaultCameraSettings, ThreeSceneSettings } from "@/types/three";
 
 export interface ThreeSceneState extends ThreeSceneSettings {
   isLoading: boolean;
@@ -11,11 +6,23 @@ export interface ThreeSceneState extends ThreeSceneSettings {
   objectsLoaded: string[];
 }
 
+export interface CameraState extends DefaultCameraSettings {
+  action: boolean;
+}
+export interface CameramanState extends DefaultCameramanSettings {
+  action: boolean;
+}
+
+export interface DefaultCameraControlsState {
+  camera: CameraState;
+  cameraman: CameramanState;
+}
+
 export interface ThreeState {
-  camera: DefaultCameraSettings;
-  cameraman: DefaultCameramanSettings;
+  camera: CameraState;
+  cameraman: CameramanState;
   activeScene: number;
-  default: ThreeDefaultSettings;
+  default: DefaultCameraControlsState;
   scenes: ThreeSceneState[];
 }
 

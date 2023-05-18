@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
-import { setActiveScene, setSceneLoading } from "@/slices/threeSlice";
+import { setActiveScene, setSceneLoading, setCamera, setCameraMan } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
-import { ThreeSceneState, ThreeStateLoadingAction } from "@/types/three";
+import { ThreeSceneState, ThreeState, ThreeStateLoadingAction } from "@/types/three";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
 
 interface ThreeSceneProps extends ReactNodeWrapper {
@@ -15,18 +15,23 @@ const ThreeScene = ({ sceneIndex, children }: ThreeSceneProps) => {
 
   // Get the current scene state and the main scene state
   const {
+    activeScene,
     sceneState,
     globalSceneState,
     loading,
-  }: { sceneState: ThreeSceneState; globalSceneState: ThreeSceneState; loading: boolean } = useAppSelector(
-    (state: RootState) => {
+  }: { activeScene: number; sceneState: ThreeSceneState; globalSceneState: ThreeSceneState; loading: boolean } =
+    useAppSelector((state: RootState) => {
+      const threeState: ThreeState = state.three;
       return {
-        sceneState: state.three.scenes[sceneIndex],
-        globalSceneState: state.three.scenes[0],
+        activeScene: threeState.activeScene,
+        sceneState: threeState.scenes[sceneIndex],
+        globalSceneState: threeState.scenes[0],
         loading: state.loading.loading,
       };
-    }
-  );
+    });
+
+  // Get the camera and cameraman state
+  const { camera, cameraman } = useAppSelector((state: RootState) => state.three as ThreeState);
 
   useEffect(() => {
     // Make sure the Global Scene has loaded first
@@ -60,6 +65,19 @@ const ThreeScene = ({ sceneIndex, children }: ThreeSceneProps) => {
       dispatch(setActiveScene(sceneIndex));
     }
   }, [globalSceneState, sceneState, dispatch, loading, sceneIndex]);
+
+  // Remove the loading screen when scene is loaded
+  useEffect(() => {
+    if (activeScene !== sceneIndex) return;
+    console.log("Should change the cameraman because active scene now is ", activeScene);
+
+    // const newCamera = camera;
+    // const newCameraman = cameraman;
+    // newCamera.position = sceneState.camera.position;
+    // newCameraman.targetPosition = sceneState.cameraman.targetPosition;
+    // dispatch(setCamera(newCamera));
+    // dispatch(setCameraMan(newCameraman));
+  }, [sceneState, activeScene, sceneIndex, camera, cameraman, dispatch]);
 
   return <>{children}</>;
 };

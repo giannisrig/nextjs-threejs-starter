@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  CameramanState,
+  CameraState,
   ThreeSceneSettings,
   ThreeSceneState,
   ThreeState,
@@ -24,13 +26,13 @@ const scenes: ThreeSceneState[] = threeSettings.scenes.map((item: ThreeSceneSett
 
 // Set up the initial state for Three
 const initialState: ThreeState = {
-  camera: threeSettings.default.camera,
-  cameraman: threeSettings.default.cameraman,
+  camera: { ...threeSettings.default.camera, action: false },
+  cameraman: { ...threeSettings.default.cameraman, action: false },
   activeScene: null,
   scenes: scenes,
   default: {
-    camera: threeSettings.default.camera,
-    cameraman: threeSettings.default.cameraman,
+    camera: { ...threeSettings.default.camera, action: false },
+    cameraman: { ...threeSettings.default.cameraman, action: false },
   },
 };
 
@@ -38,8 +40,20 @@ export const threeSlice = createSlice({
   name: "three",
   initialState,
   reducers: {
+    setCamera(state, action: PayloadAction<CameraState>) {
+      state.camera = action.payload;
+    },
+    setCameraMan(state, action: PayloadAction<CameramanState>) {
+      state.cameraman = action.payload;
+    },
     setActiveScene(state, action: PayloadAction<number>) {
       state.activeScene = action.payload;
+    },
+    setCameraAction(state, action: PayloadAction<boolean>) {
+      state.camera.action = action.payload;
+    },
+    setCameraManAction(state, action: PayloadAction<boolean>) {
+      state.cameraman.action = action.payload;
     },
     setSceneLoading(state, action: PayloadAction<ThreeStateLoadingAction>) {
       const { scene, value } = action.payload;
@@ -56,5 +70,14 @@ export const threeSlice = createSlice({
   },
 });
 
-export const { setSceneLoading, setSceneLoaded, setActiveScene, setSceneObjectsLoaded } = threeSlice.actions;
+export const {
+  setSceneLoading,
+  setSceneLoaded,
+  setActiveScene,
+  setCameraAction,
+  setCameraManAction,
+  setCamera,
+  setCameraMan,
+  setSceneObjectsLoaded,
+} = threeSlice.actions;
 export default threeSlice.reducer;

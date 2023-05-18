@@ -4,7 +4,7 @@ import GlobalScene from "@/components/three/scenes/GlobalScene";
 import ThreeSceneLoader from "@/components/three/ThreeSceneLoader";
 import cameraSettings from "@/libs/three/cameraSettings";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
-import Camera from "@/components/three/camera/Camera";
+import CameraControls from "@/components/three/camera/CameraControls";
 
 const ThreeCanvas = () => {
   const onCanvasCreated = () => {
@@ -30,7 +30,7 @@ const ThreeCanvas = () => {
     >
       <Suspense fallback={<GlobalScene />}>
         <SceneHelper grid={true} axes={true} stats={true} />
-        <Camera cameraGUI={true} useCameraman={true} cameramanGUI={true} orbitControls={false} />
+        <CameraControls cameraGUI={true} useCameraman={true} cameramanGUI={true} orbitControls={false} />
         <GlobalScene />
         <ThreeSceneLoader />
       </Suspense>

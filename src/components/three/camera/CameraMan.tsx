@@ -2,52 +2,73 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import CameraControls from "camera-controls";
 import * as THREE from "three";
-import { DefaultCameramanSettings } from "@/types/three/settings";
 import { RootState, useAppSelector } from "@/libs/store/store";
+import { CameramanState, CameraState } from "@/types/three/state";
 import { PerspectiveCamera } from "three";
 
 CameraControls.install({ THREE });
 
 interface CameraManProps {
-  cameraman: DefaultCameramanSettings;
+  cameramanState: CameramanState;
+  cameraState: CameraState;
 }
 
-function CameraMan({ cameraman }: CameraManProps) {
-  console.log("cameraman running:", cameraman);
-
-  // Get the cameraman state
-  const defaultCameraman: DefaultCameramanSettings = useAppSelector(
-    (state: RootState) => state.three.default.cameraman as DefaultCameramanSettings
+function CameraMan({ cameramanState, cameraState }: CameraManProps) {
+  // Get the default cameraman state
+  const defaultCameraman: CameramanState = useAppSelector(
+    (state: RootState) => state.three.default.cameraman as CameramanState
   );
 
+  // Get the default camera state
+  const defaultCamera: CameraState = useAppSelector((state: RootState) => state.three.default.camera as CameraState);
+
+  // Get the ThreeJS camera and the gl object from Canvas
+  const { camera, gl } = useThree();
+
+  // Get the action trigger
+  const { action } = cameraState;
+  const cameraAction = action;
+
+  const updateCamera = () => {
+    // Make sure we have a perspective camera
+    if (camera instanceof PerspectiveCamera) {
+      // Update camera properties based on when the action is triggered or not
+      // Ff the action is not triggered then we show the default camera settings
+      cameraAction
+        ? camera.position.set(cameraState.position.x, cameraState.position.y, cameraState.position.z)
+        : camera.position.set(defaultCamera.position.x, defaultCamera.position.y, defaultCamera.position.z);
+      cameraAction
+        ? camera.rotation.set(cameraState.rotation.x, cameraState.rotation.y, cameraState.rotation.z)
+        : camera.rotation.set(defaultCamera.rotation.x, defaultCamera.rotation.y, defaultCamera.rotation.z);
+      camera.fov = cameraAction ? cameraState.fov : defaultCamera.fov;
+      camera.zoom = cameraAction ? cameraState.zoom : defaultCamera.zoom;
+      camera.near = cameraAction ? cameraState.near : defaultCamera.near;
+      camera.far = cameraAction ? cameraState.far : defaultCamera.far;
+      camera.focus = cameraAction ? cameraState.focus : defaultCamera.focus;
+
+      // Update the projection, must be called after any change of the camera params
+      // Read more: https://threejs.org/docs/#api/en/cameras/PerspectiveCamera.updateProjectionMatrix
+      camera.updateProjectionMatrix();
+    }
+  };
+
+  // Define the position to look at
   const look = new THREE.Vector3();
-
-  // Get the ThreeJS camera
-  const camera = useThree((state) => state.camera);
-
-  // Gt the gl object from Canvas
-  const gl = useThree((state) => state.gl);
 
   // Set up the camera controls
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [camera, gl.domElement]);
 
-  // if (camera instanceof PerspectiveCamera) {
-  //   // update camera properties
-  //   camera.position.set(...position);
-  //   camera.rotation.set(...rotation);
-  //   camera.fov = fov;
-  //   camera.zoom = zoom;
-  //   camera.near = near;
-  //   camera.far = far;
-  //   camera.focus = focus;
-  //   camera.updateProjectionMatrix();
-  // }
-
   // Return RAF to handle the cameraman controls
   return useFrame((state, delta) => {
+    updateCamera();
+
     // zoom ? pos.set(focus.x, focus.y, focus.z + 5) : pos.set(10, 5, 40);
-    cameraman.action
-      ? look.set(cameraman.targetPosition.x, cameraman.targetPosition.y, cameraman.targetPosition.z - 0.2)
+    cameramanState.action
+      ? look.set(
+          cameramanState.targetPosition.x,
+          cameramanState.targetPosition.y,
+          cameramanState.targetPosition.z - 0.2
+        )
       : look.set(
           defaultCameraman.targetPosition.x,
           defaultCameraman.targetPosition.y,
