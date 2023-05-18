@@ -3,7 +3,7 @@ import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
 import { ThreeSceneState, ThreeStateLoadingAction } from "@/types/three/state";
 import { useEffect } from "react";
 import sameArrays from "@/libs/utils/sameArrays";
-import { setActiveScene, setSceneLoaded } from "@/slices/threeSlice";
+import { setSceneLoaded } from "@/slices/threeSlice";
 
 interface SceneContainerProps extends ReactNodeWrapper {
   scene: number;
@@ -22,6 +22,7 @@ const SceneContainer = ({ scene, deps, children }: SceneContainerProps) => {
     if (sameArrays(objectsLoaded, deps)) {
       console.log("Objects have loaded for: ", name);
 
+      // Set up the data to update the scene state loaded value
       const loadedAction: ThreeStateLoadingAction = {
         scene: scene,
         value: true,
@@ -29,7 +30,6 @@ const SceneContainer = ({ scene, deps, children }: SceneContainerProps) => {
 
       // Update the state and start loading the scene
       dispatch(setSceneLoaded(loadedAction));
-      dispatch(setActiveScene(scene));
     }
   }, [dispatch, name, deps, objectsLoaded, scene]);
 
