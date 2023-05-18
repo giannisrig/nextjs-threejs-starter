@@ -17,7 +17,7 @@ const ScenePreloaderLink = ({ scene, href, className = null, children, ...props 
 
   // Get the current scene state and the main scene state
   const { isLoaded, name }: { isLoaded: boolean; name: string } = useAppSelector((state: RootState) => {
-    return state.three.scenes[1] as ThreeSceneState;
+    return state.three.scenes[scene] as ThreeSceneState;
   });
 
   useEffect(() => {
