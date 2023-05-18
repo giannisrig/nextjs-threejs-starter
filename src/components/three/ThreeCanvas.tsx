@@ -1,14 +1,14 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import MainScene from "@/components/three/scene/MainScene";
-import LazyLoadedModels from "@/components/three/scene/LazyLoadedModels";
+import GlobalScene from "@/components/three/scenes/GlobalScene";
+import ThreeSceneLoader from "@/components/three/ThreeSceneLoader";
 import cameraSettings from "@/libs/three/cameraSettings";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
-import CameraMan from "@/components/three/scene/CameraMan";
+import CameraMan from "@/components/three/camera/CameraMan";
 import { Vector3 } from "three";
 
 const ThreeCanvas = () => {
-  const onCanvasCreated = (canvas) => {
+  const onCanvasCreated = () => {
     // const { gl } = canvas;
     // console.log("Canvas UUID:", gl);
     console.log("ThreeJsCanvas Created");
@@ -29,11 +29,11 @@ const ThreeCanvas = () => {
         focus: cameraSettings.focus,
       }}
     >
-      <Suspense fallback={<MainScene />}>
+      <Suspense fallback={<GlobalScene />}>
         <SceneHelper cameraGUI={true} orbitControls={true} grid={true} axes={true} stats={true} />
-        <MainScene />
-        <LazyLoadedModels />
-        <CameraMan zoom={false} targetPosition={new Vector3(0, 0, 120)} cameraPosition={new Vector3(0, 14, 0)} />
+        <GlobalScene />
+        <ThreeSceneLoader />
+        {/*<CameraMan zoom={false} targetPosition={new Vector3(0, 0, 120)} cameraPosition={new Vector3(0, 14, 0)} />*/}
       </Suspense>
     </Canvas>
   );

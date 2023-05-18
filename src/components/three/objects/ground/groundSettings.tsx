@@ -1,8 +1,8 @@
 import { Color, Euler, Vector2, Vector3 } from "three";
-import { SceneItem } from "@/types/three";
+import { Object3DSettings } from "@/types/three";
 
 // Define the type for the settings, extending the core SceneItem type
-export interface GroundSettings extends SceneItem {
+export interface GroundSettings extends Object3DSettings {
   geometry: Vector2;
   color: Color;
 }

@@ -2,8 +2,7 @@ import MobileMenu from "@/components/common/mobileMenu/MobileMenu";
 import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
 import Logo from "@/components/common/header/Logo";
 import GithubLink from "@/components/common/header/GithubLink";
-import Image from "next/image";
-import Link from "next/link";
+import ScenePreloaderLink from "@/components/three/containers/ScenePreloaderLink";
 
 export default function Header() {
   return (
@@ -15,13 +14,13 @@ export default function Header() {
               <Logo />
               <div className="h-[20px] w-[1px] bg-silver" />
               <GithubLink />
-              <Link
-                prefetch={true}
+              <ScenePreloaderLink
+                scene={2}
                 href={"/test"}
                 className="cursor-hover flex items-center gap-[4px] transition-colors duration-200 hover:text-pink"
               >
                 <h4 className={`font-primary text-lg font-semibold`}>Test</h4>
-              </Link>
+              </ScenePreloaderLink>
             </div>
 
             <div className="flex items-center gap-20px">

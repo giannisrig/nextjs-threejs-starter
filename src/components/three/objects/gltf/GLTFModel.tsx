@@ -1,38 +1,39 @@
 import { useGLTF } from "@react-three/drei";
-import * as Three from "three";
 import { GLTF } from "three-stdlib";
 import { useAppDispatch } from "@/libs/store/store";
-import { setScene1Loaded } from "@/slices/threeSlice";
+import { setSceneObjectsLoaded } from "@/libs/store/slices/threeSlice";
+import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
+import { useEffect, useState } from "react";
 
-type GLTFResult = GLTF & {
-  nodes: {
-    Pyramid: Three.Mesh;
-    Model_7_1: any;
-  };
-  materials: {
-    ["default"]: Three.MeshStandardMaterial;
-  };
-};
-function GLTFModel({ url, ...props }) {
+interface GLTFModelProps {
+  url: string;
+  stateScene: number;
+  name: string;
+}
+
+function GLTFModel({ url, stateScene, name, ...props }: GLTFModelProps) {
+  // Get the nodes and materials of the model
+  const { scene } = useGLTF(url, true) as GLTF;
+
+  // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
 
-  // Get the nodes and materials of the model
-  const { nodes, materials } = useGLTF(url, true, true, () => {
-    // Update the state and start loading the scene for homepage
-    dispatch(setScene1Loaded(true));
-  }) as GLTFResult;
+  useEffect(() => {
+    // Set up the objects loaded action for state
+    const objectLoaded: ThreeStateObjectsLoadedAction = {
+      scene: stateScene,
+      value: name,
+    };
 
-  useGLTF.preload(url);
+    // add the object name to the scene state
+    dispatch(setSceneObjectsLoaded(objectLoaded));
+  }, [dispatch, name, stateScene, scene]);
+
+  // useGLTF.preload(url);
 
   return (
     <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Model_7_1.geometry}
-        material={materials["Cube.001"]}
-        position={[4.36, 17, -28.37]}
-        rotation={[0, 0.35, -Math.PI]}
-        scale={0.09}
-      />
+      <primitive object={scene} />
     </group>
   );
 }

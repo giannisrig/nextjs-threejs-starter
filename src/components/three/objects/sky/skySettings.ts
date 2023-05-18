@@ -1,5 +1,5 @@
 import { Color, Vector3 } from "three";
-import { SceneItem } from "@/types/three";
+import { Object3DSettings } from "@/types/three";
 
 // Define the type for the sky shader uniforms
 export interface shaderUniforms {
@@ -10,7 +10,7 @@ export interface shaderUniforms {
 }
 
 // Define the type for the sky settings, extending the core SceneItem type
-export interface SkySettings extends SceneItem {
+export interface SkySettings extends Object3DSettings {
   geometry: Vector3;
   uniforms: shaderUniforms;
 }

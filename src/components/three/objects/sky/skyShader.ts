@@ -1,6 +1,6 @@
-import { SceneShader } from "@/types/three";
+import { Object3DShader } from "@/types/three";
 
-const skyShader: SceneShader = {
+const skyShader: Object3DShader = {
   vertexShader: `
     varying vec3 vWorldPosition;
     void main() {
@@ -11,16 +11,16 @@ const skyShader: SceneShader = {
   `,
   fragmentShader: `
     uniform vec3 topColor;
-uniform vec3 bottomColor;
-uniform float offset;
-uniform float exponent;
+    uniform vec3 bottomColor;
+    uniform float offset;
+    uniform float exponent;
 
-varying vec3 vWorldPosition;
-
-void main() {
-  float h = normalize(vWorldPosition + offset).y;
-  gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
-}
+    varying vec3 vWorldPosition;
+    
+    void main() {
+      float h = normalize(vWorldPosition + offset).y;
+      gl_FragColor = vec4(mix(bottomColor, topColor, max(pow(max(h, 0.0), exponent), 0.0)), 1.0);
+    }
   `,
 };
 

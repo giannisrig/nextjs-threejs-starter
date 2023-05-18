@@ -1,16 +1,8 @@
 import { Euler, Vector3 } from "three";
+import { DefaultCameraSettings } from "@/types/three";
+// import {Vector3} from "three-stdlib"
 
-export interface CameraSettings {
-  position: Vector3;
-  rotation: Euler;
-  fov: number;
-  far: number;
-  near: number;
-  zoom: number;
-  focus: number;
-}
-
-const cameraSettings: CameraSettings = {
+const cameraSettings: DefaultCameraSettings = {
   // position: new Vector3(28, 17, 125),
   position: new Vector3(180, 14, 0),
   rotation: new Euler(0, 0, 0, "XYZ"),
