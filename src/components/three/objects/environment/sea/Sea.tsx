@@ -1,8 +1,12 @@
-import * as THREE from "three";
-import { Mesh } from "three";
 import React, { useRef, useMemo } from "react";
-import { extend, useThree, useLoader, useFrame, Object3DNode } from "@react-three/fiber";
+import seaSettings, { SeaSettings } from "./seaSettings";
+import SeaGUI from "./SeaGUI";
+import * as THREE from "three";
+import { Mesh, ShaderMaterial } from "three";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { extend, useThree, useLoader, useFrame, ThreeElements, Object3DNode } from "@react-three/fiber";
 import { Water } from "three-stdlib";
+extend({ Water });
 
 // Create our custom element
 class CustomWater extends Water {}
@@ -16,28 +20,65 @@ declare module "@react-three/fiber" {
   }
 }
 
-const Sea = () => {
+const Sea = ({ showGUI = false }) => {
+  // Our ref item for the sea, needed to animate it
   const ref = useRef<Mesh>();
-  const gl = useThree((state) => state.gl);
+
+  // Set up the settings for the ground plane and use GUI controls if enabled
+  const settings: SeaSettings = showGUI ? SeaGUI() : seaSettings;
+
+  // Load the water normals texture
   const waterNormals = useLoader(THREE.TextureLoader, "/images/waternormals.jpg");
+
+  // Repeat the texture infinitely
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
-  const geom = useMemo(() => new THREE.BoxGeometry(2100, 2100, 10), []);
+
+  // Set up the sea geometry
+  const geom = useMemo(
+    () => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y, settings.geometry.z),
+    [settings.geometry.x, settings.geometry.y, settings.geometry.z]
+  );
+
+  // Set up the options for the sea
   const config = useMemo(
     () => ({
-      textureWidth: 256,
-      textureHeight: 256,
-      waterNormals,
-      sunDirection: new THREE.Vector3(-10, 0, -1),
-      sunColor: 0xffffff,
-      waterColor: 0xae94bd,
-      distortionScale: 2.7,
-      fog: true,
-      side: 2,
-      format: gl.encoding,
+      textureWidth: settings.uniforms.textureSize,
+      textureHeight: settings.uniforms.textureSize,
+      waterNormals: waterNormals,
+      sunDirection: new THREE.Vector3(
+        settings.uniforms.sunDirection.x,
+        settings.uniforms.sunDirection.y,
+        settings.uniforms.sunDirection.z
+      ),
+      sunColor: settings.uniforms.sunColor,
+      waterColor: settings.uniforms.waterColor,
+      distortionScale: settings.uniforms.distortionScale,
+      fog: settings.uniforms.fog,
+      side: settings.uniforms.side,
     }),
-    [gl.encoding, waterNormals]
+    [
+      settings.uniforms.distortionScale,
+      settings.uniforms.fog,
+      settings.uniforms.side,
+      settings.uniforms.sunColor,
+      settings.uniforms.sunDirection.x,
+      settings.uniforms.sunDirection.y,
+      settings.uniforms.sunDirection.z,
+      settings.uniforms.textureSize,
+      settings.uniforms.waterColor,
+      waterNormals,
+    ]
   );
-  useFrame((state, delta) => (ref.current.material.uniforms.time.value += delta * 0.2));
+  useFrame((state, delta) => {
+    if (!ref.current) return;
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const material: ShaderMaterial = ref.current.material;
+    material.uniforms.time.value += delta * 0.2;
+  });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return <customWater ref={ref} args={[geom, config]} position={[0, -4, 0]} rotation-x={-Math.PI / 2} />;
 };
 
