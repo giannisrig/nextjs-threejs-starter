@@ -4,16 +4,16 @@ import { Euler, Vector3 } from "three";
 const threeSettings: ThreeSettings = {
   default: {
     camera: {
-      position: new Vector3(32, 5, 2),
+      position: new Vector3(54, 21, 39),
       rotation: new Euler(0, 0, 0, "XYZ"),
-      fov: 75,
+      fov: 66,
       near: 0.1,
-      far: 1000,
+      far: 8000,
       zoom: 1,
       focus: 20,
     },
     cameraman: {
-      targetPosition: new Vector3(8, 7, -19),
+      targetPosition: new Vector3(16, 11, -35),
     },
   },
   scenes: [
@@ -25,10 +25,10 @@ const threeSettings: ThreeSettings = {
       name: "Scene1",
       objectsDependencies: ["Scene1GltfModel"],
       camera: {
-        position: new Vector3(38, 5, 5),
+        position: new Vector3(54, 21, 39),
       },
       cameraman: {
-        targetPosition: new Vector3(8, 7, -19),
+        targetPosition: new Vector3(16, 11, -35),
       },
     },
     {

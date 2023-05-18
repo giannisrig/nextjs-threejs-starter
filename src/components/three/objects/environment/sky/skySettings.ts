@@ -17,7 +17,7 @@ export interface SkySettings extends Object3DSettings {
 
 // Set the initial values of the sky object
 const skySettings: SkySettings = {
-  geometry: new Vector3(1000, 1000, 1000),
+  geometry: new Vector3(8000, 8000, 8000),
   position: new Vector3(0, 0, 0),
   uniforms: {
     topColor: new Color(0x65a0b3),

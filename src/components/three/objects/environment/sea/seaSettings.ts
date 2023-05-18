@@ -26,7 +26,7 @@ export interface SeaSettings extends Object3DSettings {
 
 // Set the initial values of the sky object
 const seaSettings: SeaSettings = {
-  geometry: new Vector3(2100, 2100, 8),
+  geometry: new Vector3(8000, 8000, 8),
   position: new Vector3(0, -4, 0),
   uniforms: {
     textureSize: 512,

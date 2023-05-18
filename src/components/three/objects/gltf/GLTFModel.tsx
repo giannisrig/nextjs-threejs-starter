@@ -4,14 +4,20 @@ import { useAppDispatch } from "@/libs/store/store";
 import { setSceneObjectsLoaded } from "@/libs/store/slices/threeSlice";
 import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
 import { useEffect, useState } from "react";
+import { useControls } from "leva";
+import seaSettings from "@/components/three/objects/environment/sea/seaSettings";
+import { Vector3 } from "three";
 
 interface GLTFModelProps {
   url: string;
   stateScene: number;
   name: string;
+  showGUI: boolean;
+  modelPosition: any;
+  modelScale?: number;
 }
 
-function GLTFModel({ url, stateScene, name, ...props }: GLTFModelProps) {
+function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showGUI, ...props }: GLTFModelProps) {
   // Get the nodes and materials of the model
   const { scene } = useGLTF(url, true) as GLTF;
 
@@ -29,11 +35,21 @@ function GLTFModel({ url, stateScene, name, ...props }: GLTFModelProps) {
     dispatch(setSceneObjectsLoaded(objectLoaded));
   }, [dispatch, name, stateScene, scene]);
 
-  // useGLTF.preload(url);
+  const { scale, position } = useControls(name + " Settings", {
+    position: { value: modelPosition, step: 0.5 },
+    scale: { value: modelScale, step: 1, min: 1, max: 50 },
+  });
+
+  const finalSettings = {
+    position: showGUI ? position : modelPosition,
+    scale: showGUI ? scale : modelScale,
+  };
 
   return (
     <group {...props} dispose={null}>
-      <primitive object={scene} />
+      <mesh scale={finalSettings.scale} position={new Vector3(...finalSettings.position)}>
+        <primitive object={scene} />
+      </mesh>
     </group>
   );
 }

@@ -15,7 +15,14 @@ const Scene1 = () => {
   return (
     <Scene scene={scene} deps={objectsDependencies}>
       <Suspense>
-        <GLTFModel stateScene={scene} name={objectsDependencies[0]} url={"/models/website-scene.glb"} />
+        <GLTFModel
+          url={"/models/website-scene.glb"}
+          showGUI={true}
+          stateScene={scene}
+          name={objectsDependencies[0]}
+          modelPosition={[0, 0, 0]}
+          modelScale={6}
+        />
       </Suspense>
     </Scene>
   );
