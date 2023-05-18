@@ -10,7 +10,7 @@ interface SceneContainerProps extends ReactNodeWrapper {
   deps: string[];
 }
 
-const SceneContainer = ({ scene, deps, children }: SceneContainerProps) => {
+const Scene = ({ scene, deps, children }: SceneContainerProps) => {
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
 
@@ -36,4 +36,4 @@ const SceneContainer = ({ scene, deps, children }: SceneContainerProps) => {
   return <>{children}</>;
 };
 
-export default SceneContainer;
+export default Scene;

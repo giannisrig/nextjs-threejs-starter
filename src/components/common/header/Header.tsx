@@ -3,6 +3,7 @@ import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
 import Logo from "@/components/common/header/Logo";
 import GithubLink from "@/components/common/header/GithubLink";
 import ScenePreloaderLink from "@/components/three/containers/ScenePreloaderLink";
+import ResetGUIButton from "@/components/three/helpers/ResetGUIButton";
 
 export default function Header() {
   return (
@@ -21,6 +22,7 @@ export default function Header() {
               >
                 <h4 className={`font-primary text-lg font-semibold`}>Test</h4>
               </ScenePreloaderLink>
+              <ResetGUIButton />
             </div>
 
             <div className="flex items-center gap-20px">

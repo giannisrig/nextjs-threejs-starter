@@ -9,13 +9,10 @@ import { CameramanState, CameraState, ThreeState } from "@/types/three/state";
 const CameraControls = ({ showGUI = false, useCameraman = true, orbitControls = false }) => {
   // Get the camera and cameraman state
   const { camera, cameraman } = useAppSelector((state: RootState) => state.three as ThreeState);
-  console.log("data before GUI", { camera, cameraman });
 
   // Set up the settings for the cameraman and use GUI controls if enabled
   const cameramanState: CameramanState = showGUI ? CameramanGUI() : cameraman;
   const cameraState: CameraState = showGUI ? CameraGUI() : camera;
-
-  console.log("data after GUI", { cameraState, cameramanState });
 
   return (
     <>
