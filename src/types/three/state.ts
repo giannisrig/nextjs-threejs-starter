@@ -22,7 +22,6 @@ export interface ThreeState {
   camera: CameraState;
   cameraman: CameramanState;
   activeScene: number;
-  showGUI: boolean;
   default: DefaultCameraControlsState;
   scenes: ThreeSceneState[];
 }

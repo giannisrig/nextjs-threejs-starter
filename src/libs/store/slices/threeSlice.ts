@@ -30,7 +30,6 @@ const initialState: ThreeState = {
   cameraman: { ...threeSettings.default.cameraman, action: false },
   activeScene: null,
   scenes: scenes,
-  showGUI: true,
   default: {
     camera: { ...threeSettings.default.camera, name: "default" },
     cameraman: { ...threeSettings.default.cameraman, action: false },
@@ -52,9 +51,6 @@ export const threeSlice = createSlice({
     },
     setCameraManAction(state, action: PayloadAction<boolean>) {
       state.cameraman.action = action.payload;
-    },
-    setShowGUI(state, action: PayloadAction<boolean>) {
-      state.showGUI = action.payload;
     },
     setSceneLoading(state, action: PayloadAction<ThreeStateLoadingAction>) {
       const { scene, value } = action.payload;
@@ -79,6 +75,5 @@ export const {
   setCamera,
   setCameraMan,
   setSceneObjectsLoaded,
-  setShowGUI,
 } = threeSlice.actions;
 export default threeSlice.reducer;
