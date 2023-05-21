@@ -30,7 +30,7 @@ const seaSettings: SeaSettings = {
   position: new Vector3(0, -4, 0),
   uniforms: {
     textureSize: 512,
-    sunDirection: new THREE.Vector3(-1.8, 0.5, -10),
+    sunDirection: new THREE.Vector3(-1.8, -2.5, -10.1), //{"sunDirection":[-1.8,-2.499999999999999,-10.1]}
     sunColor: new Color(0xffffff),
     waterColor: new Color(0x475e96),
     distortionScale: 0.5,
