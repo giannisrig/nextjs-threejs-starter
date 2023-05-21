@@ -1,4 +1,5 @@
 import { DefaultCameramanSettings, DefaultCameraSettings, ThreeSceneSettings } from "@/types/three";
+import { Vector3 } from "three";
 
 export interface ThreeSceneState extends ThreeSceneSettings {
   isLoading: boolean;
@@ -11,6 +12,7 @@ export interface CameraState extends DefaultCameraSettings {
 }
 export interface CameramanState extends DefaultCameramanSettings {
   action: boolean;
+  zoom?: number;
 }
 
 export interface DefaultCameraControlsState {

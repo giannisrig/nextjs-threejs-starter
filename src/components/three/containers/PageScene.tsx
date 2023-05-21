@@ -82,6 +82,9 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
 
       const newCameraManState: CameramanState = {
         action: true,
+        cameraPosition: sceneState.cameraman.cameraPosition
+          ? sceneState.cameraman.cameraPosition
+          : cameraman.cameraPosition,
         targetPosition: sceneState.cameraman.targetPosition
           ? sceneState.cameraman.targetPosition
           : cameraman.targetPosition,
@@ -108,6 +111,7 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
     camera.zoom,
     camera.focus,
     cameraman.targetPosition,
+    cameraman.cameraPosition,
   ]);
 
   // Remove the loading screen when scene is loaded

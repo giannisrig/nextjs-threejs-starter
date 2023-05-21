@@ -13,6 +13,7 @@ const threeSettings: ThreeSettings = {
       focus: 20,
     },
     cameraman: {
+      cameraPosition: new Vector3(112, 11, 77),
       targetPosition: new Vector3(16, 11, -35),
     },
   },
@@ -28,6 +29,7 @@ const threeSettings: ThreeSettings = {
         position: new Vector3(112, 11, 77),
       },
       cameraman: {
+        cameraPosition: new Vector3(112, 11, 77),
         targetPosition: new Vector3(16, 11, -35),
       },
     },
@@ -38,6 +40,7 @@ const threeSettings: ThreeSettings = {
         position: new Vector3(0, 11, 9),
       },
       cameraman: {
+        cameraPosition: new Vector3(0, 11, 9),
         targetPosition: new Vector3(48, 4, 294),
       },
     },

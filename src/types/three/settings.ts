@@ -22,6 +22,7 @@ export interface DefaultCameraSettings {
 
 export interface DefaultCameramanSettings {
   targetPosition: Vector3;
+  cameraPosition: Vector3;
 }
 
 export interface ThreeDefaultSettings {
@@ -41,6 +42,8 @@ export interface SceneCameraSettings {
 
 export interface SceneCameramanSettings {
   targetPosition: Vector3;
+
+  cameraPosition: Vector3;
 }
 
 export interface ThreeSceneSettings {
