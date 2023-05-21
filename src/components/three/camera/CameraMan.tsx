@@ -67,17 +67,26 @@ function CameraMan({ showGUI = false }) {
    * handles tha cameraman changes based on our Three Redux state
    */
   useEffect(() => {
+    // if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
+    //
+    // }
+
     // Update the camera position and update the R3F 'perspectiveCamera' component
-    if (cameraControlsRef.current && cameramanState.cameraPosition && cameramanState.targetPosition) {
+    if (
+      cameramanRef.current &&
+      cameramanRef.current.children[0] &&
+      cameramanState.cameraPosition &&
+      cameramanState.targetPosition
+    ) {
       // If there's an action, then set the position of the camera from the cameramanState
       // Otherwise use the default position ( we could also use a previous state instead of default )
       action
-        ? cameraControlsRef.current.position.set(
+        ? cameramanRef.current.children[0].position.set(
             cameramanState.cameraPosition.x,
             cameramanState.cameraPosition.y,
             cameramanState.cameraPosition.z
           )
-        : cameraControlsRef.current.position.set(
+        : cameramanRef.current.children[0].position.set(
             defaultCameraman.cameraPosition.x,
             defaultCameraman.cameraPosition.y,
             defaultCameraman.cameraPosition.z
@@ -85,16 +94,16 @@ function CameraMan({ showGUI = false }) {
     }
 
     // Update the target position to look at by updating the R3F 'mesh' component for the target object
-    if (targetRef.current) {
+    if (cameramanRef.current && cameramanRef.current.children[1]) {
       // If there's an action, then we set the position of the target from the cameramanState
       // Otherwise use the default target position ( we could also use a previous state instead of default )
       action
-        ? targetRef.current.position.set(
+        ? cameramanRef.current.children[1].position.set(
             cameramanState.targetPosition.x,
             cameramanState.targetPosition.y,
             cameramanState.targetPosition.z
           )
-        : targetRef.current.position.set(
+        : cameramanRef.current.children[1].position.set(
             defaultCameraman.targetPosition.x,
             defaultCameraman.targetPosition.y,
             defaultCameraman.targetPosition.z
@@ -106,16 +115,17 @@ function CameraMan({ showGUI = false }) {
   useFrame((state, delta) => {
     // console.log(cameramanRef.current.children);
 
-    if (cameraControlsRef.current && targetRef.current) {
+    // Make sure the cameraman objects are defined
+    if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
       // Set the position of the camera and the target to look at
       // Documentation: https://yomotsu.github.io/camera-controls/classes/CameraControls.html#setLookAt
       controls.setLookAt(
-        cameraControlsRef.current.position.x,
-        cameraControlsRef.current.position.y,
-        cameraControlsRef.current.position.z,
-        targetRef.current.position.x,
-        targetRef.current.position.y,
-        targetRef.current.position.z,
+        cameramanRef.current.children[0].position.x,
+        cameramanRef.current.children[0].position.y,
+        cameramanRef.current.children[0].position.z,
+        cameramanRef.current.children[1].position.x,
+        cameramanRef.current.children[1].position.y,
+        cameramanRef.current.children[1].position.z,
         true
       );
     }
