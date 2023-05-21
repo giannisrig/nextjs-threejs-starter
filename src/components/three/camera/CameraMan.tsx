@@ -7,6 +7,7 @@ import { PerspectiveCamera, Vector3 } from "three";
 import CameramanGUI from "@/components/three/camera/CameramanGUI";
 import CameraGUI from "@/components/three/camera/CameraGUI";
 import useThreeState from "@/libs/hooks/useThreeState";
+import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
 // import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
 
 CameraControls.install({ THREE });
@@ -67,10 +68,6 @@ function CameraMan({ showGUI = false }) {
    * handles tha cameraman changes based on our Three Redux state
    */
   useEffect(() => {
-    // if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
-    //
-    // }
-
     // Update the camera position and update the R3F 'perspectiveCamera' component
     if (
       cameramanRef.current &&
@@ -90,23 +87,6 @@ function CameraMan({ showGUI = false }) {
             defaultCameraman.cameraPosition.x,
             defaultCameraman.cameraPosition.y,
             defaultCameraman.cameraPosition.z
-          );
-    }
-
-    // Update the target position to look at by updating the R3F 'mesh' component for the target object
-    if (cameramanRef.current && cameramanRef.current.children[1]) {
-      // If there's an action, then we set the position of the target from the cameramanState
-      // Otherwise use the default target position ( we could also use a previous state instead of default )
-      action
-        ? cameramanRef.current.children[1].position.set(
-            cameramanState.targetPosition.x,
-            cameramanState.targetPosition.y,
-            cameramanState.targetPosition.z
-          )
-        : cameramanRef.current.children[1].position.set(
-            defaultCameraman.targetPosition.x,
-            defaultCameraman.targetPosition.y,
-            defaultCameraman.targetPosition.z
           );
     }
   }, [action, cameramanState, defaultCameraman, cameramanRef]);
@@ -149,19 +129,7 @@ function CameraMan({ showGUI = false }) {
         }
       />
       {/* This component is used for the cameraman's camera position and for zoom/fov */}
-      <mesh
-        ref={targetRef}
-        position={
-          new Vector3(
-            defaultCameraman.targetPosition.x,
-            defaultCameraman.targetPosition.y,
-            defaultCameraman.targetPosition.z
-          )
-        }
-      >
-        <sphereGeometry />
-        <meshStandardMaterial color={"red"} />
-      </mesh>
+      <CameraTarget ref={targetRef} showTarget={true} showGUI={true} />
     </group>
   );
 }
