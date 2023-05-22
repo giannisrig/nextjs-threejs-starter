@@ -1,17 +1,13 @@
 import { Vector3 } from "three";
 import { useEffect, useRef } from "react";
-import { CameramanState, ThreeState } from "@/types/three/state";
-import useThreeState from "@/libs/hooks/useThreeState";
-import CameramanGUI from "@/components/three/camera/CameramanGUI";
+import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 
 const CameraTarget = ({ showTarget = false, showGUI = true, ...props }) => {
   // Ref objects, these refs are used for the cameraman actions
   const targetRef = useRef(props.ref);
 
-  // State
-  const threeState: ThreeState = useThreeState();
-  const cameramanState: CameramanState = showGUI ? CameramanGUI() : threeState.cameraman;
-  const defaultCameraman: CameramanState = threeState.default.cameraman;
+  // Redux Cameraman State
+  const { cameramanState, defaultCameramanState } = useThreeCameramanState(showGUI);
 
   // Get the action trigger
   const action = cameramanState.action;
@@ -33,21 +29,21 @@ const CameraTarget = ({ showTarget = false, showGUI = true, ...props }) => {
             cameramanState.targetPosition.z
           )
         : targetRef.current.position.set(
-            defaultCameraman.targetPosition.x,
-            defaultCameraman.targetPosition.y,
-            defaultCameraman.targetPosition.z
+            defaultCameramanState.targetPosition.x,
+            defaultCameramanState.targetPosition.y,
+            defaultCameramanState.targetPosition.z
           );
     }
-  }, [action, cameramanState, defaultCameraman, targetRef]);
+  }, [action, cameramanState, defaultCameramanState, targetRef]);
 
   return (
     <mesh
       ref={targetRef}
       position={
         new Vector3(
-          defaultCameraman.targetPosition.x,
-          defaultCameraman.targetPosition.y,
-          defaultCameraman.targetPosition.z
+          defaultCameramanState.targetPosition.x,
+          defaultCameramanState.targetPosition.y,
+          defaultCameramanState.targetPosition.z
         )
       }
     >

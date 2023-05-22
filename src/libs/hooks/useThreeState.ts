@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { RootState, useAppSelector } from "@/libs/store/store";
 import { ThreeState } from "@/types/three/state";
 

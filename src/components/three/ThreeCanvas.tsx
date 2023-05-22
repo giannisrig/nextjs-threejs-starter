@@ -4,7 +4,7 @@ import GlobalScene from "@/components/three/scenes/GlobalScene";
 import ThreeSceneLoader from "@/components/three/ThreeSceneLoader";
 import threeSettings from "@/libs/three/threeSettings";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
-import CameraControls from "@/components/three/camera/CameraControls";
+import CameraControls from "@/components/three/composites/CameraControls";
 
 const ThreeCanvas = () => {
   const onCanvasCreated = () => {
