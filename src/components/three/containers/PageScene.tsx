@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
-import { setActiveScene, setSceneLoading, setCamera, setCameraMan, setCameraManAction } from "@/slices/threeSlice";
+import { setActiveScene, setSceneLoading, setCameraMan, setCameraManAction } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
-import { CameramanState, CameraState, ThreeSceneState, ThreeState, ThreeStateLoadingAction } from "@/types/three";
+import { CameramanState, ThreeSceneState, ThreeState, ThreeStateLoadingAction } from "@/types/three";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
-import { Euler, Vector3 } from "three";
 
 interface ThreeSceneProps extends ReactNodeWrapper {
   sceneIndex: number;
@@ -16,23 +15,21 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
 
   // Get the current scene state and the main scene state
   const {
-    activeScene,
     sceneState,
+    cameraman,
     globalSceneState,
     loading,
-  }: { activeScene: number; sceneState: ThreeSceneState; globalSceneState: ThreeSceneState; loading: boolean } =
+  }: { activeScene: number; sceneState: ThreeSceneState; globalSceneState: ThreeSceneState; loading: boolean; cameraman: CameramanState } =
     useAppSelector((state: RootState) => {
       const threeState: ThreeState = state.three;
       return {
-        activeScene: threeState.activeScene,
-        sceneState: threeState.scenes[sceneIndex],
-        globalSceneState: threeState.scenes[0],
-        loading: state.loading.loading,
+        cameraman: threeState.cameraman, // Get the cameraman state
+        activeScene: threeState.activeScene, // Get the active scene from state
+        sceneState: threeState.scenes[sceneIndex], // The Scene State of the current scene
+        globalSceneState: threeState.scenes[0], // The global scene state
+        loading: state.loading.loading, // The loading screen loading state
       };
     });
-
-  // Get the camera and cameraman state
-  const { camera, cameraman } = useAppSelector((state: RootState) => state.three as ThreeState);
 
   useEffect(() => {
     // Make sure the Global Scene has loaded first
@@ -63,85 +60,21 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
       }
 
       console.log("Set active scene: ", sceneState.name);
+      // Make the current scene the active one
       dispatch(setActiveScene(sceneIndex));
-
       dispatch(setCameraManAction(false));
-
-      const newCameraState: CameraState = {
-        name: sceneState.name,
-        position: new Vector3(sceneState.camera.position.x, sceneState.camera.position.y, sceneState.camera.position.z),
-        rotation: sceneState.camera.rotation
-          ? new Euler(sceneState.camera.rotation.x, sceneState.camera.rotation.y, sceneState.camera.rotation.z, "XYZ")
-          : new Euler(camera.rotation.x, camera.rotation.y, camera.rotation.z),
-        fov: sceneState.camera.fov ? sceneState.camera.fov : camera.fov,
-        near: sceneState.camera.near ? sceneState.camera.near : camera.near,
-        far: sceneState.camera.far ? sceneState.camera.far : camera.far,
-        zoom: sceneState.camera.zoom ? sceneState.camera.zoom : camera.zoom,
-        focus: sceneState.camera.focus ? sceneState.camera.focus : camera.focus,
-      };
 
       const newCameraManState: CameramanState = {
         action: true,
-        cameraPosition: sceneState.cameraman.cameraPosition
-          ? sceneState.cameraman.cameraPosition
-          : cameraman.cameraPosition,
-        targetPosition: sceneState.cameraman.targetPosition
-          ? sceneState.cameraman.targetPosition
-          : cameraman.targetPosition,
+        cameraPosition: sceneState.cameraman.cameraPosition ? sceneState.cameraman.cameraPosition : cameraman.cameraPosition,
+        targetPosition: sceneState.cameraman.targetPosition ? sceneState.cameraman.targetPosition : cameraman.targetPosition,
       };
 
-      console.log(newCameraState);
       console.log(newCameraManState);
 
-      dispatch(setCamera(newCameraState));
       dispatch(setCameraMan(newCameraManState));
     }
-  }, [
-    globalSceneState,
-    sceneState,
-    dispatch,
-    loading,
-    sceneIndex,
-    camera.rotation.x,
-    camera.rotation.y,
-    camera.rotation.z,
-    camera.fov,
-    camera.near,
-    camera.far,
-    camera.zoom,
-    camera.focus,
-    cameraman.targetPosition,
-    cameraman.cameraPosition,
-  ]);
-
-  // Remove the loading screen when scene is loaded
-  // useEffect(() => {
-  //   if (activeScene !== sceneIndex) return;
-  //   console.log("Should change the cameraman because active scene now is ", activeScene);
-  //
-  //   const newCameraState: CameraState = {
-  //     name: sceneState.name,
-  //     position: new Vector3(sceneState.camera.position.x, sceneState.camera.position.y, sceneState.camera.position.z),
-  //     rotation: sceneState.camera.rotation
-  //       ? new Euler(sceneState.camera.rotation.x, sceneState.camera.rotation.y, sceneState.camera.rotation.z, "XYZ")
-  //       : new Euler(camera.rotation.x, camera.rotation.y, camera.rotation.z),
-  //     fov: sceneState.camera.fov ? sceneState.camera.fov : camera.fov,
-  //     near: sceneState.camera.near ? sceneState.camera.near : camera.near,
-  //     far: sceneState.camera.far ? sceneState.camera.far : camera.far,
-  //     zoom: sceneState.camera.zoom ? sceneState.camera.zoom : camera.zoom,
-  //     focus: sceneState.camera.focus ? sceneState.camera.focus : camera.focus,
-  //   };
-  //
-  //   const newCameraManState: CameramanState = {
-  //     action: true,
-  //     targetPosition: sceneState.cameraman.targetPosition
-  //       ? sceneState.cameraman.targetPosition
-  //       : cameraman.targetPosition,
-  //   };
-  //
-  //   dispatch(setCamera(newCameraState));
-  //   dispatch(setCameraMan(newCameraManState));
-  // }, [sceneState, activeScene, sceneIndex, camera, cameraman, dispatch]);
+  }, [globalSceneState, sceneState, dispatch, loading, sceneIndex, cameraman.targetPosition, cameraman.cameraPosition]);
 
   return <>{children}</>;
 };

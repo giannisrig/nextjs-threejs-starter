@@ -2,15 +2,19 @@ import React, { Suspense } from "react";
 import Box from "@/components/three/objects/common/Box";
 import Scene from "@/components/three/containers/Scene";
 import { RootState, useAppSelector } from "@/libs/store/store";
-import { ThreeSceneState } from "@/types/three/state";
+import { ThreeSceneState, ThreeState } from "@/types/three/state";
 import GLTFModel from "@/components/three/objects/gltf/GLTFModel";
+import useThreeState from "@/libs/hooks/useThreeState";
 
 const Scene2 = () => {
   // Define the current scene
   const scene = 2;
 
+  // Get the scenes state
+  const { scenes } = useThreeState() as ThreeState;
+
   // Get the scene object dependencies
-  const { objectsDependencies } = useAppSelector((state: RootState) => state.three.scenes[scene] as ThreeSceneState);
+  const { objectsDependencies } = scenes[scene] as ThreeSceneState;
 
   // Wrap every Lazy loaded Model in a Suspense so that there's no glitch while loading the objects, especially GTLFs which might be pretty big
   return (

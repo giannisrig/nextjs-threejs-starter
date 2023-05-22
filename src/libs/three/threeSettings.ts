@@ -1,9 +1,12 @@
-import { ThreeSettings } from "@/types/three";
+import { ThreeState } from "@/types/three";
 import { Euler, Vector3 } from "three";
+
 //{"position":[38,5,5]}
-const threeSettings: ThreeSettings = {
+const threeSettings: ThreeState = {
+  activeScene: 0,
   default: {
     camera: {
+      name: "default",
       position: new Vector3(112, 11, 77),
       rotation: new Euler(0, 0, 0, "XYZ"),
       fov: 66,
@@ -13,6 +16,7 @@ const threeSettings: ThreeSettings = {
       focus: 20,
     },
     cameraman: {
+      action: false,
       cameraPosition: new Vector3(112, 11, 77),
       targetPosition: new Vector3(16, 11, -35),
     },
@@ -25,9 +29,6 @@ const threeSettings: ThreeSettings = {
     {
       name: "Scene1",
       objectsDependencies: ["Scene1GltfModel"],
-      camera: {
-        position: new Vector3(112, 11, 77),
-      },
       cameraman: {
         cameraPosition: new Vector3(112, 11, 77),
         targetPosition: new Vector3(16, 11, -35),
@@ -36,9 +37,6 @@ const threeSettings: ThreeSettings = {
     {
       name: "Scene2",
       objectsDependencies: ["Box2"],
-      camera: {
-        position: new Vector3(0, 11, 9),
-      },
       cameraman: {
         cameraPosition: new Vector3(0, 11, 9),
         targetPosition: new Vector3(48, 4, 294),

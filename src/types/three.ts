@@ -1,2 +1,2 @@
 export * from "@/types/three/state";
-export * from "@/types/three/settings";
+export * from "@/types/three/objects";
