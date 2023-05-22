@@ -7,7 +7,7 @@ import CameramanCamera from "@/components/three/camera/cameramanCamera/Cameraman
 
 CameraControls.install({ THREE });
 
-function CameraMan() {
+function CameraMan({ showGUI = false }) {
   // Get the ThreeJS camera and the gl object from Canvas
   const { camera, gl } = useThree();
 
@@ -41,9 +41,9 @@ function CameraMan() {
   return (
     <group ref={cameramanRef}>
       {/* This component is used for the cameraman's camera position and for zoom/fov */}
-      <CameramanCamera showGUI={true} />
+      <CameramanCamera showGUI={showGUI} />
       {/* This component is used for the cameraman's target position to look at */}
-      <CameraTarget showTarget={true} showGUI={true} />
+      <CameraTarget showGUI={showGUI} />
     </group>
   );
 }

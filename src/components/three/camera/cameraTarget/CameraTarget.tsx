@@ -4,7 +4,7 @@ import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import CameraTargetGUI from "@/components/three/camera/cameraTarget/cameraTargetGUI";
 import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraTarget/cameraTargetSettings";
 
-const CameraTarget = ({ showTargetGUI = true, showGUI = true, ...props }) => {
+const CameraTarget = ({ showGUI = false, ...props }) => {
   // Ref objects, these refs are used for the cameraman actions
   const targetRef = useRef(props.ref);
 
@@ -15,7 +15,7 @@ const CameraTarget = ({ showTargetGUI = true, showGUI = true, ...props }) => {
   const action = cameramanState.action;
 
   // Get the Target settings
-  const targetSettings: CameraTarget = showTargetGUI ? CameraTargetGUI() : cameraTargetSettings;
+  const targetSettings: CameraTarget = showGUI ? CameraTargetGUI() : cameraTargetSettings;
 
   /*
    * This codes handles the changes of the properties of the 'R3F' components
