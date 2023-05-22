@@ -45,11 +45,7 @@ const Sea = ({ showGUI = false }) => {
       textureWidth: settings.uniforms.textureSize,
       textureHeight: settings.uniforms.textureSize,
       waterNormals: waterNormals,
-      sunDirection: new THREE.Vector3(
-        settings.uniforms.sunDirection.x,
-        settings.uniforms.sunDirection.y,
-        settings.uniforms.sunDirection.z
-      ),
+      sunDirection: new THREE.Vector3(settings.uniforms.sunDirection.x, settings.uniforms.sunDirection.y, settings.uniforms.sunDirection.z),
       sunColor: settings.uniforms.sunColor,
       waterColor: settings.uniforms.waterColor,
       distortionScale: settings.uniforms.distortionScale,
@@ -75,7 +71,7 @@ const Sea = ({ showGUI = false }) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const material: ShaderMaterial = ref.current.material;
-    material.uniforms.time.value += delta * 0.2;
+    material.uniforms.time.value += delta * 0.25;
   });
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

@@ -19,6 +19,7 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
     cameraman,
     globalSceneState,
     loading,
+    activeScene,
   }: { activeScene: number; sceneState: ThreeSceneState; globalSceneState: ThreeSceneState; loading: boolean; cameraman: CameramanState } =
     useAppSelector((state: RootState) => {
       const threeState: ThreeState = state.three;
@@ -35,7 +36,6 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
     // Make sure the Global Scene has loaded first
     if (!globalSceneState.isLoaded) return;
     if (sceneState.isLoading) return;
-
     // Set up the loading action data
     const loadingAction: ThreeStateLoadingAction = {
       scene: sceneIndex,
@@ -50,13 +50,15 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
 
   // Remove the loading screen when scene is loaded
   useEffect(() => {
+    if (activeScene === sceneIndex) return;
+
     // When both the global scene and the current one have loaded set the LoadingScreen to false
     if (globalSceneState.isLoaded && sceneState.isLoaded) {
-      console.log("Current page scene and global scene have loaded");
+      // console.log("Current page scene and global scene have loaded");
 
       if (loading) {
         dispatch(setLoading(false));
-        console.log("Remove the loading screen");
+        // console.log("Remove the loading screen");
       }
 
       console.log("Set active scene: ", sceneState.name);
@@ -70,11 +72,11 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
         targetPosition: sceneState.cameraman.targetPosition ? sceneState.cameraman.targetPosition : cameraman.targetPosition,
       };
 
-      console.log(newCameraManState);
+      // console.log(newCameraManState);
 
       dispatch(setCameraMan(newCameraManState));
     }
-  }, [globalSceneState, sceneState, dispatch, loading, sceneIndex, cameraman.targetPosition, cameraman.cameraPosition]);
+  }, [activeScene, globalSceneState, sceneState, dispatch, loading, sceneIndex, cameraman.targetPosition, cameraman.cameraPosition]);
 
   return <>{children}</>;
 };
