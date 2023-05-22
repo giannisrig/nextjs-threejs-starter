@@ -1,6 +1,6 @@
 import { CameramanState, ThreeState } from "@/types/three/state";
 import useThreeState from "@/libs/hooks/useThreeState";
-import CameramanGUI from "@/components/three/camera/CameramanGUI";
+import CameramanGUI from "@/components/three/camera/cameraman/CameramanGUI";
 
 const useThreeCameramanState = <ThreeCameramanState>(
   showGUI

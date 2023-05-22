@@ -1,7 +1,7 @@
 import { Vector3 } from "three";
 import { useControls } from "leva";
 import { RootState, useAppSelector } from "@/libs/store/store";
-import { CameramanState, ThreeState } from "@/types/three/state";
+import { CameramanState } from "@/types/three/state";
 
 const CameramanGUI = () => {
   // Get the cameraman state
@@ -22,10 +22,11 @@ const CameramanGUI = () => {
 
   // Set up the Cameraman controls GUI from leva
   // We will use the state values as the initial ones
-  const { action, targetPosition } = useControls(
+  const { action, targetPosition, cameraPosition } = useControls(
     "Cameraman Settings",
     {
       action: { value: cameramanState.action },
+      cameraPosition: { value: cameramanState.cameraPosition.toArray(), step: 1 },
       targetPosition: { value: cameramanState.targetPosition.toArray(), step: 1 },
     },
     [activeScene, cameramanState]
@@ -34,6 +35,7 @@ const CameramanGUI = () => {
   // Create a CameramanState type object
   const cameramanSettings: CameramanState = {
     action: action,
+    cameraPosition: new Vector3(...cameraPosition),
     targetPosition: new Vector3(...targetPosition),
   };
 

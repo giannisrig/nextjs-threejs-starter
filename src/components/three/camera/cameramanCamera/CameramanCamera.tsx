@@ -2,7 +2,7 @@ import { Vector3 } from "three";
 import { useEffect, useRef } from "react";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 
-const Camera = ({ showGUI = true }) => {
+const CameramanCamera = ({ showGUI = true }) => {
   // Ref objects, these refs are used for the cameraman actions
   const cameraRef = useRef(null);
 
@@ -51,4 +51,4 @@ const Camera = ({ showGUI = true }) => {
   );
 };
 
-export default Camera;
+export default CameramanCamera;
