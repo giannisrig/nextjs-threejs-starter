@@ -8,8 +8,6 @@ import CameramanCamera from "@/components/three/camera/cameramanCamera/Cameraman
 CameraControls.install({ THREE });
 
 function CameraMan() {
-  // console.log("cameraman updated", { cameramanState, cameraState });
-
   // Get the ThreeJS camera and the gl object from Canvas
   const { camera, gl } = useThree();
 
@@ -19,13 +17,8 @@ function CameraMan() {
   // Ref objects, these refs are used for the cameraman actions
   const cameramanRef = useRef(null);
 
-  // Get the action trigger
-  // const action = cameramanState.action;
-
   // RAF to handle the cameraman controls
   useFrame((state, delta) => {
-    // console.log(cameramanRef.current.children);
-
     // Make sure the cameraman objects are defined
     if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
       // Set the position of the camera and the target to look at
