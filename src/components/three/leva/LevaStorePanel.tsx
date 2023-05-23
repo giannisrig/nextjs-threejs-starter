@@ -1,12 +1,13 @@
-import { useCreateStore, LevaPanel } from "leva";
-import { useEffect } from "react";
+import { useCreateStore, LevaPanel, Leva } from "leva";
+import { useEffect, useRef } from "react";
 import { useAppDispatch } from "@/libs/store/store";
 import { setLevaStore, SetLevaStoreAction } from "@/slices/levaSlice";
 import { StoreType } from "leva/src/types";
 import useLevaStore from "@/libs/hooks/useLevaStore";
 
-const LevaStorePanel = () => {
+const LevaStorePanel = ({ show = true }) => {
   // Create a leva store
+  const panelRef = useRef(null);
   const levaStore: StoreType = useCreateStore();
   const currentStore: StoreType = useLevaStore("camera");
 
@@ -31,7 +32,17 @@ const LevaStorePanel = () => {
     dispatch(setLevaStore(levaStoreAction));
   }, [levaStore, dispatch, currentStore]);
 
-  return <LevaPanel hidden={true} store={levaStore} />;
+  // useEffect(() => {
+  //   console.log(panelRef.current.children[0]);
+  //   panelRef.current.children[0].style.display = show ? "block" : "none";
+  // }, [show, panelRef]);
+
+  return (
+    <div ref={panelRef}>
+      <Leva isRoot={true} hidden={false} />
+      <LevaPanel hidden={!show} store={levaStore} />
+    </div>
+  );
 };
 
 export default LevaStorePanel;
