@@ -1,7 +1,7 @@
 import CameraMan from "@/components/three/camera/cameraman/CameraMan";
 import React from "react";
 import { OrbitControls } from "@react-three/drei";
-import CameraGUI from "@/components/three/camera/cameraGUI/CameraGUI";
+import DefaultCamera from "@/components/three/camera/defaultCamera/DefaultCamera";
 
 const CameraControls = ({ useCameraman = true, useCameramanGUI = false, orbitControls = false, defaultCameraGUI = false }) => {
   if (useCameraman && useCameramanGUI) {
@@ -10,9 +10,15 @@ const CameraControls = ({ useCameraman = true, useCameramanGUI = false, orbitCon
 
   return (
     <>
-      {orbitControls && <OrbitControls />}
-      {useCameraman && <CameraMan showGUI={useCameramanGUI} />}
-      {defaultCameraGUI && <CameraGUI />}
+      <group visible={orbitControls}>
+        <OrbitControls />
+      </group>
+      <group visible={useCameraman}>
+        <CameraMan showGUI={useCameramanGUI} />
+      </group>
+      <group visible={defaultCameraGUI}>
+        <DefaultCamera showGUI={defaultCameraGUI} />
+      </group>
     </>
   );
 };

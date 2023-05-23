@@ -3,7 +3,7 @@ import { ThreeState } from "@/types/three/state";
 
 const useThreeState = <ThreeState>(): ThreeState => {
   // Get the camera and cameraman state
-  return useAppSelector((state: RootState) => state.three as ThreeState);
+  return useAppSelector((state: RootState) => state.three as ThreeState) as ThreeState;
 };
 
 export default useThreeState;

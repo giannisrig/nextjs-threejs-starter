@@ -25,7 +25,7 @@ const ThreeCanvas = () => {
     >
       <Suspense fallback={<GlobalScene />}>
         <SceneHelper grid={false} axes={true} stats={true} />
-        <CameraControls defaultCameraGUI={false} useCameraman={true} useCameramanGUI={true} orbitControls={false} />
+        <CameraControls useCameraman={true} useCameramanGUI={true} defaultCameraGUI={true} orbitControls={false} />
         <GlobalScene />
         <ThreeSceneLoader />
       </Suspense>

@@ -7,9 +7,15 @@ const SceneHelper = ({ axes = false, grid = false, stats = false }) => {
 
   return (
     <>
-      {axes && <axesHelper args={[1000]} />}
-      {grid && <gridHelper args={[1000, 100]} />}
-      {stats && <Stats />}
+      <group visible={axes}>
+        <axesHelper args={[1000]} />
+      </group>
+      <group visible={grid}>
+        <gridHelper args={[1000, 100]} />
+      </group>
+      <group visible={stats}>
+        <Stats />
+      </group>
     </>
   );
 };

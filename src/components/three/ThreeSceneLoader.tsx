@@ -16,8 +16,6 @@ const ThreeSceneLoader = () => {
       <group visible={scenes[2].isLoading}>
         <Scene2 />
       </group>
-      {/*{scenes[1].isLoading && <Scene1 />}*/}
-      {/*{scenes[2].isLoading && <Scene2 />}*/}
     </>
   );
 };
