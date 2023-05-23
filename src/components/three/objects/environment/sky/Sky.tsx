@@ -28,7 +28,7 @@ const Sky = ({ showGUI = false }) => {
 
   return (
     <mesh ref={ref} position={[settings.position.x, settings.position.y, settings.position.z]}>
-      <boxBufferGeometry args={[settings.geometry.x, settings.geometry.y, settings.geometry.z]} />
+      <boxGeometry args={[settings.geometry.x, settings.geometry.y, settings.geometry.z]} />
       <shaderMaterial args={[shaderSettings]} />
     </mesh>
   );

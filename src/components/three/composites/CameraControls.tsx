@@ -14,7 +14,7 @@ const CameraControls = ({ useCameraman = true, useCameramanGUI = false, orbitCon
         <OrbitControls />
       </group>
       <group visible={useCameraman}>
-        <CameraMan showGUI={useCameramanGUI} />
+        <CameraMan useCameraman={useCameraman} />
       </group>
       <group visible={defaultCameraGUI}>
         <DefaultCamera showGUI={defaultCameraGUI} />

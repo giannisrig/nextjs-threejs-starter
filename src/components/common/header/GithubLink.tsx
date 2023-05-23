@@ -7,7 +7,7 @@ export default function GithubLink() {
       target="_blank"
       className="flex items-center gap-5px rounded-full border border-silver bg-white px-10px py-7px text-black transition-colors duration-200 hover:border-black"
     >
-      <Image src="/github.svg" alt="Github Logo" width={18} height={18} priority />
+      <Image src="/github.svg" alt="Github Logo" width={18} height={18} />
       <span className="hidden font-secondary text-sm mdl:block">View on github</span>
     </a>
   );

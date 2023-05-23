@@ -1,13 +1,15 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import CameraControls from "camera-controls";
 import * as THREE from "three";
 import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
 import CameramanCamera from "@/components/three/camera/cameramanCamera/CameramanCamera";
+import { useControls } from "leva";
+import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 
 CameraControls.install({ THREE });
 
-function CameraMan({ showGUI = false }) {
+function CameraMan({ useCameraman = false }) {
   // Get the ThreeJS camera and the gl object from Canvas
   const { camera, gl } = useThree();
 
@@ -16,6 +18,41 @@ function CameraMan({ showGUI = false }) {
 
   // Ref objects, these refs are used for the cameraman actions
   const cameramanRef = useRef(null);
+
+  // Get the active cameraman state
+  const { cameramanState } = useThreeCameramanState();
+
+  // Set up the Leva controls for the cameraman
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const [, set] = useControls("Cameraman Settings", () => ({
+    cameraPosition: {
+      value: cameramanState.cameraPosition.toArray(),
+      step: 1,
+      onChange: (cameraPosition) => {
+        if (cameramanRef.current && cameramanRef.current.children[0]) {
+          cameramanRef.current.children[0].position.set(...cameraPosition);
+        }
+      },
+    },
+    targetPosition: {
+      value: cameramanState.targetPosition.toArray(),
+      step: 1,
+      onChange: (targetPosition) => {
+        if (cameramanRef.current && cameramanRef.current.children[1]) {
+          cameramanRef.current.children[1].position.set(...targetPosition);
+        }
+      },
+    },
+  }));
+
+  // This code runs when the cameraman state changes, usually because there's a new active scene
+  // It sets the values of the updated state to the leva controls
+  useEffect(() => {
+    // Update the leva controls with the values of the new cameraman state
+    set({ cameraPosition: cameramanState.cameraPosition.toArray() });
+    set({ targetPosition: cameramanState.targetPosition.toArray() });
+  }, [set, cameramanState.cameraPosition, cameramanState.targetPosition]);
 
   // RAF to handle the cameraman controls
   useFrame((state, delta) => {
@@ -39,11 +76,11 @@ function CameraMan({ showGUI = false }) {
   });
 
   return (
-    <group ref={cameramanRef}>
+    <group ref={cameramanRef} visible={useCameraman}>
       {/* This component is used for the cameraman's camera position and for zoom/fov */}
-      <CameramanCamera showGUI={showGUI} />
+      <CameramanCamera />
       {/* This component is used for the cameraman's target position to look at */}
-      <CameraTarget showGUI={showGUI} />
+      <CameraTarget showGUI={true} />
     </group>
   );
 }

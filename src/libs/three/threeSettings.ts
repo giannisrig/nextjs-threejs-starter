@@ -7,7 +7,7 @@ const threeSettings: ThreeState = {
   default: {
     camera: {
       name: "default",
-      position: new Vector3(112, 11, 77),
+      position: new Vector3(0, 11, 77),
       rotation: new Euler(0, 0, 0, "XYZ"),
       fov: 66,
       near: 0.1,
@@ -16,8 +16,7 @@ const threeSettings: ThreeState = {
       focus: 20,
     },
     cameraman: {
-      action: false,
-      cameraPosition: new Vector3(112, 11, 77),
+      cameraPosition: new Vector3(0, 11, 77),
       targetPosition: new Vector3(16, 11, -35),
     },
   },
@@ -30,7 +29,6 @@ const threeSettings: ThreeState = {
       name: "Scene1",
       objectsDependencies: ["Scene1GltfModel"],
       cameraman: {
-        action: true,
         cameraPosition: new Vector3(112, 11, 77),
         targetPosition: new Vector3(16, 11, -35),
       },
@@ -39,7 +37,6 @@ const threeSettings: ThreeState = {
       name: "Scene2",
       objectsDependencies: ["Box2"],
       cameraman: {
-        action: true,
         cameraPosition: new Vector3(0, 11, 9),
         targetPosition: new Vector3(48, 4, 294),
       },

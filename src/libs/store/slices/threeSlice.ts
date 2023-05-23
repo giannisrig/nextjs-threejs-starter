@@ -19,6 +19,7 @@ const scenes: ThreeSceneState[] = threeSettings.scenes.map((item: ThreeSceneStat
 // Set up the initial state for Three
 const initialState: ThreeState = {
   activeScene: null,
+  pageScene: null,
   scenes: scenes,
   default: {
     camera: { ...threeSettings.default.camera, name: "default" },
@@ -30,6 +31,9 @@ export const threeSlice = createSlice({
   name: "three",
   initialState,
   reducers: {
+    setPageScene(state, action: PayloadAction<number>) {
+      state.pageScene = action.payload;
+    },
     setActiveScene(state, action: PayloadAction<number>) {
       state.activeScene = action.payload;
     },
@@ -48,5 +52,5 @@ export const threeSlice = createSlice({
   },
 });
 
-export const { setSceneLoading, setSceneLoaded, setActiveScene, setSceneObjectsLoaded } = threeSlice.actions;
+export const { setSceneLoading, setPageScene, setSceneLoaded, setActiveScene, setSceneObjectsLoaded } = threeSlice.actions;
 export default threeSlice.reducer;

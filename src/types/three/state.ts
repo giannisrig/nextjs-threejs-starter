@@ -28,7 +28,9 @@ export interface ThreeSceneState {
 }
 
 export interface ThreeState {
+  pageScene?: number;
   activeScene: number;
+  requestingScene?: number;
   default: {
     camera: CameraState;
     cameraman: CameramanState;

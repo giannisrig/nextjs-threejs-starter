@@ -17,6 +17,7 @@ const ThreeCanvas = () => {
   return (
     <Canvas
       dpr={dpr}
+      gl={{ antialias: true }}
       camera={{
         position: defaultCameraSettings.position,
         rotation: defaultCameraSettings.rotation,
@@ -30,7 +31,7 @@ const ThreeCanvas = () => {
       <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)} />
       <Suspense fallback={<GlobalScene />}>
         <SceneHelper grid={false} axes={true} stats={true} />
-        <CameraControls useCameraman={true} useCameramanGUI={true} defaultCameraGUI={true} orbitControls={false} />
+        <CameraControls useCameraman={true} useCameramanGUI={false} defaultCameraGUI={false} orbitControls={false} />
         <GlobalScene />
         <ThreeSceneLoader />
       </Suspense>

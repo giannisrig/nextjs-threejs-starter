@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
-import { setActiveScene, setSceneLoading } from "@/slices/threeSlice";
+import { setActiveScene, setSceneLoading, setPageScene } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
 import { ThreeSceneState, ThreeState, ThreeStateLoadingAction } from "@/types/three";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
@@ -30,6 +30,14 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
       };
     }
   );
+
+  // This code triggers to load the scene
+  useEffect(() => {
+    // Update the state and start loading the scene
+    dispatch(setPageScene(sceneIndex));
+
+    // console.log("Will start loading: ", sceneState.name);
+  }, [dispatch, sceneIndex]);
 
   // This code triggers to load the scene
   useEffect(() => {
@@ -65,6 +73,7 @@ const PageScene = ({ sceneIndex, children }: ThreeSceneProps) => {
     // If the global scene or the current one haven't loaded yet return
     if (!globalSceneState.isLoaded || !sceneState.isLoaded) return;
 
+    // console.log("Current page scene:", sceneIndex);
     // console.log("Set active scene: ", sceneState.name);
     // Make the current scene the active one
     dispatch(setActiveScene(sceneIndex));
