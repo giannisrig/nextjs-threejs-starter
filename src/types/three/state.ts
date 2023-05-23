@@ -28,7 +28,6 @@ export interface ThreeSceneState {
 }
 
 export interface ThreeState {
-  cameraman?: CameramanState;
   activeScene: number;
   default: {
     camera: CameraState;

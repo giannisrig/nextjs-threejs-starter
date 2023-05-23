@@ -30,6 +30,7 @@ const threeSettings: ThreeState = {
       name: "Scene1",
       objectsDependencies: ["Scene1GltfModel"],
       cameraman: {
+        action: true,
         cameraPosition: new Vector3(112, 11, 77),
         targetPosition: new Vector3(16, 11, -35),
       },
@@ -38,6 +39,7 @@ const threeSettings: ThreeState = {
       name: "Scene2",
       objectsDependencies: ["Box2"],
       cameraman: {
+        action: true,
         cameraPosition: new Vector3(0, 11, 9),
         targetPosition: new Vector3(48, 4, 294),
       },

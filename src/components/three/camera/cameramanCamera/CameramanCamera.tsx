@@ -23,11 +23,7 @@ const CameramanCamera = ({ showGUI = true }) => {
       // If there's an action, then set the position of the camera from the cameramanState
       // Otherwise use the default position ( we could also use a previous state instead of default )
       action
-        ? cameraRef.current.position.set(
-            cameramanState.cameraPosition.x,
-            cameramanState.cameraPosition.y,
-            cameramanState.cameraPosition.z
-          )
+        ? cameraRef.current.position.set(cameramanState.cameraPosition.x, cameramanState.cameraPosition.y, cameramanState.cameraPosition.z)
         : cameraRef.current.position.set(
             defaultCameramanState.cameraPosition.x,
             defaultCameramanState.cameraPosition.y,
@@ -40,13 +36,7 @@ const CameramanCamera = ({ showGUI = true }) => {
     <perspectiveCamera
       ref={cameraRef}
       fov={45}
-      position={
-        new Vector3(
-          defaultCameramanState.cameraPosition.x,
-          defaultCameramanState.cameraPosition.y,
-          defaultCameramanState.cameraPosition.z
-        )
-      }
+      position={new Vector3(defaultCameramanState.cameraPosition.x, defaultCameramanState.cameraPosition.y, defaultCameramanState.cameraPosition.z)}
     />
   );
 };

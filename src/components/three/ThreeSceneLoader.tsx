@@ -10,8 +10,14 @@ const ThreeSceneLoader = () => {
 
   return (
     <>
-      {scenes[1].isLoading && <Scene1 />}
-      {scenes[2].isLoading && <Scene2 />}
+      <group visible={scenes[1].isLoading}>
+        <Scene1 />
+      </group>
+      <group visible={scenes[2].isLoading}>
+        <Scene2 />
+      </group>
+      {/*{scenes[1].isLoading && <Scene1 />}*/}
+      {/*{scenes[2].isLoading && <Scene2 />}*/}
     </>
   );
 };

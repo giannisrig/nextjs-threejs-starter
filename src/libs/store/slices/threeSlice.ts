@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CameramanState, ThreeSceneState, ThreeState, ThreeStateLoadingAction, ThreeStateObjectsLoadedAction } from "@/types/three";
+import { ThreeSceneState, ThreeState, ThreeStateLoadingAction, ThreeStateObjectsLoadedAction } from "@/types/three";
 import threeSettings from "@/libs/three/threeSettings";
 
 // Set up the initial state all scenes
@@ -18,7 +18,6 @@ const scenes: ThreeSceneState[] = threeSettings.scenes.map((item: ThreeSceneStat
 
 // Set up the initial state for Three
 const initialState: ThreeState = {
-  cameraman: { ...threeSettings.default.cameraman, action: false },
   activeScene: null,
   scenes: scenes,
   default: {
@@ -31,14 +30,8 @@ export const threeSlice = createSlice({
   name: "three",
   initialState,
   reducers: {
-    setCameraMan(state, action: PayloadAction<CameramanState>) {
-      state.cameraman = action.payload;
-    },
     setActiveScene(state, action: PayloadAction<number>) {
       state.activeScene = action.payload;
-    },
-    setCameraManAction(state, action: PayloadAction<boolean>) {
-      state.cameraman.action = action.payload;
     },
     setSceneLoading(state, action: PayloadAction<ThreeStateLoadingAction>) {
       const { scene, value } = action.payload;
@@ -55,5 +48,5 @@ export const threeSlice = createSlice({
   },
 });
 
-export const { setSceneLoading, setSceneLoaded, setActiveScene, setCameraManAction, setCameraMan, setSceneObjectsLoaded } = threeSlice.actions;
+export const { setSceneLoading, setSceneLoaded, setActiveScene, setSceneObjectsLoaded } = threeSlice.actions;
 export default threeSlice.reducer;
