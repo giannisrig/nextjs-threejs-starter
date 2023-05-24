@@ -5,9 +5,9 @@ import Sea from "@/components/three/objects/environment/sea/Sea";
 const Environment = () => {
   return (
     <>
-      <Sky showGUI={false} />
+      <Sky showGUI={true} />
       {/*<Ground showGUI={false} />*/}
-      <Sea showGUI={false} />
+      <Sea showGUI={true} />
     </>
   );
 };

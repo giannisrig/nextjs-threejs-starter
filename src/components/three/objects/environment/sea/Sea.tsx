@@ -72,7 +72,9 @@ const Sea = ({ showGUI = false }) => {
     // @ts-ignore
     const material: ShaderMaterial = ref.current.material;
     material.uniforms.time.value += delta * 0.25;
+    // ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.02;
   });
+
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return <customWater ref={ref} args={[geom, config]} position={[0, -4, 0]} rotation-x={-Math.PI / 2} />;

@@ -80,7 +80,7 @@ function CameraMan({ useCameraman = false }) {
       {/* This component is used for the cameraman's camera position and for zoom/fov */}
       <CameramanCamera />
       {/* This component is used for the cameraman's target position to look at */}
-      <CameraTarget showGUI={true} />
+      <CameraTarget />
     </group>
   );
 }

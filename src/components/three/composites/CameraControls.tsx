@@ -3,11 +3,7 @@ import React from "react";
 import { OrbitControls } from "@react-three/drei";
 import DefaultCamera from "@/components/three/camera/defaultCamera/DefaultCamera";
 
-const CameraControls = ({ useCameraman = true, useCameramanGUI = false, orbitControls = false, defaultCameraGUI = false }) => {
-  if (useCameraman && useCameramanGUI) {
-    console.warn("The cameraman GUI is enabled, Note that automatic cameraman change doesn't work when GUI is enabled.");
-  }
-
+const CameraControls = ({ useCameraman = true, orbitControls = false, defaultCameraGUI = false }) => {
   return (
     <>
       <group visible={orbitControls}>

@@ -3,10 +3,11 @@ import { GLTF } from "three-stdlib";
 import { useAppDispatch } from "@/libs/store/store";
 import { setSceneObjectsLoaded } from "@/libs/store/slices/threeSlice";
 import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useControls } from "leva";
 import seaSettings from "@/components/three/objects/environment/sea/seaSettings";
 import { Vector3 } from "three";
+import { useFrame } from "@react-three/fiber";
 
 interface GLTFModelProps {
   url: string;
@@ -20,6 +21,8 @@ interface GLTFModelProps {
 function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showGUI, ...props }: GLTFModelProps) {
   // Get the nodes and materials of the model
   const { scene } = useGLTF(url, true) as GLTF;
+
+  const ref = useRef(null);
 
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
@@ -45,9 +48,14 @@ function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showG
     scale: showGUI ? scale : modelScale,
   };
 
+  // useFrame((state, delta) => {
+  //   ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
+  //   // ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z += delta;
+  // });
+
   return (
     <group {...props} dispose={null}>
-      <mesh scale={finalSettings.scale} position={new Vector3(...finalSettings.position)}>
+      <mesh ref={ref} scale={finalSettings.scale} position={new Vector3(...finalSettings.position)}>
         <primitive object={scene} />
       </mesh>
     </group>

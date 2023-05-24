@@ -20,8 +20,8 @@ const skySettings: SkySettings = {
   geometry: new Vector3(1000, 1000, 1000),
   position: new Vector3(0, 0, 0),
   uniforms: {
-    topColor: new Color(0x65a0b3),
-    bottomColor: new Color(0xe09d86),
+    topColor: new Color(0xcee0ff),
+    bottomColor: new Color(0xf9f4ff),
     offset: 0,
     exponent: 0.6,
   },

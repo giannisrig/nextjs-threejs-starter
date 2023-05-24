@@ -6,11 +6,12 @@ import { Provider } from "react-redux";
 import { store } from "@/libs/store/store";
 import fonts from "@/libs/constants/fonts";
 import LoadingScreen from "@/components/common/loading/LoadingScreen";
+import LevaControls from "@/components/three/containers/LevaControls";
 import ThreeCanvas from "@/components/three/ThreeCanvas";
-const DynamicThreeCanvas = dynamic(() => import("@/components/three/ThreeCanvas"), {
-  loading: () => null,
-  ssr: false,
-});
+// const DynamicThreeCanvas = dynamic(() => import("@/components/three/ThreeCanvas"), {
+//   loading: () => null,
+//   ssr: false,
+// });
 
 export default function App({ Component, ...props }) {
   const { pageProps } = props;
@@ -20,9 +21,10 @@ export default function App({ Component, ...props }) {
       <GoogleAnalytics trackPageViews />
       <div className={`${fonts.primary.variable} ${fonts.secondary.variable} font-primary`}>
         <LoadingScreen />
+        <LevaControls />
         <Component {...pageProps} />
         <div className="absolute left-0 top-0 z-1 h-screen w-full">
-          <DynamicThreeCanvas />
+          <ThreeCanvas />
         </div>
       </div>
     </Provider>

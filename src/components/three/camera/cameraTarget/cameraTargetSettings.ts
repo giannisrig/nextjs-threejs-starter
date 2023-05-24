@@ -10,7 +10,7 @@ export interface CameraTarget {
 const cameraTargetSettings: CameraTarget = {
   scale: 1,
   show: true,
-  color: new Color("#ff0000"),
+  color: new Color(0xff0000),
 };
 
 export default cameraTargetSettings;

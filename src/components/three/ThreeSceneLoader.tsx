@@ -6,14 +6,14 @@ import useThreeState from "@/libs/hooks/useThreeState";
 
 const ThreeSceneLoader = () => {
   // Get the scenes state
-  const { scenes, activeScene } = useThreeState() as ThreeState;
+  const { scenes } = useThreeState() as ThreeState;
 
   return (
     <>
-      <group visible={scenes[1].isLoaded && activeScene === 1}>
+      <group visible={scenes[1].isLoaded}>
         <Scene1 />
       </group>
-      <group visible={scenes[2].isLoaded && activeScene === 2}>
+      <group visible={scenes[2].isLoaded}>
         <Scene2 />
       </group>
     </>
