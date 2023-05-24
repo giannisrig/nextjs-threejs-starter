@@ -38,10 +38,16 @@ function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showG
     dispatch(setSceneObjectsLoaded(objectLoaded));
   }, [dispatch, name, stateScene, scene]);
 
-  const { scale, position } = useControls(name + " Settings", {
-    position: { value: modelPosition, step: 0.5 },
-    scale: { value: modelScale, step: 1, min: 1, max: 50 },
-  });
+  const { scale, position } = useControls(
+    name + " Settings",
+    {
+      position: { value: modelPosition, step: 0.5 },
+      scale: { value: modelScale, step: 1, min: 1, max: 50 },
+    },
+    {
+      collapsed: true,
+    }
+  );
 
   const finalSettings = {
     position: showGUI ? position : modelPosition,

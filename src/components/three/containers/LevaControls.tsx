@@ -2,7 +2,7 @@ import { Leva } from "leva";
 
 const LevaControls = ({ hidden = false }) => {
   return (
-    <div className="relative top-[100px] z-3 ml-auto w-[300px]">
+    <div className="z-99 fixed right-0 top-0 max-h-[80vh] w-[300px] overflow-y-auto">
       <Leva isRoot={true} hidden={hidden} fill={true} />
     </div>
   );

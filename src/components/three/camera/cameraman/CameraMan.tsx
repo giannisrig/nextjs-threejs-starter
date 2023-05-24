@@ -55,25 +55,25 @@ function CameraMan({ useCameraman = false }) {
   }, [set, cameramanState.cameraPosition, cameramanState.targetPosition]);
 
   // RAF to handle the cameraman controls
-  useFrame((state, delta) => {
-    // Make sure the cameraman objects are defined
-    if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
-      // Set the position of the camera and the target to look at
-      // Documentation: https://yomotsu.github.io/camera-controls/classes/CameraControls.html#setLookAt
-      controls.setLookAt(
-        cameramanRef.current.children[0].position.x,
-        cameramanRef.current.children[0].position.y,
-        cameramanRef.current.children[0].position.z,
-        cameramanRef.current.children[1].position.x,
-        cameramanRef.current.children[1].position.y,
-        cameramanRef.current.children[1].position.z,
-        true
-      );
-    }
-
-    // Update the controls
-    controls.update(delta);
-  });
+  // useFrame((state, delta) => {
+  //   // Make sure the cameraman objects are defined
+  //   if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
+  //     // Set the position of the camera and the target to look at
+  //     // Documentation: https://yomotsu.github.io/camera-controls/classes/CameraControls.html#setLookAt
+  //     controls.setLookAt(
+  //       cameramanRef.current.children[0].position.x,
+  //       cameramanRef.current.children[0].position.y,
+  //       cameramanRef.current.children[0].position.z,
+  //       cameramanRef.current.children[1].position.x,
+  //       cameramanRef.current.children[1].position.y,
+  //       cameramanRef.current.children[1].position.z,
+  //       true
+  //     );
+  //   }
+  //
+  //   // Update the controls
+  //   controls.update(delta);
+  // });
 
   return (
     <group ref={cameramanRef} visible={useCameraman}>
