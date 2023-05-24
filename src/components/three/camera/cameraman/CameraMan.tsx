@@ -1,5 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import CameraControls from "camera-controls";
 import * as THREE from "three";
 import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
@@ -12,6 +12,8 @@ CameraControls.install({ THREE });
 function CameraMan({ useCameraman = false }) {
   // Get the ThreeJS camera and the gl object from Canvas
   const { camera, gl } = useThree();
+
+  const [action, setAction] = useState(true);
 
   // Set up the camera controls
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [camera, gl.domElement]);
@@ -32,6 +34,7 @@ function CameraMan({ useCameraman = false }) {
       onChange: (cameraPosition) => {
         if (cameramanRef.current && cameramanRef.current.children[0]) {
           cameramanRef.current.children[0].position.set(...cameraPosition);
+          setAction(true);
         }
       },
     },
@@ -41,6 +44,7 @@ function CameraMan({ useCameraman = false }) {
       onChange: (targetPosition) => {
         if (cameramanRef.current && cameramanRef.current.children[1]) {
           cameramanRef.current.children[1].position.set(...targetPosition);
+          setAction(true);
         }
       },
     },
@@ -52,28 +56,28 @@ function CameraMan({ useCameraman = false }) {
     // Update the leva controls with the values of the new cameraman state
     set({ cameraPosition: cameramanState.cameraPosition.toArray() });
     set({ targetPosition: cameramanState.targetPosition.toArray() });
+    setAction(true);
   }, [set, cameramanState.cameraPosition, cameramanState.targetPosition]);
 
   // RAF to handle the cameraman controls
-  // useFrame((state, delta) => {
-  //   // Make sure the cameraman objects are defined
-  //   if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
-  //     // Set the position of the camera and the target to look at
-  //     // Documentation: https://yomotsu.github.io/camera-controls/classes/CameraControls.html#setLookAt
-  //     controls.setLookAt(
-  //       cameramanRef.current.children[0].position.x,
-  //       cameramanRef.current.children[0].position.y,
-  //       cameramanRef.current.children[0].position.z,
-  //       cameramanRef.current.children[1].position.x,
-  //       cameramanRef.current.children[1].position.y,
-  //       cameramanRef.current.children[1].position.z,
-  //       true
-  //     );
-  //   }
-  //
-  //   // Update the controls
-  //   controls.update(delta);
-  // });
+  useFrame((state, delta) => {
+    // Make sure the cameraman objects are defined
+    if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1]) {
+      // Set the position of the camera and the target to look at
+      // Documentation: https://yomotsu.github.io/camera-controls/classes/CameraControls.html#setLookAt
+      controls.setLookAt(
+        cameramanRef.current.children[0].position.x,
+        cameramanRef.current.children[0].position.y,
+        cameramanRef.current.children[0].position.z,
+        cameramanRef.current.children[1].position.x,
+        cameramanRef.current.children[1].position.y,
+        cameramanRef.current.children[1].position.z,
+        true
+      );
+
+      controls.update(delta);
+    }
+  });
 
   return (
     <group ref={cameramanRef} visible={useCameraman}>
