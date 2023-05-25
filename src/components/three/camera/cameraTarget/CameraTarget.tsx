@@ -43,7 +43,6 @@ const CameraTarget = ({ ...props }) => {
         value: "#" + targetSettings.color.getHexString(),
         onChange: (color) => {
           if (targetRef.current) {
-            console.log(color);
             targetRef.current.material.color = new Color(color);
           }
         },

@@ -5,7 +5,7 @@ import DefaultCameraGUI from "@/components/three/camera/defaultCamera/DefaultCam
 import useThreeState from "@/libs/hooks/useThreeState";
 import { useEffect } from "react";
 
-const DefaultCamera = ({ showGUI = false }) => {
+const DefaultCamera = ({ showGUI = true }) => {
   // Get the Scene camera
   const { camera }: { camera: PerspectiveCamera } = useThree();
 
