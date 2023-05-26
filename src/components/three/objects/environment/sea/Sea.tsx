@@ -20,7 +20,7 @@ declare module "@react-three/fiber" {
   }
 }
 
-const Sea = ({ showGUI = false }) => {
+const Sea = ({ showGUI = true }) => {
   // Our ref item for the sea, needed to animate it
   const ref = useRef<Mesh>();
 

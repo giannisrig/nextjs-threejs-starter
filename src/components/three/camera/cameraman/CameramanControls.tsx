@@ -5,6 +5,7 @@ import CameramanCamera from "@/components/three/camera/cameramanCamera/Cameraman
 import { useControls } from "leva";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import { OrbitControls } from "@react-three/drei";
+import gsap from "gsap";
 
 function CameramanControls() {
   // Get the ThreeJS camera and the gl object from Canvas

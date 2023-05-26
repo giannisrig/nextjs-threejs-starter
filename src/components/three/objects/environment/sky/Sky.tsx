@@ -5,7 +5,7 @@ import skyShader from "./skyShader";
 import skySettings, { SkySettings } from "./skySettings";
 import SkyGUI from "./SkyGUI";
 
-const Sky = ({ showGUI = false }) => {
+const Sky = ({ showGUI = true }) => {
   // Ref item for our Sky
   const ref = useRef<Mesh>();
 

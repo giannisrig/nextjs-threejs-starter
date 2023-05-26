@@ -20,7 +20,6 @@ const ThreeCanvas = () => {
   return (
     <Canvas
       dpr={dpr}
-      shadows
       gl={{ antialias: true }}
       camera={{
         position: defaultCameraSettings.position,
