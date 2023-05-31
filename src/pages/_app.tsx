@@ -1,5 +1,4 @@
 import React from "react";
-import dynamic from "next/dynamic";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import "@/styles/globals.scss";
 import { Provider } from "react-redux";
@@ -8,6 +7,7 @@ import fonts from "@/libs/constants/fonts";
 import LoadingScreen from "@/components/common/loading/LoadingScreen";
 import LevaControls from "@/components/three/containers/LevaControls";
 import ThreeCanvas from "@/components/three/ThreeCanvas";
+// import dynamic from "next/dynamic";
 // const DynamicThreeCanvas = dynamic(() => import("@/components/three/ThreeCanvas"), {
 //   loading: () => null,
 //   ssr: false,

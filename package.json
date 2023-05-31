@@ -12,12 +12,10 @@
     "format:fix": "prettier --write ."
   },
   "dependencies": {
-    "@react-three/drei": "9.65.3",
-    "@react-three/fiber": "8.12.1",
-    "@react-three/postprocessing": "^2.14.1",
+    "@react-three/drei": "^9.70.0",
+    "@react-three/fiber": "^8.13.0",
+    "@react-three/postprocessing": "^2.14.7",
     "@reduxjs/toolkit": "^1.9.3",
-    "camera-controls": "^2.3.4",
-    "gltfpack": "^0.19.1",
     "gsap": "3.11.5",
     "leva": "^0.9.34",
     "next": "13.3.0",
@@ -30,8 +28,8 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "react-use": "^17.4.0",
-    "three": "0.151.3",
-    "three-stdlib": "^2.21.11"
+    "three": "^0.152.2",
+    "three-stdlib": "^2.23.4"
   },
   "devDependencies": {
     "@types/node": "^18.16.2",
