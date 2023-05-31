@@ -26,16 +26,16 @@ export interface SeaSettings extends Object3DSettings {
 
 // Set the initial values of the sky object
 const seaSettings: SeaSettings = {
-  geometry: new Vector3(2000, 2000, 8),
+  geometry: new Vector3(4000, 4000, 8),
   position: new Vector3(0, -4, 0),
   uniforms: {
     textureSize: 512,
     sunDirection: new THREE.Vector3(-19.2, -2.5, -10.1), //{"sunDirection":[-19.19999999999999,-2.5,-10.1]}
-    sunColor: new Color(0xfcfafe),
-    waterColor: new Color(0xacbfde),
+    sunColor: new Color(0xffffff),
+    waterColor: new Color(0x48b3e2),
     distortionScale: 0.5,
     fog: false,
-    side: 2,
+    side: 0,
   },
 };
 

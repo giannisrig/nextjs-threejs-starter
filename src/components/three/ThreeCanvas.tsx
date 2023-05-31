@@ -1,10 +1,11 @@
-import React, { Suspense, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import GlobalScene from "@/components/three/scenes/GlobalScene";
 import ThreeSceneLoader from "@/components/three/ThreeSceneLoader";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
 import CameraControls from "@/components/three/composites/CameraControls";
 import threeSettings from "@/libs/three/threeSettings";
+import PostProcessing from "@/components/three/composites/PostProcessing";
 
 const ThreeCanvas = () => {
   const defaultCameraSettings = useMemo(() => {
@@ -13,14 +14,10 @@ const ThreeCanvas = () => {
 
   const [dpr, setDpr] = useState(1);
 
-  // useEffect(() => {
-  //   setDpr(window.devicePixelRatio);
-  // }, []);
-
   return (
     <Canvas
       dpr={dpr}
-      gl={{ antialias: true }}
+      gl={{ antialias: false, stencil: false, depth: true }}
       camera={{
         position: defaultCameraSettings.position,
         rotation: defaultCameraSettings.rotation,
@@ -36,6 +33,7 @@ const ThreeCanvas = () => {
         <CameraControls />
         <GlobalScene />
         <ThreeSceneLoader />
+        <PostProcessing />
       </Suspense>
     </Canvas>
   );

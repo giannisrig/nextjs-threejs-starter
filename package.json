@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-three/drei": "9.65.3",
     "@react-three/fiber": "8.12.1",
-    "@react-three/postprocessing": "^2.10.0",
+    "@react-three/postprocessing": "^2.14.1",
     "@reduxjs/toolkit": "^1.9.3",
     "camera-controls": "^2.3.4",
     "gltfpack": "^0.19.1",
@@ -25,6 +25,7 @@
     "next-sitemap": "^4.0.7",
     "next-transpile-modules": "^10.0.0",
     "nextjs-google-analytics": "^2.3.3",
+    "r3f-perf": "^7.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",

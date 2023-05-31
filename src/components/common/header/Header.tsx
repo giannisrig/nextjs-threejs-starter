@@ -7,7 +7,7 @@ import ScenePreloaderLink from "@/components/three/containers/ScenePreloaderLink
 export default function Header() {
   return (
     <>
-      <header className="fixed top-0 z-10 w-full border-b border-basicGray py-6 text-sm backdrop-blur-lg">
+      <header className="fixed top-0 z-10 w-full border-b border-basicGray py-6 text-sm ">
         <div className="container">
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-20px">

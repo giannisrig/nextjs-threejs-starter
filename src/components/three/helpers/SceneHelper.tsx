@@ -1,5 +1,6 @@
 import { Stats } from "@react-three/drei";
 import React from "react";
+import { Perf } from "r3f-perf";
 
 const SceneHelper = ({ axes = false, grid = false, stats = false }) => {
   // https://threejs.org/docs/#api/en/helpers/AxesHelper
@@ -14,7 +15,8 @@ const SceneHelper = ({ axes = false, grid = false, stats = false }) => {
         <gridHelper args={[1000, 100]} />
       </group>
       <group visible={stats}>
-        <Stats />
+        {/*<Stats />*/}
+        <Perf position="bottom-left" />
       </group>
     </>
   );

@@ -4,7 +4,7 @@ import SeaGUI from "./SeaGUI";
 import * as THREE from "three";
 import { Mesh, ShaderMaterial } from "three";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { extend, useThree, useLoader, useFrame, ThreeElements, Object3DNode } from "@react-three/fiber";
+import { extend, useLoader, useFrame, Object3DNode } from "@react-three/fiber";
 import { Water } from "three-stdlib";
 extend({ Water });
 
@@ -35,7 +35,7 @@ const Sea = ({ showGUI = true }) => {
 
   // Set up the sea geometry
   const geom = useMemo(
-    () => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y, settings.geometry.z),
+    () => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y),
     [settings.geometry.x, settings.geometry.y, settings.geometry.z]
   );
 
@@ -71,13 +71,13 @@ const Sea = ({ showGUI = true }) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const material: ShaderMaterial = ref.current.material;
-    material.uniforms.time.value += delta * 0.25;
+    material.uniforms.time.value += delta * 0.15;
     // ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.02;
   });
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <customWater ref={ref} args={[geom, config]} position={[0, -4, 0]} rotation-x={-Math.PI / 2} />;
+  return <customWater ref={ref} args={[geom, config]} position={[0, 0, 0]} rotation-x={-Math.PI / 2} />;
 };
 
 export default Sea;

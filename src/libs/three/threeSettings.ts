@@ -11,7 +11,7 @@ const threeSettings: ThreeState = {
       rotation: new Euler(0, 0, 0, "XYZ"),
       fov: 37,
       near: 0.1,
-      far: 1000,
+      far: 4000,
       zoom: 1,
       focus: 20,
     },

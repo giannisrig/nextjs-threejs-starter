@@ -19,7 +19,7 @@ const Scene1 = () => {
     <Scene scene={scene} deps={objectsDependencies}>
       <Suspense>
         <GLTFModel
-          url={"/models/website-scene-3.glb"}
+          url={"/models/website-scene-1.glb"}
           showGUI={true}
           stateScene={scene}
           name={objectsDependencies[0]}

@@ -1,11 +1,11 @@
-import Sky from "@/components/three/objects/environment/sky/Sky";
 import Sea from "@/components/three/objects/environment/sea/Sea";
+import Skybox from "@/components/three/objects/environment/skybox/Skybox";
 // import Ground from "@/components/three/objects/environment/ground/Ground";
 
 const Environment = () => {
   return (
     <>
-      <Sky />
+      <Skybox />
       {/*<Ground showGUI={false} />*/}
       <Sea />
     </>
