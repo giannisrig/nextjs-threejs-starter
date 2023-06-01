@@ -24,7 +24,7 @@ export default function App({ Component, ...props }) {
         <LoadingScreen />
         <LevaControls />
         <Component {...pageProps} />
-        <div className="absolute left-0 top-0 z-1 h-screen w-full">
+        <div className="fixed left-0 top-0 z-1 h-screen w-full">
           <ThreeCanvas />
         </div>
       </div>
