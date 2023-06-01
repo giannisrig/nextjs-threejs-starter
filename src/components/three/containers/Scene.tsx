@@ -31,7 +31,7 @@ const Scene = ({ scene, deps, children }: SceneContainerProps) => {
         value: true,
       };
 
-      console.log("Loaded Scene " + scene);
+      // console.log("Loaded Scene " + scene);
 
       // Update the state and start loading the scene
       dispatch(setSceneLoaded(loadedAction));

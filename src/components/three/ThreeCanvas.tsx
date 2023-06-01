@@ -21,7 +21,7 @@ const ThreeCanvas = () => {
   return (
     <Canvas
       dpr={dpr}
-      gl={{ antialias: false, stencil: false, depth: true }}
+      gl={{ antialias: true, stencil: true, depth: true }}
       camera={{
         position: defaultCameraSettings.position,
         rotation: defaultCameraSettings.rotation,

@@ -20,6 +20,7 @@ export default function App({ Component, ...props }) {
     <Provider store={store}>
       <GoogleAnalytics trackPageViews />
       <div className={`${fonts.primary.variable} ${fonts.secondary.variable} font-primary`}>
+        <div className="grain" />
         <LoadingScreen />
         <LevaControls />
         <Component {...pageProps} />

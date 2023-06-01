@@ -1,15 +1,15 @@
-import { Color, Vector3 } from "three";
+import { Color } from "three";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraTarget/cameraTargetSettings";
 import { useControls } from "leva";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const CameraTarget = ({ ...props }) => {
   // Set up the ref for our camera target Mesh
   const targetRef = useRef(null);
 
   // Redux Cameraman State from the active scene
-  const { cameramanState } = useThreeCameramanState();
+  const { cameramanState, defaultCameramanState } = useThreeCameramanState();
 
   // Get the Target settings
   const targetSettings: CameraTarget = cameraTargetSettings;
@@ -53,11 +53,19 @@ const CameraTarget = ({ ...props }) => {
     }
   );
 
+  // Triggered every time the target position state changes
+  useEffect(() => {
+    if (targetRef.current) {
+      // Mutate the target position, the cameraman will detect the change
+      targetRef.current.position.set(cameramanState.targetPosition.x, cameramanState.targetPosition.y, cameramanState.targetPosition.z);
+    }
+  }, [targetRef, cameramanState.targetPosition]);
+
   return (
     <mesh
       ref={targetRef}
       scale={targetSettings.scale}
-      position={new Vector3(cameramanState.targetPosition.x, cameramanState.targetPosition.y, cameramanState.targetPosition.z)}
+      position={[defaultCameramanState.targetPosition.x, defaultCameramanState.targetPosition.y, defaultCameramanState.targetPosition.z]}
       {...props}
     >
       <sphereGeometry />

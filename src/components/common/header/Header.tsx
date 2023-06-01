@@ -21,6 +21,13 @@ export default function Header() {
               >
                 <h4 className={`font-primary text-lg font-semibold`}>Test</h4>
               </ScenePreloaderLink>
+              <ScenePreloaderLink
+                scene={3}
+                href={"/undersea"}
+                className="cursor-hover flex items-center gap-[4px] transition-colors duration-200 hover:text-pink"
+              >
+                <h4 className={`font-primary text-lg font-semibold`}>Under Sea</h4>
+              </ScenePreloaderLink>
             </div>
 
             <div className="flex items-center gap-20px">

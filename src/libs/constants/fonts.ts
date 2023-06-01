@@ -15,22 +15,10 @@ const unna = Unna({
 });
 
 //load the local fonts
-const grava = localFont({
+const drallen = localFont({
   src: [
     {
-      path: "../../../public/fonts/Grava Display Normal.woff",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/Grava Display Medium.woff",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../../public/fonts/Grava Display Bold.woff",
-      weight: "700",
-      style: "normal",
+      path: "../../../public/fonts/Drallen.woff",
     },
   ],
   variable: "--font-secondary",
@@ -39,7 +27,7 @@ const grava = localFont({
 //define the fonts object
 const fonts: AppFonts = {
   primary: unna,
-  secondary: grava,
+  secondary: drallen,
 };
 
 export default fonts;

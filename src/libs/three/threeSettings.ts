@@ -29,8 +29,8 @@ const threeSettings: ThreeState = {
       name: "Scene1",
       objectsDependencies: ["Scene1GltfModel"],
       cameraman: {
-        cameraPosition: new Vector3(112, 11, 77), //{"cameraPosition":[115,11,62]}
-        targetPosition: new Vector3(-18, 14, -31), //{"targetPosition":[-18,14,-31]}
+        cameraPosition: new Vector3(80, 11, 86), //{"cameraPosition":[80,11,86]}
+        targetPosition: new Vector3(-43, 14, -31), //{"targetPosition":[-43,14,-31]}
       },
     },
     {
@@ -39,6 +39,14 @@ const threeSettings: ThreeState = {
       cameraman: {
         cameraPosition: new Vector3(0, 11, 9),
         targetPosition: new Vector3(48, 4, 294),
+      },
+    },
+    {
+      name: "Scene3",
+      objectsDependencies: [""],
+      cameraman: {
+        cameraPosition: new Vector3(80, 41, 86), //{"cameraPosition":[80,11,86]}
+        targetPosition: new Vector3(-43, -500, -31), //{"targetPosition":[-43,14,-31]}
       },
     },
   ],

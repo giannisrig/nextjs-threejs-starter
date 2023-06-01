@@ -40,6 +40,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
+        'black': '#000',
         'green': '#24C1AE',
         'pink': '#F73693',
         'amethyst': '#AE94BD',
