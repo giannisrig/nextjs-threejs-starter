@@ -5,9 +5,10 @@ import * as THREE from "three";
 
 const SeaGUI = () => {
   // Set up the Ground Object controls GUI from leva
-  const { geometry, position, sunColor, waterColor, sunDirection, fog, side, distortionScale, textureSize } = useControls(
+  const { visible, geometry, position, sunColor, waterColor, sunDirection, fog, side, distortionScale, textureSize } = useControls(
     "Sea Settings",
     {
+      visible: { value: seaSettings.visible },
       geometry: { value: seaSettings.geometry.toArray(), step: 1 },
       position: { value: seaSettings.position.toArray(), step: 0.1 },
       sunDirection: { value: seaSettings.uniforms.sunDirection.toArray(), step: 0.1 },
@@ -25,6 +26,7 @@ const SeaGUI = () => {
 
   // Create a GroundSettings type object
   const guiSettings: SeaSettings = {
+    visible: visible,
     geometry: new Vector3(...geometry),
     position: new Vector3(...position),
     uniforms: {

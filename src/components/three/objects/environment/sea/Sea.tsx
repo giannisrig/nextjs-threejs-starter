@@ -34,10 +34,7 @@ const Sea = ({ showGUI = true }) => {
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
   // Set up the sea geometry
-  const geom = useMemo(
-    () => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y),
-    [settings.geometry.x, settings.geometry.y, settings.geometry.z]
-  );
+  const geom = useMemo(() => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y), [settings.geometry.x, settings.geometry.y]);
 
   // Set up the options for the sea
   const config = useMemo(
@@ -77,7 +74,7 @@ const Sea = ({ showGUI = true }) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <customWater ref={ref} args={[geom, config]} position={[0, 0, 0]} rotation-x={-Math.PI / 2} />;
+  return <customWater ref={ref} args={[geom, config]} position={[0, 0, 0]} visible={settings.visible} rotation-x={-Math.PI / 2} />;
 };
 
 export default Sea;

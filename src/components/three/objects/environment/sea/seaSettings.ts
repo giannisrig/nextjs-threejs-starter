@@ -20,12 +20,14 @@ export interface shaderUniforms {
 
 // Define the type for the sky settings, extending the core SceneItem type
 export interface SeaSettings extends Object3DSettings {
+  visible: boolean;
   geometry: Vector3;
   uniforms: shaderUniforms;
 }
 
 // Set the initial values of the sky object
 const seaSettings: SeaSettings = {
+  visible: true,
   geometry: new Vector3(4000, 4000, 8),
   position: new Vector3(0, -4, 0),
   uniforms: {

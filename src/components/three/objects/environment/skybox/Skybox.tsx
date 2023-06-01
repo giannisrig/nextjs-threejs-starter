@@ -1,6 +1,5 @@
-import { useCubeTexture, useGLTF } from "@react-three/drei";
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import * as THREE from "three";
+import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
 import { useEffect, useRef } from "react";
 import { useAppDispatch } from "@/libs/store/store";
@@ -10,6 +9,7 @@ import { useControls } from "leva";
 import { Euler, Vector3 } from "three";
 
 const Skybox = ({ showGUI = true }) => {
+  const modelVisible = true;
   const modelPosition: any = [0, 0, 0];
   const modelRotation: any = [0, 0, 0];
   const modelScale = 1;
@@ -35,9 +35,10 @@ const Skybox = ({ showGUI = true }) => {
     dispatch(setSceneObjectsLoaded(objectLoaded));
   }, [dispatch, scene]);
 
-  const { scale, position, rotation } = useControls(
+  const { visible, scale, position, rotation } = useControls(
     name + " Settings",
     {
+      visible: { value: true },
       position: { value: [0, -310, 0], step: 0.5 },
       scale: { value: 3, step: 1, min: 1, max: 50 },
       rotation: { value: [0, 0, 0], step: 0.5 },
@@ -48,18 +49,21 @@ const Skybox = ({ showGUI = true }) => {
   );
 
   const finalSettings = {
+    visible: showGUI ? visible : modelVisible,
     position: showGUI ? position : modelPosition,
     scale: showGUI ? scale : modelScale,
     rotation: showGUI ? rotation : modelRotation,
   };
 
   useFrame((state, delta) => {
+    if (ref.current) {
+      ref.current.rotation.y += delta * 0.005;
+    }
     // ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
-    ref.current.rotation.y += delta * 0.005;
   });
 
   return (
-    <group dispose={null}>
+    <group dispose={null} visible={visible}>
       <mesh
         ref={ref}
         scale={new Vector3(finalSettings.scale, finalSettings.scale, finalSettings.scale)}
