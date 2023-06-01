@@ -1,7 +1,6 @@
 import React from "react";
 import { Perf } from "r3f-perf";
 import { folder, useControls } from "leva";
-import { Color } from "three";
 
 const SceneHelper = () => {
   // https://threejs.org/docs/#api/en/helpers/AxesHelper
@@ -10,7 +9,7 @@ const SceneHelper = () => {
   // Set up the camera target controls from Leva
   // The controls have the default values of cameraTargetSettings
   // They mutate the object on value changes
-  const { showAxes, showGrid, showStats, axesSize, gridSize, tilesNumber, gridColor } = useControls(
+  const { showAxes, showGrid, axesSize, gridSize, tilesNumber, gridColor } = useControls(
     "Scene Helper",
     {
       "Scene Axes": folder(
@@ -30,7 +29,7 @@ const SceneHelper = () => {
       "Scene Grid": folder(
         {
           showGrid: {
-            value: true,
+            value: false,
           },
           gridSize: {
             value: 1000,

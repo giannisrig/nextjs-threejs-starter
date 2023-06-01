@@ -64,7 +64,7 @@ function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showG
 
   return (
     <group {...props} dispose={null} visible={visible}>
-      <mesh ref={ref} scale={finalSettings.scale} position={new Vector3(...finalSettings.position)}>
+      <mesh ref={ref} scale={finalSettings.scale} position={new Vector3(...finalSettings.position)} castShadow={true} receiveShadow={true}>
         <primitive object={scene} />
       </mesh>
     </group>

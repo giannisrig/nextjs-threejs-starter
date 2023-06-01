@@ -12,7 +12,7 @@ export default function Layout({ children }: ReactNodeWrapper) {
         <meta name="description" content="A weather app built with Next.js" />
       </Head>
       <Header />
-      <main>{children}</main>
+      <main className="relative z-2">{children}</main>
       <Footer />
     </>
   );
