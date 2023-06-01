@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import Box from "@/components/three/objects/common/Box";
 import Scene from "@/components/three/containers/Scene";
 import { ThreeSceneState, ThreeState } from "@/types/three/state";
 import GLTFModel from "@/components/three/objects/gltf/GLTFModel";
@@ -20,12 +19,12 @@ const Scene2 = () => {
     <Scene scene={scene} deps={objectsDependencies}>
       <Suspense>
         <GLTFModel
-          url={"/models/website-scene-2.glb"}
+          url={"/models/NextJSLogo.glb"}
           stateScene={scene}
           name={objectsDependencies[0]}
           showGUI={true}
-          modelPosition={[-24, 0, 0]}
-          modelScale={11}
+          modelPosition={[48, 0, 300]}
+          modelScale={20}
         />
         {/*<Box stateScene={scene} name={objectsDependencies[0]} />*/}
       </Suspense>
