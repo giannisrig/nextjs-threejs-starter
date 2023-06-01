@@ -6,6 +6,7 @@ import SceneHelper from "@/components/three/helpers/SceneHelper";
 import CameraControls from "@/components/three/composites/CameraControls";
 import threeSettings from "@/libs/three/threeSettings";
 import dynamic from "next/dynamic";
+import ScreenTransition from "@/components/three/objects/screenTransition/ScreenTransition";
 const Effects = dynamic(() => import("@/components/three/composites/PostProcessing"), {
   loading: () => null,
   ssr: false,
@@ -31,6 +32,7 @@ const ThreeCanvas = () => {
       }}
     >
       <Suspense fallback={<GlobalScene />}>
+        <ScreenTransition />
         <SceneHelper />
         <CameraControls />
         <GlobalScene />
