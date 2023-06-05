@@ -4,6 +4,7 @@
         "paths": {
             "@/public/*": ["./public/*"],
             "@/images/*": ["./public/images/*"],
+            "@/sounds/*": ["./public/sounds/*"],
             "@/components/*": ["./src/components/*"],
             "@/libs/*": ["./src/libs/*"],
             "@/slices/*": ["./src/libs/store/slices/*"],

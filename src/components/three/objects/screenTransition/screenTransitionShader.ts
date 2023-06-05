@@ -2,77 +2,64 @@ import { Object3DShader } from "@/types/three";
 
 const screenTransitionShader: Object3DShader = {
   vertexShader: `
-      varying vec2 vUv;
-      uniform float uProgress;
-      uniform vec2 uZoomScale;
-      
-      void main() {
-        vUv = uv;
-        vec3 pos = position;
-        float angle = uProgress * 3.14159265 / 2.;
-        float wave = cos(angle);
-        float c = sin(length(uv - .5) * 15. + uProgress * 12.) * .5 + .5;
-        pos.x *= mix(1., uZoomScale.x + wave * c, uProgress);
-        pos.y *= mix(1., uZoomScale.y + wave * c, uProgress);
-      
-        gl_Position = projectionMatrix * modelViewMatrix * vec4( pos, 1.0 );
-      }
+    varying vec2 vUv;
+    uniform vec2 uRes;
+    uniform vec2 uImageRes;
+    
+    vec2 CoverUV(vec2 u, vec2 s, vec2 i) {
+      float rs = s.x / s.y; // Aspect screen size
+      float ri = i.x / i.y; // Aspect image size
+      vec2 st = rs < ri ? vec2(i.x * s.y / i.y, s.y) : vec2(s.x, i.y * s.x / i.x); // New st
+      vec2 o = (rs < ri ? vec2((st.x - s.x) / 2.0, 0.0) : vec2(0.0, (st.y - s.y) / 2.0)) / st; // Offset
+      return u * s / st + o;
+    }
+
+    void main() {
+      vUv = uv;
+      vec3 pos = position;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    }
   `,
   fragmentShader: `
-    uniform sampler2D mainTexture;
-      uniform sampler2D transparentTexture;
-      uniform sampler2D dispTexture;
+    precision highp float;
+    
+    varying vec2 vUv;
+    uniform sampler2D distortedTexture;
+    uniform vec3 solidColor;
+    uniform float dispFactor;
+    uniform vec2 uRes;
+    uniform vec2 uImageRes;
 
-      uniform vec2 uRes;
-      uniform vec2 uZoomScale;
-      uniform vec2 uImageRes;
+    vec2 CoverUV(vec2 u, vec2 s, vec2 i) {
+      float rs = s.x / s.y; // Aspect screen size
+      float ri = i.x / i.y; // Aspect image size
+      vec2 st = rs < ri ? vec2(i.x * s.y / i.y, s.y) : vec2(s.x, i.y * s.x / i.x); // New st
+      vec2 o = (rs < ri ? vec2((st.x - s.x) / 2.0, 0.0) : vec2(0.0, (st.y - s.y) / 2.0)) / st; // Offset
+      return u * s / st + o;
+    }
 
-      uniform float dispFactor;
-      uniform float effectFactor;
+    void main() {
+      vec2 uv = CoverUV(vUv, uRes, uImageRes);
+
+      // Get the distorted texture coordinates
+      vec2 distortedUV = texture(distortedTexture, uv).xy;
       
-      uniform float effectX;
-      uniform float effectY;
-      uniform float hover;
-    
-      /*------------------------------
-      Background Cover UV
-      --------------------------------
-      u = basic UV
-      s = screensize
-      i = image size
-      ------------------------------*/
-      vec2 CoverUV(vec2 u, vec2 s, vec2 i) {
-        float rs = s.x / s.y; // Aspect screen size
-        float ri = i.x / i.y; // Aspect image size
-        vec2 st = rs < ri ? vec2(i.x * s.y / i.y, s.y) : vec2(s.x, i.y * s.x / i.x); // New st
-        vec2 o = (rs < ri ? vec2((st.x - s.x) / 2.0, 0.0) : vec2(0.0, (st.y - s.y) / 2.0)) / st; // Offset
-        return u * s / st + o;
-      }
-    
-      varying vec2 vUv;
-        void main() {
-          vec2 uv = CoverUV(vUv, uRes, uImageRes);
-          
-          vec3 disp = texture2D(dispTexture, uv).rgb;
-          vec2 distortedPosition = vec2(uv.x + effectX * dispFactor * (disp.r*effectFactor), uv.y + effectY * dispFactor * (disp.r*effectFactor));
-          vec2 distortedPosition2 = vec2(uv.x - effectX * (1.0 - dispFactor) * (disp.r*effectFactor), uv.y - effectY * (1.0 - dispFactor) * (disp.r*effectFactor));
-          vec3 transText = texture2D(transparentTexture, distortedPosition2).rgb;
-          vec3 distortedText = texture2D(mainTexture, distortedPosition2).rgb;
-          vec3 mainText = texture2D(mainTexture, distortedPosition).rgb; //we can use distortedPosition instead of uv
-          // if( hover == 0 ){
-          //   vec3 finalTexture = mix(mainText, distortedText, dispFactor);
-          //   gl_FragColor = vec4( finalTexture, 1.0 );
-            
-            vec3 finalTexture = mix(mainText, transText, dispFactor);
-            gl_FragColor = vec4( finalTexture, 1.0 );
-          
-          
-          
-          
-          //Keep
-          // vec3 tex = texture2D(mainTexture, uv).rgb;
-          // gl_FragColor = vec4( tex, 1.0 );
-        }   
+      // Mix between the transparent vector and solid white vector based on progress
+      vec4 transparentVec = vec4(0.0, 0.0, 0.0, 0.0);
+      vec4 solidVec = vec4(solidColor, 1.0);
+      vec4 mixedVec = mix(transparentVec, solidVec, dispFactor);
+      
+      vec3 distortedText = texture2D(distortedTexture, distortedUV).rgb;
+      vec4 distortedVec = vec4(distortedText, 1.0);
+      
+      vec4 mixedDistortedVec = mix(distortedVec, mixedVec, dispFactor);
+      
+      // Apply the distortion effect
+      // vec4 finalColor = texture2D(distortedTexture, uv) * mixedDistortedVec;
+      vec4 finalColor = mixedDistortedVec;
+      
+      gl_FragColor = finalColor;
+    }
   `,
 };
 
