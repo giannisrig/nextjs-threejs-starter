@@ -1,3 +1,4 @@
+"use client";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
@@ -5,7 +6,9 @@ import CameramanCamera from "@/components/three/camera/cameramanCamera/Cameraman
 import { useControls } from "leva";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import { OrbitControls } from "@react-three/drei";
-import gsap from "gsap";
+import { Mesh } from "three";
+import * as React from "react";
+import { OrbitControls as OrbitControlsImpl } from "three-stdlib/controls/OrbitControls";
 
 function CameramanControls() {
   // Get the ThreeJS camera and the gl object from Canvas
@@ -15,13 +18,13 @@ function CameramanControls() {
 
   // Ref objects, these refs are used for the cameraman actions
   const cameramanRef = useRef(null);
-  const orbit = useRef(null);
+  const orbit = useRef<OrbitControlsImpl>(null);
 
   // Get the active cameraman state
   const { cameramanState } = useThreeCameramanState();
 
   // We need this as state so that we can have a camera transition when the page changes
-  const [orbitTarget, setOrbitTarget] = useState(cameramanState.targetPosition);
+  const [orbitTarget] = useState(cameramanState.targetPosition);
 
   // This function is used for enabling the rendering of the cameraman changes
   const enableRender = () => {
@@ -35,19 +38,15 @@ function CameramanControls() {
         // Stop the camera action
         setAction(false);
 
-        // Set the global camera position with the one from the cameraman camera
-        camera.position.set(
-          cameramanRef.current.children[0].position.x,
-          cameramanRef.current.children[0].position.y,
-          cameramanRef.current.children[0].position.z
-        );
+        if (cameramanRef.current) {
+          const cameraman: Mesh = cameramanRef.current;
 
-        // Set the global camera to look at the position of cameraTarget's
-        camera.lookAt(
-          cameramanRef.current.children[1].position.x,
-          cameramanRef.current.children[1].position.y,
-          cameramanRef.current.children[1].position.z
-        );
+          // Set the global camera position with the one from the cameraman camera
+          camera.position.set(cameraman.children[0].position.x, cameraman.children[0].position.y, cameraman.children[0].position.z);
+
+          // Set the global camera to look at the position of cameraTarget's
+          camera.lookAt(cameraman.children[1].position.x, cameraman.children[1].position.y, cameraman.children[1].position.z);
+        }
 
         // Update the projection matrix of the camera because we made changes
         camera.updateProjectionMatrix();
@@ -63,9 +62,13 @@ function CameramanControls() {
       value: cameramanState.cameraPosition.toArray(),
       step: 1,
       onChange: (cameraPosition) => {
-        if (cameramanRef.current && cameramanRef.current.children[0]) {
-          // Change the position of the camera from the leva control value
-          cameramanRef.current.children[0].position.set(...cameraPosition);
+        if (cameramanRef.current) {
+          const cameraman: Mesh = cameramanRef.current;
+
+          if (cameraman.children[0]) {
+            // Change the position of the camera from the leva control value
+            cameraman.children[0].position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+          }
 
           // If there's no active camera action
           if (!action) {
@@ -79,12 +82,16 @@ function CameramanControls() {
       value: cameramanState.targetPosition.toArray(),
       step: 1,
       onChange: (targetPosition) => {
-        if (cameramanRef.current && cameramanRef.current.children[1]) {
-          cameramanRef.current.children[1].position.set(...targetPosition);
-          // If there's no active camera action
-          if (!action) {
-            // Enable the rendering
-            enableRender();
+        if (cameramanRef.current) {
+          const cameraman: Mesh = cameramanRef.current;
+
+          if (cameraman.children[1]) {
+            cameraman.children[1].position.set(targetPosition.x, targetPosition.y, targetPosition.z);
+            // If there's no active camera action
+            if (!action) {
+              // Enable the rendering
+              enableRender();
+            }
           }
         }
       },
@@ -106,22 +113,26 @@ function CameramanControls() {
       return;
     }
 
-    // Check that our ref objects exist
-    if (cameramanRef.current && cameramanRef.current.children[0] && cameramanRef.current.children[1] && orbit.current) {
-      // Change the camera position based on the cameraman camera position
-      camera.position.lerp(cameramanRef.current.children[0].position, delta * 2);
+    if (cameramanRef.current) {
+      const cameraman: Mesh = cameramanRef.current;
 
-      // Update & animate the orbit target from the cameraman target position
-      orbit.current.target.lerp(cameramanRef.current.children[1].position, delta * 2);
+      // Check that our ref objects exist
+      if (cameramanRef.current && cameraman.children[0] && cameraman.children[1] && orbit.current) {
+        // Change the camera position based on the cameraman camera position
+        camera.position.lerp(cameraman.children[0].position, delta * 2);
 
-      // Update the orbit controls
-      orbit.current.update();
+        // Update & animate the orbit target from the cameraman target position
+        orbit.current.target.lerp(cameraman.children[1].position, delta * 2);
 
-      // Update the camera
-      camera.updateProjectionMatrix();
+        // Update the orbit controls
+        orbit.current.update();
 
-      // If something's strange maybe use this too
-      // camera.updateMatrixWorld();
+        // Update the camera
+        camera.updateProjectionMatrix();
+
+        // If something's strange maybe use this too
+        // camera.updateMatrixWorld();
+      }
     }
   });
 

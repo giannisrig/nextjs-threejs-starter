@@ -1,3 +1,4 @@
+"use client";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/libs/store/store";
@@ -12,7 +13,7 @@ interface ScenePreloaderLinkProps extends ReactNodeWrapper {
   className?: string;
 }
 
-const ScenePreloaderLink = ({ scene, href, className = null, children, ...props }: ScenePreloaderLinkProps) => {
+const ScenePreloaderLink = ({ scene, href, className = "", children, ...props }: ScenePreloaderLinkProps) => {
   const [hovered, setHovered] = useState(false);
   const dispatch = useAppDispatch();
 

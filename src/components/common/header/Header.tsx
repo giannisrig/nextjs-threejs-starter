@@ -1,3 +1,4 @@
+"use client";
 import MobileMenu from "@/components/common/mobileMenu/MobileMenu";
 import HamburgerButton from "@/components/common/mobileMenu/HamburgerButton";
 import Logo from "@/components/common/header/Logo";

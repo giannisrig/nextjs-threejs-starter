@@ -5,6 +5,8 @@ import { Object3DSettings } from "@/types/three";
 export interface GroundSettings extends Object3DSettings {
   geometry: Vector2;
   color: Color;
+  position: Vector3;
+  rotation: Euler;
 }
 
 // Set the initial values of the ground object

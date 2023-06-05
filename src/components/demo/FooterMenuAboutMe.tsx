@@ -1,3 +1,4 @@
+"use client";
 import FooterMenu from "@/components/demo/FooterMenu";
 
 export default function FooterMenuAboutMe() {

@@ -1,3 +1,4 @@
+"use client";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
 import { ThreeSceneState, ThreeState, ThreeStateLoadingAction } from "@/types/three/state";
@@ -24,7 +25,7 @@ const Scene = ({ scene, deps, children }: SceneContainerProps) => {
     if (!pageScene || pageScene !== scene) return;
 
     // If the objects loaded are the same as the dependencies models
-    if (sameArrays(objectsLoaded, deps)) {
+    if (objectsLoaded && sameArrays(objectsLoaded, deps)) {
       // Set up the data to update the scene state loaded value
       const loadedAction: ThreeStateLoadingAction = {
         scene: scene,

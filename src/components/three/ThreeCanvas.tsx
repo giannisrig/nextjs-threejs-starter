@@ -1,3 +1,4 @@
+"use client";
 import React, { Suspense, useMemo, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import GlobalScene from "@/components/three/scenes/GlobalScene";
@@ -16,11 +17,11 @@ const ThreeCanvas = () => {
     return threeSettings.default.camera;
   }, []);
 
-  const [dpr, setDpr] = useState(1);
+  // const [dpr, setDpr] = useState(1);
 
   return (
     <Canvas
-      dpr={dpr}
+      dpr={1}
       gl={{ antialias: true, stencil: true, depth: true }}
       camera={{
         position: defaultCameraSettings.position,

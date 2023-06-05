@@ -1,4 +1,4 @@
-import { Stats } from "@react-three/drei";
+"use client";
 import React from "react";
 import { Perf } from "r3f-perf";
 

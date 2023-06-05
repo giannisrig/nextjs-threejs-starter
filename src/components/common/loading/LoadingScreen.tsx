@@ -1,3 +1,4 @@
+"use client";
 import { RootState, useAppSelector } from "@/libs/store/store";
 import React from "react";
 

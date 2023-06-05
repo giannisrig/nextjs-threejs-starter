@@ -1,3 +1,4 @@
+"use client";
 import React, { Suspense } from "react";
 import Scene from "@/components/three/containers/Scene";
 import { ThreeSceneState, ThreeState } from "@/types/three/state";

@@ -1,3 +1,4 @@
+"use client";
 import seaSettings, { SeaSettings } from "./seaSettings";
 import { Vector3, Color } from "three";
 import { useControls } from "leva";

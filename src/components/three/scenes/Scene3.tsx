@@ -1,3 +1,4 @@
+"use client";
 import SceneEmpty from "@/components/three/containers/SceneEmpty";
 
 const Scene3 = () => {

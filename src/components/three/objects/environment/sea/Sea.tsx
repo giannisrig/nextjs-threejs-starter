@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef, useMemo } from "react";
 import seaSettings, { SeaSettings } from "./seaSettings";
 import SeaGUI from "./SeaGUI";
@@ -34,10 +35,7 @@ const Sea = ({ showGUI = true }) => {
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping;
 
   // Set up the sea geometry
-  const geom = useMemo(
-    () => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y),
-    [settings.geometry.x, settings.geometry.y, settings.geometry.z]
-  );
+  const geom = useMemo(() => new THREE.BoxGeometry(settings.geometry.x, settings.geometry.y), [settings.geometry.x, settings.geometry.y]);
 
   // Set up the options for the sea
   const config = useMemo(

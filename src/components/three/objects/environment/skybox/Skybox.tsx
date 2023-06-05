@@ -1,13 +1,13 @@
-import { useCubeTexture, useGLTF } from "@react-three/drei";
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import * as THREE from "three";
+"use client";
+import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
 import { useEffect, useRef } from "react";
 import { useAppDispatch } from "@/libs/store/store";
 import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
 import { setSceneObjectsLoaded } from "@/slices/threeSlice";
 import { useControls } from "leva";
-import { Euler, Vector3 } from "three";
+import { Euler, Mesh, Vector3 } from "three";
 
 const Skybox = ({ showGUI = true }) => {
   const modelPosition: any = [0, 0, 0];
@@ -19,7 +19,7 @@ const Skybox = ({ showGUI = true }) => {
   const { scene } = useGLTF("/models/skydome.glb", true) as GLTF;
   console.log(scene);
 
-  const ref = useRef(null);
+  const ref = useRef<Mesh>(null);
 
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
@@ -54,8 +54,10 @@ const Skybox = ({ showGUI = true }) => {
   };
 
   useFrame((state, delta) => {
-    // ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
-    ref.current.rotation.y += delta * 0.005;
+    if (ref.current) {
+      // ref.current.position.y = Math.sin(state.clock.elapsedTime) * 0.2;
+      ref.current.rotation.y += delta * 0.005;
+    }
   });
 
   return (

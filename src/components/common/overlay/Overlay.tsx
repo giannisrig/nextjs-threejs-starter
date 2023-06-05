@@ -1,3 +1,4 @@
+"use client";
 import { setOverlayActive } from "@/slices/overlaySlice";
 import { setMobileMenuOpen } from "@/slices/mobileMenuSlice";
 import { useEffect, useRef, useState } from "react";

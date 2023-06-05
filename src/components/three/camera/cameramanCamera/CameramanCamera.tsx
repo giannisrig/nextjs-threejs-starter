@@ -1,12 +1,14 @@
+"use client";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import { useRef, useEffect } from "react";
+import { PerspectiveCamera } from "three";
 
 const CameramanCamera = () => {
   // Redux Cameraman State
   const { cameramanState, defaultCameramanState } = useThreeCameramanState();
 
   // Our camera ref object
-  const camera = useRef(null);
+  const camera = useRef<PerspectiveCamera>(null);
 
   // Triggered every time the camera position state changes
   useEffect(() => {

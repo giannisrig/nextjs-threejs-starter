@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect } from "react";
 import Environment from "@/components/three/composites/Environment";
 import Lights from "@/components/three/composites/Lights";

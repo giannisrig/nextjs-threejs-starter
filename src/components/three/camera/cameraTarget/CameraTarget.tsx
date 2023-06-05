@@ -1,4 +1,5 @@
-import { Color } from "three";
+"use client";
+import { Mesh, MeshStandardMaterial } from "three";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraTarget/cameraTargetSettings";
 import { useControls } from "leva";
@@ -6,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 const CameraTarget = ({ ...props }) => {
   // Set up the ref for our camera target Mesh
-  const targetRef = useRef(null);
+  const targetRef = useRef<Mesh>(null);
 
   // Redux Cameraman State from the active scene
   const { cameramanState, defaultCameramanState } = useThreeCameramanState();
@@ -24,7 +25,9 @@ const CameraTarget = ({ ...props }) => {
         value: targetSettings.show,
         onChange: (show) => {
           if (targetRef.current) {
-            targetRef.current.material.visible = show;
+            // Define the mesh standard material for ts reference
+            const material = targetRef.current.material as MeshStandardMaterial;
+            material.visible = show;
           }
         },
       },
@@ -43,7 +46,11 @@ const CameraTarget = ({ ...props }) => {
         value: "#" + targetSettings.color.getHexString(),
         onChange: (color) => {
           if (targetRef.current) {
-            targetRef.current.material.color = new Color(color);
+            // Define the mesh standard material for ts reference
+            const material = targetRef.current.material as MeshStandardMaterial;
+
+            // Change the color
+            material.color.set(color);
           }
         },
       },

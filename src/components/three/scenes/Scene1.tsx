@@ -1,3 +1,4 @@
+"use client";
 import GLTFModel from "@/components/three/objects/gltf/GLTFModel";
 import React, { Suspense } from "react";
 import Scene from "@/components/three/containers/Scene";

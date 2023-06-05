@@ -1,3 +1,4 @@
+"use client";
 import { PerspectiveCamera } from "three";
 import { useThree } from "@react-three/fiber";
 import { CameraState, ThreeState } from "@/types/three/state";
