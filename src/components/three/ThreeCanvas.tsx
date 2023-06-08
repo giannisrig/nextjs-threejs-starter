@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, useMemo, useState } from "react";
+import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import GlobalScene from "@/components/three/scenes/GlobalScene";
 import ThreeSceneLoader from "@/components/three/ThreeSceneLoader";
@@ -7,10 +7,10 @@ import SceneHelper from "@/components/three/helpers/SceneHelper";
 import CameraControls from "@/components/three/composites/CameraControls";
 import threeSettings from "@/libs/three/threeSettings";
 import dynamic from "next/dynamic";
-const Effects = dynamic(() => import("@/components/three/composites/PostProcessing"), {
-  loading: () => null,
-  ssr: false,
-});
+// const Effects = dynamic(() => import("@/components/three/composites/PostProcessing"), {
+//   loading: () => null,
+//   ssr: false,
+// });
 
 const ThreeCanvas = () => {
   const defaultCameraSettings = useMemo(() => {
@@ -38,7 +38,6 @@ const ThreeCanvas = () => {
         <CameraControls />
         <GlobalScene />
         <ThreeSceneLoader />
-        <Effects />
       </Suspense>
     </Canvas>
   );

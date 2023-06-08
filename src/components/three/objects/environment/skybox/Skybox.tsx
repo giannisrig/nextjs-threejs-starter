@@ -17,7 +17,7 @@ const Skybox = ({ showGUI = true }) => {
 
   // Get the nodes and materials of the model
   const { scene } = useGLTF("/models/skydome.glb", true) as GLTF;
-  console.log(scene);
+  // console.log(scene);
 
   const ref = useRef<Mesh>(null);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import "@/styles/globals.scss";
-import Wrapper from "./wrapper";
+import Wrapper from "@/components/three/wrapper";
 import Header from "@/components/common/header/Header";
 import Footer from "@/components/common/footer/Footer";
 

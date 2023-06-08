@@ -7,7 +7,7 @@ const CameraControls = () => {
   return (
     <>
       <CameramanControls />
-      <DefaultCamera />
+      {/*<DefaultCamera />*/}
     </>
   );
 };

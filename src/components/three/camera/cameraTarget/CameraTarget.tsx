@@ -1,11 +1,11 @@
 "use client";
-import { Mesh, MeshStandardMaterial } from "three";
+import { Mesh, MeshStandardMaterial, Vector3 } from "three";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraTarget/cameraTargetSettings";
 import { useControls } from "leva";
 import { useEffect, useRef } from "react";
 
-const CameraTarget = ({ ...props }) => {
+const CameraTarget = ({ setChanged }) => {
   // Set up the ref for our camera target Mesh
   const targetRef = useRef<Mesh>(null);
 
@@ -18,7 +18,7 @@ const CameraTarget = ({ ...props }) => {
   // Set up the camera target controls from Leva
   // The controls have the default values of cameraTargetSettings
   // They mutate the object on value changes
-  useControls(
+  const { targetPosition } = useControls(
     "Camera Target",
     {
       show: {
@@ -30,6 +30,10 @@ const CameraTarget = ({ ...props }) => {
             material.visible = show;
           }
         },
+      },
+      targetPosition: {
+        value: cameramanState.targetPosition.toArray(),
+        step: 1,
       },
       scale: {
         value: targetSettings.scale,
@@ -60,7 +64,7 @@ const CameraTarget = ({ ...props }) => {
     }
   );
 
-  // Triggered every time the target position state changes
+  // Triggered every time the redux state target position changes
   useEffect(() => {
     if (targetRef.current) {
       // Mutate the target position, the cameraman will detect the change
@@ -68,13 +72,17 @@ const CameraTarget = ({ ...props }) => {
     }
   }, [targetRef, cameramanState.targetPosition]);
 
+  // Triggered every time the Leva target position changes
+  useEffect(() => {
+    if (targetRef.current) {
+      if (targetPosition !== targetRef.current.position.toArray()) {
+        setChanged(true);
+      }
+    }
+  }, [setChanged, targetRef, targetPosition]);
+
   return (
-    <mesh
-      ref={targetRef}
-      scale={targetSettings.scale}
-      position={[defaultCameramanState.targetPosition.x, defaultCameramanState.targetPosition.y, defaultCameramanState.targetPosition.z]}
-      {...props}
-    >
+    <mesh ref={targetRef} scale={targetSettings.scale} position={targetPosition}>
       <sphereGeometry />
       <meshStandardMaterial color={targetSettings.color} visible={targetSettings.show} />
     </mesh>
