@@ -29,15 +29,15 @@ const CameramanCamera = ({ setChanged }) => {
     if (cameraRef.current) {
       // Mutate the camera position, the cameraman will detect the change
       cameraRef.current.position.set(cameramanState.cameraPosition.x, cameramanState.cameraPosition.y, cameramanState.cameraPosition.z);
+      setChanged(true);
+      console.log("camera position state changed");
     }
-  }, [cameraRef, cameramanState.cameraPosition]);
+  }, [cameraRef, cameramanState.cameraPosition, setChanged]);
 
   // Triggered every time the Leva target position changes
   useEffect(() => {
-    if (cameraRef.current) {
-      if (cameraPosition !== cameraRef.current.position.toArray()) {
-        setChanged(true);
-      }
+    if (cameraRef.current && cameraPosition) {
+      setChanged(true);
     }
   }, [setChanged, cameraRef, cameraPosition]);
 

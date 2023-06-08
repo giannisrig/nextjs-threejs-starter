@@ -36,9 +36,6 @@ function CameramanControls() {
       setTimeout(() => {
         // Make sure there's an active camera action
         if (action) {
-          // Stop the camera action
-          setAction(false);
-
           if (cameramanRef.current) {
             const cameraman: Mesh = cameramanRef.current;
 
@@ -52,37 +49,17 @@ function CameramanControls() {
           // Update the projection matrix of the camera because we made changes
           camera.updateProjectionMatrix();
         }
+
+        // Stop the camera action
+        setAction(false);
+
+        // Set the changed back to false
+        setChanged(false);
       }, 2000);
     }
-  }, [action, camera, changed]);
+  }, [action, camera, changed, setAction]);
 
-  // This function is used for enabling the rendering of the cameraman changes
-  // const enableRender = () => {
-  //   // Set the action so that the useFrame is running
-  //   setAction(true);
-  //
-  //   // After 2 sec, the camera transition will have finished
-  //   setTimeout(() => {
-  //     // Make sure there's an active camera action
-  //     if (action) {
-  //       // Stop the camera action
-  //       setAction(false);
-  //
-  //       if (cameramanRef.current) {
-  //         const cameraman: Mesh = cameramanRef.current;
-  //
-  //         // Set the global camera position with the one from the cameraman camera
-  //         camera.position.set(cameraman.children[0].position.x, cameraman.children[0].position.y, cameraman.children[0].position.z);
-  //
-  //         // Set the global camera to look at the position of cameraTarget's
-  //         camera.lookAt(cameraman.children[1].position.x, cameraman.children[1].position.y, cameraman.children[1].position.z);
-  //       }
-  //
-  //       // Update the projection matrix of the camera because we made changes
-  //       camera.updateProjectionMatrix();
-  //     }
-  //   }, 2000);
-  // };
+
 
   // Set up the Leva controls for the cameraman
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -144,6 +121,7 @@ function CameramanControls() {
     }
 
     if (cameramanRef.current) {
+      console.log("rendeding");
       const cameraman: Mesh = cameramanRef.current;
 
       // Check that our ref objects exist
