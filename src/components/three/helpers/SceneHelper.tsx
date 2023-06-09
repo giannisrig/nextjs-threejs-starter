@@ -65,13 +65,13 @@ const SceneHelper = () => {
 
   return (
     <>
-      <group visible={axes}>
-        <axesHelper args={[1000]} />
+      <group visible={showAxes}>
+        <axesHelper args={[axesSize]} />
       </group>
-      <group visible={grid}>
-        <gridHelper args={[1000, 100]} />
+      <group visible={showGrid}>
+        <gridHelper args={[gridSize, tilesNumber, gridColor]} />
       </group>
-      <group visible={stats}>
+      <group>
         {/*<Stats />*/}
         <Perf position="bottom-left" />
       </group>
