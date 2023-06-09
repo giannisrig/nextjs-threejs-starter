@@ -1,3 +1,4 @@
+"use client";
 import { Leva } from "leva";
 
 const LevaControls = ({ hidden = false }) => {

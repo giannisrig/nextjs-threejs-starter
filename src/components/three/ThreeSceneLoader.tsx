@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ThreeState } from "@/types/three";
 import Scene1 from "@/components/three/scenes/Scene1";

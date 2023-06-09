@@ -69,11 +69,11 @@ const SceneHelper = () => {
         <axesHelper args={[axesSize]} />
       </group>
       <group visible={showGrid}>
-        <gridHelper args={[gridSize, tilesNumber, gridColor, gridColor]} />
+        <gridHelper args={[gridSize, tilesNumber, gridColor]} />
       </group>
       <group>
         {/*<Stats />*/}
-        showStats && <Perf position="bottom-left" />
+        <Perf position="bottom-left" />
       </group>
     </>
   );

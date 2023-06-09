@@ -4,18 +4,18 @@ import * as THREE from "three";
 
 // Define the type for the sky shader uniforms
 export interface shaderUniforms {
-  textureSize?: number;
+  textureSize: number;
   clipBias?: number;
   alpha?: number;
   time?: number;
   waterNormals?: Texture;
-  sunDirection?: Vector3;
-  sunColor?: Color;
-  waterColor?: Color;
+  sunDirection: Vector3;
+  sunColor: Color;
+  waterColor: Color;
   eye?: Vector3;
-  distortionScale?: number;
-  side?: number;
-  fog?: boolean;
+  distortionScale: number;
+  side: number;
+  fog: boolean;
 }
 
 // Define the type for the sky settings, extending the core SceneItem type
@@ -23,6 +23,8 @@ export interface SeaSettings extends Object3DSettings {
   visible: boolean;
   geometry: Vector3;
   uniforms: shaderUniforms;
+
+  position: Vector3;
 }
 
 // Set the initial values of the sky object

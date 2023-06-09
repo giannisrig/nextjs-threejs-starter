@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 export default function ProjectCommand() {
@@ -6,8 +7,8 @@ export default function ProjectCommand() {
   const copyCode = () => {
     // const codeElement = document.querySelector("#projectCode");
     // const codeText = codeElement.innerText.trim();
-    const codeElement: Element = document.querySelector("#projectCode");
-    const codeText = codeElement.textContent;
+    const codeElement = document.querySelector("#projectCode") as Element;
+    const codeText = codeElement.textContent as string;
     navigator.clipboard.writeText(codeText).then(
       () => {
         console.log(`Copied ${codeText} to clipboard`);

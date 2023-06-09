@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef, useMemo } from "react";
 import seaSettings, { SeaSettings } from "./seaSettings";
 import SeaGUI from "./SeaGUI";

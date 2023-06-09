@@ -26,7 +26,7 @@ const useThreeCameramanState = <ThreeCameramanState>(): { name: string; defaultC
     setSceneName(threeState.scenes[threeState.activeScene].name);
 
     // Change the state with the new cameraman state
-    setActiveSceneCameramanState(threeState.scenes[threeState.activeScene].cameraman);
+    setActiveSceneCameramanState(threeState.scenes[threeState.activeScene].cameraman as CameramanState);
   }, [sceneName, threeState.activeScene, threeState.pageScene, threeState.scenes]);
 
   return {

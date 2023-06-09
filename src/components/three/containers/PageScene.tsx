@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
 import { setActiveScene, setSceneLoading, setPageScene } from "@/slices/threeSlice";

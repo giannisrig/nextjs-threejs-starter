@@ -1,3 +1,4 @@
+"use client";
 import groundSettings, { GroundSettings } from "./groundSettings";
 import { Euler, Vector2, Vector3, Color } from "three";
 import { useControls } from "leva";

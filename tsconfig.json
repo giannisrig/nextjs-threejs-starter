@@ -8,9 +8,6 @@
       "@/images/*": [
         "./public/images/*"
       ],
-      "@/sounds/*": [
-        "./public/sounds/*"
-      ],
       "@/components/*": [
         "./src/components/*"
       ],

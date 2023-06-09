@@ -1,8 +1,7 @@
-import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
+"use client";
 import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
 import { ThreeSceneState, ThreeState, ThreeStateLoadingAction } from "@/types/three/state";
 import { useEffect } from "react";
-import sameArrays from "@/libs/utils/sameArrays";
 import { setSceneLoaded } from "@/slices/threeSlice";
 
 interface SceneEmptyContainerProps {

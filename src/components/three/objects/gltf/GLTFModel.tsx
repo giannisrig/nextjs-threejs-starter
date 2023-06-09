@@ -1,13 +1,12 @@
+"use client";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { useAppDispatch } from "@/libs/store/store";
 import { setSceneObjectsLoaded } from "@/libs/store/slices/threeSlice";
 import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useControls } from "leva";
-import seaSettings from "@/components/three/objects/environment/sea/seaSettings";
 import { Vector3 } from "three";
-import { useFrame } from "@react-three/fiber";
 
 interface GLTFModelProps {
   url: string;

@@ -1,3 +1,4 @@
+"use client";
 import { useControls } from "leva";
 import { Euler, Vector3 } from "three";
 import { CameraState } from "@/types/three/state";

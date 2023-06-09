@@ -1,3 +1,4 @@
+"use client";
 import { EffectComposer, Autofocus } from "@react-three/postprocessing";
 
 // ===================================================================

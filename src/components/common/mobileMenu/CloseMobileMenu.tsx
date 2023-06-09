@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useAppDispatch } from "@/libs/store/store";
 import { setMobileMenuOpen } from "@/slices/mobileMenuSlice";
@@ -15,11 +16,7 @@ export default function CloseMobileMenu() {
 
   return (
     <>
-      <a
-        className="flex items-center gap-5px transition-colors duration-200 hover:text-pink"
-        href="#"
-        onClick={(e) => closeMobileMenu(e)}
-      >
+      <a className="flex items-center gap-5px transition-colors duration-200 hover:text-pink" href="#" onClick={(e) => closeMobileMenu(e)}>
         <div className="flex items-center justify-center rounded-full bg-bleached p-2">
           <Image src="/images/close.svg" alt="Close menu icon" width={10} height={10} />
         </div>

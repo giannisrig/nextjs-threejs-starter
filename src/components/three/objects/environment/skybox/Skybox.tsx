@@ -1,3 +1,4 @@
+"use client";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
@@ -6,7 +7,7 @@ import { useAppDispatch } from "@/libs/store/store";
 import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
 import { setSceneObjectsLoaded } from "@/slices/threeSlice";
 import { useControls } from "leva";
-import { Euler, Vector3 } from "three";
+import { Euler, Mesh, Vector3 } from "three";
 
 const Skybox = ({ showGUI = true }) => {
   const modelVisible = true;
@@ -17,9 +18,9 @@ const Skybox = ({ showGUI = true }) => {
 
   // Get the nodes and materials of the model
   const { scene } = useGLTF("/models/skydome.glb", true) as GLTF;
-  console.log(scene);
+  // console.log(scene);
 
-  const ref = useRef(null);
+  const ref = useRef<Mesh>(null);
 
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();

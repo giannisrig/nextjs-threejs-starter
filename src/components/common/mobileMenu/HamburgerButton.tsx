@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useAppDispatch } from "@/libs/store/store";
 import { setMobileMenuOpen } from "@/slices/mobileMenuSlice";
