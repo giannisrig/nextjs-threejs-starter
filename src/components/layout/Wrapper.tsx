@@ -6,7 +6,6 @@ import { GoogleAnalytics } from "nextjs-google-analytics";
 import fonts from "@/libs/constants/fonts";
 import LoadingScreen from "@/components/common/loading/LoadingScreen";
 import LevaControls from "@/components/three/containers/LevaControls";
-// import ThreeCanvas from "@/components/three/ThreeCanvas";
 import dynamic from "next/dynamic";
 const Canvas = dynamic(() => import("@/components/three/ThreeCanvas"), {
   loading: () => null,

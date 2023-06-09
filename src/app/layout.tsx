@@ -2,7 +2,7 @@ process.env.NODE_NO_WARNINGS = "stream/web";
 import React from "react";
 import { Metadata } from "next";
 import "@/styles/globals.scss";
-import Wrapper from "@/components/three/wrapper";
+import Wrapper from "@/components/layout/Wrapper";
 import Header from "@/components/common/header/Header";
 import Footer from "@/components/common/footer/Footer";
 
