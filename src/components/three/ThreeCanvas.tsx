@@ -2,11 +2,10 @@
 import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import GlobalScene from "@/components/three/scenes/GlobalScene";
-import ThreeSceneLoader from "@/components/three/ThreeSceneLoader";
 import SceneHelper from "@/components/three/helpers/SceneHelper";
 import CameraControls from "@/components/three/composites/CameraControls";
 import threeSettings from "@/libs/three/threeSettings";
-import dynamic from "next/dynamic";
+import { ThreeOutput } from "@/components/three/tunnel/ThreeOutput";
 
 const ThreeCanvas = () => {
   const defaultCameraSettings = useMemo(() => {
@@ -31,7 +30,7 @@ const ThreeCanvas = () => {
         <SceneHelper />
         <CameraControls />
         <GlobalScene />
-        <ThreeSceneLoader />
+        <ThreeOutput />
       </Suspense>
     </Canvas>
   );

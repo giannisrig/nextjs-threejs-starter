@@ -1,7 +1,15 @@
 "use client";
 import PageScene from "@/components/three/containers/PageScene";
+import useThreeState from "@/libs/hooks/useThreeState";
+import { ThreeState } from "@/types/three/state";
+import { ThreeInput } from "@/components/three/tunnel/ThreeInput";
+import Scene3 from "@/components/three/scenes/Scene3";
+import React from "react";
 
 export default function Undersea() {
+  // Get the scenes state
+  const { scenes } = useThreeState() as ThreeState;
+
   return (
     <PageScene sceneIndex={3}>
       <div className="relative h-screen"></div>
@@ -9,6 +17,11 @@ export default function Undersea() {
         Undersea
       </h1>
       {/* The scene will be lazy loaded to the main threejs canvas */}
+      <ThreeInput>
+        <group visible={scenes[3].isLoaded}>
+          <Scene3 />
+        </group>
+      </ThreeInput>
     </PageScene>
   );
 }
