@@ -39,9 +39,10 @@ function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showG
     dispatch(setSceneObjectsLoaded(objectLoaded));
   }, [dispatch, name, stateScene, scene]);
 
-  const { scale, position } = useControls(
+  const { visible, scale, position } = useControls(
     name + " Settings",
     {
+      visible: { value: true },
       position: { value: modelPosition, step: 0.5 },
       scale: { value: modelScale, step: 1, min: 1, max: 50 },
     },
@@ -61,8 +62,8 @@ function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showG
   // });
 
   return (
-    <group {...props} dispose={null}>
-      <mesh ref={ref} scale={finalSettings.scale} position={new Vector3(...finalSettings.position)}>
+    <group {...props} dispose={null} visible={visible}>
+      <mesh ref={ref} scale={finalSettings.scale} position={new Vector3(...finalSettings.position)} castShadow={true} receiveShadow={true}>
         <primitive object={scene} />
       </mesh>
     </group>

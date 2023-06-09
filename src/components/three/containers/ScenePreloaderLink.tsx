@@ -6,6 +6,7 @@ import { ThreeState, ThreeStateLoadingAction } from "@/types/three/state";
 import { setSceneLoading } from "@/slices/threeSlice";
 import Link from "next/link";
 import useThreeState from "@/libs/hooks/useThreeState";
+import useSound from "use-sound";
 
 interface ScenePreloaderLinkProps extends ReactNodeWrapper {
   scene: number;
@@ -16,6 +17,7 @@ interface ScenePreloaderLinkProps extends ReactNodeWrapper {
 const ScenePreloaderLink = ({ scene, href, className = "", children, ...props }: ScenePreloaderLinkProps) => {
   const [hovered, setHovered] = useState(false);
   const dispatch = useAppDispatch();
+  const [play, { stop }] = useSound("/sounds/hover.mp3");
 
   // Get the scenes from three state
   const { scenes } = useThreeState() as ThreeState;
@@ -43,11 +45,22 @@ const ScenePreloaderLink = ({ scene, href, className = "", children, ...props }:
     console.log("Preloading ", name);
   }, [dispatch, hovered, isLoaded, name, scene]);
 
+  useEffect(() => {
+    if (hovered) {
+      play();
+    } else {
+      stop();
+    }
+  }, [hovered, play, stop]);
+
   return (
     <Link
       href={href}
       onMouseEnter={() => {
         setHovered(true);
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
       }}
       className={className}
       {...props}

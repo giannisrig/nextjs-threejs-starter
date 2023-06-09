@@ -75,7 +75,7 @@ const Sea = ({ showGUI = true }) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <customWater ref={ref} args={[geom, config]} position={[0, 0, 0]} rotation-x={-Math.PI / 2} />;
+  return <customWater ref={ref} args={[geom, config]} position={[0, 0, 0]} visible={settings.visible} rotation-x={-Math.PI / 2} />;
 };
 
 export default Sea;

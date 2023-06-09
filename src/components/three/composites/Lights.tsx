@@ -17,8 +17,8 @@ const Lights = () => {
       ),
       "PointLight 2": folder(
         {
-          intensity2: { value: 0.4, step: 0.05, min: 0, max: 1 },
-          position2: { value: [-256, -92, 100], step: 1 }, //{"position2":[-256,-92,100]}
+          intensity2: { value: 0.45, step: 0.05, min: 0, max: 1 },
+          position2: { value: [-135, 12, 2], step: 1 }, //{"position2":[-135,12,2]}
         },
         {
           collapsed: true,

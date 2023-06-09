@@ -7,17 +7,11 @@ import SceneHelper from "@/components/three/helpers/SceneHelper";
 import CameraControls from "@/components/three/composites/CameraControls";
 import threeSettings from "@/libs/three/threeSettings";
 import dynamic from "next/dynamic";
-// const Effects = dynamic(() => import("@/components/three/composites/PostProcessing"), {
-//   loading: () => null,
-//   ssr: false,
-// });
 
 const ThreeCanvas = () => {
   const defaultCameraSettings = useMemo(() => {
     return threeSettings.default.camera;
   }, []);
-
-  // const [dpr, setDpr] = useState(1);
 
   return (
     <Canvas
@@ -34,7 +28,7 @@ const ThreeCanvas = () => {
       }}
     >
       <Suspense fallback={<GlobalScene />}>
-        <SceneHelper grid={false} axes={true} stats={true} />
+        <SceneHelper />
         <CameraControls />
         <GlobalScene />
         <ThreeSceneLoader />
