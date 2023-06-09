@@ -15,15 +15,10 @@ export default function Header() {
               <Logo />
               <div className="h-[20px] w-[1px] bg-silver" />
               <GithubLink />
-              <ScenePreloaderLink
-                scene={2}
-                href={"/test"}
-                className="cursor-hover flex items-center gap-[4px] transition-colors duration-200 hover:text-pink"
-              >
+              <ScenePreloaderLink href={"/test"} className="cursor-hover flex items-center gap-[4px] transition-colors duration-200 hover:text-pink">
                 <h4 className={`font-primary text-lg font-semibold`}>Test</h4>
               </ScenePreloaderLink>
               <ScenePreloaderLink
-                scene={3}
                 href={"/undersea"}
                 className="cursor-hover flex items-center gap-[4px] transition-colors duration-200 hover:text-pink"
               >
