@@ -1,41 +1,66 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/public/*": ["./public/*"],
-            "@/images/*": ["./public/images/*"],
-            "@/sounds/*": ["./public/sounds/*"],
-            "@/components/*": ["./src/components/*"],
-            "@/libs/*": ["./src/libs/*"],
-            "@/slices/*": ["./src/libs/store/slices/*"],
-            "@/pages/*": ["./src/pages/*"],
-            "@/styles/*": ["./src/styles/*"],
-            "@/types/*": ["./src/types/*"]
-        },
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": false,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "incremental": true,
-        "esModuleInterop": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "preserve"
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/public/*": [
+        "./public/*"
+      ],
+      "@/images/*": [
+        "./public/images/*"
+      ],
+      "@/sounds/*": [
+        "./public/sounds/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/libs/*": [
+        "./src/libs/*"
+      ],
+      "@/slices/*": [
+        "./src/libs/store/slices/*"
+      ],
+      "@/pages/*": [
+        "./src/pages/*"
+      ],
+      "@/styles/*": [
+        "./src/styles/*"
+      ],
+      "@/types/*": [
+        "./src/types/*"
+      ]
     },
-    "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx"
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "exclude": [
-        "node_modules"
-    ]
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
