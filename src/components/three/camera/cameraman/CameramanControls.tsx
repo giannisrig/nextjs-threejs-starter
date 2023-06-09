@@ -55,63 +55,9 @@ function CameramanControls() {
 
         // Set the changed back to false
         setChanged(false);
-      }, 2000);
+      }, 2500);
     }
   }, [action, camera, changed, setAction]);
-
-
-
-  // Set up the Leva controls for the cameraman
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // const [, set] = useControls("Cameraman Settings", () => ({
-  //   cameraPosition: {
-  //     value: cameramanState.cameraPosition.toArray(),
-  //     step: 1,
-  //     onChange: (cameraPosition) => {
-  //       if (cameramanRef.current) {
-  //         const cameraman: Mesh = cameramanRef.current;
-  //
-  //         if (cameraman.children[0]) {
-  //           // Change the position of the camera from the leva control value
-  //           cameraman.children[0].position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-  //         }
-  //
-  //         // If there's no active camera action
-  //         if (!action) {
-  //           // Enable the rendering
-  //           enableRender();
-  //         }
-  //       }
-  //     },
-  //   },
-  //   targetPosition: {
-  //     value: cameramanState.targetPosition.toArray(),
-  //     step: 1,
-  //     onChange: (targetPosition) => {
-  //       if (cameramanRef.current) {
-  //         const cameraman: Mesh = cameramanRef.current;
-  //
-  //         if (cameraman.children[1]) {
-  //           cameraman.children[1].position.set(targetPosition.x, targetPosition.y, targetPosition.z);
-  //           // If there's no active camera action
-  //           if (!action) {
-  //             // Enable the rendering
-  //             enableRender();
-  //           }
-  //         }
-  //       }
-  //     },
-  //   },
-  // }));
-
-  // This code runs when the cameraman state changes, usually because there's a new active scene
-  // It sets the values of the updated state to the leva controls
-  // useEffect(() => {
-  //   // Update the leva controls with the values of the new cameraman state
-  //   set({ cameraPosition: cameramanState.cameraPosition.toArray() });
-  //   set({ targetPosition: cameramanState.targetPosition.toArray() });
-  // }, [set, cameramanState.cameraPosition, cameramanState.targetPosition]);
 
   // https://sbcode.net/threejs/annotations/
   useFrame((_, delta) => {

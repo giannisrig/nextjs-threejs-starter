@@ -1,5 +1,5 @@
 "use client";
-import { Mesh, MeshStandardMaterial, Vector3 } from "three";
+import { Mesh, MeshStandardMaterial } from "three";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraTarget/cameraTargetSettings";
 import { useControls } from "leva";
@@ -10,7 +10,7 @@ const CameraTarget = ({ setChanged }) => {
   const targetRef = useRef<Mesh>(null);
 
   // Redux Cameraman State from the active scene
-  const { cameramanState, defaultCameramanState } = useThreeCameramanState();
+  const { cameramanState } = useThreeCameramanState();
 
   // Get the Target settings
   const targetSettings: CameraTarget = cameraTargetSettings;
