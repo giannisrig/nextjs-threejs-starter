@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
 import CameramanCamera from "@/components/three/camera/cameramanCamera/CameramanCamera";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
+import useThreeState from "@/libs/hooks/useThreeState";
 import { OrbitControls } from "@react-three/drei";
 import { Mesh } from "three";
 import * as React from "react";

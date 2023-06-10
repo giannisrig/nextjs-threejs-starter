@@ -4,6 +4,10 @@ import { Euler, Vector3 } from "three";
 //{"position":[38,5,5]}
 const threeSettings: ThreeState = {
   activeScene: 0,
+  cameraman: {
+    cameraPosition: new Vector3(150, 11, 77),
+    targetPosition: new Vector3(16, 11, -35),
+  },
   default: {
     camera: {
       name: "default",

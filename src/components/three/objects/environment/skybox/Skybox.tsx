@@ -2,10 +2,7 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { GLTF } from "three-stdlib";
-import { useEffect, useRef } from "react";
-import { useAppDispatch } from "@/libs/store/store";
-import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
-import { setSceneObjectsLoaded } from "@/slices/threeSlice";
+import { useRef } from "react";
 import { useControls } from "leva";
 import { Euler, Mesh, Vector3 } from "three";
 
@@ -21,20 +18,6 @@ const Skybox = ({ showGUI = true }) => {
   // console.log(scene);
 
   const ref = useRef<Mesh>(null);
-
-  // Set up the Redux State dispatch
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    // Set up the objects loaded action for state
-    const objectLoaded: ThreeStateObjectsLoadedAction = {
-      scene: 0,
-      value: name,
-    };
-
-    // add the object name to the scene state
-    dispatch(setSceneObjectsLoaded(objectLoaded));
-  }, [dispatch, scene]);
 
   const { visible, scale, position, rotation } = useControls(
     name + " Settings",
