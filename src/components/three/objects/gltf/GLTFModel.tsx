@@ -1,43 +1,23 @@
 "use client";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useAppDispatch } from "@/libs/store/store";
-import { setSceneObjectsLoaded } from "@/libs/store/slices/threeSlice";
-import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useControls } from "leva";
 import { Vector3 } from "three";
 
 interface GLTFModelProps {
   url: string;
-  stateScene: number;
   name: string;
   showGUI: boolean;
   modelPosition: any;
   modelScale?: number;
 }
 
-function GLTFModel({ url, stateScene, name, modelPosition, modelScale = 1, showGUI, ...props }: GLTFModelProps) {
+function GLTFModel({ url, name, modelPosition, modelScale = 1, showGUI, ...props }: GLTFModelProps) {
   // Get the nodes and materials of the model
   const { scene } = useGLTF(url, true) as GLTF;
 
-  // console.log(scene);
-
   const ref = useRef(null);
-
-  // Set up the Redux State dispatch
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    // Set up the objects loaded action for state
-    const objectLoaded: ThreeStateObjectsLoadedAction = {
-      scene: stateScene,
-      value: name,
-    };
-
-    // add the object name to the scene state
-    dispatch(setSceneObjectsLoaded(objectLoaded));
-  }, [dispatch, name, stateScene, scene]);
 
   const { visible, scale, position } = useControls(
     name + " Settings",

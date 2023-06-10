@@ -17,7 +17,7 @@ const useThreeCameramanState = <ThreeCameramanState>(): { name: string; defaultC
     // Return if there's no active scene
     if (!threeState.activeScene) return;
 
-    if (!threeState.pageScene || threeState.pageScene !== threeState.activeScene) return;
+    // if (!threeState.pageScene || threeState.pageScene !== threeState.activeScene) return;
 
     // Return if the active scene hasn't changed
     if (sceneName === threeState.scenes[threeState.activeScene].name) return;

@@ -31,15 +31,8 @@ export const threeSlice = createSlice({
   name: "three",
   initialState,
   reducers: {
-    setPageScene(state, action: PayloadAction<number>) {
-      state.pageScene = action.payload;
-    },
     setActiveScene(state, action: PayloadAction<number>) {
       state.activeScene = action.payload;
-    },
-    setSceneLoading(state, action: PayloadAction<ThreeStateLoadingAction>) {
-      const { scene, value } = action.payload;
-      state.scenes[scene].isLoading = value;
     },
     setSceneLoaded(state, action: PayloadAction<ThreeStateLoadingAction>) {
       const { scene, value } = action.payload;
@@ -56,5 +49,5 @@ export const threeSlice = createSlice({
   },
 });
 
-export const { setSceneLoading, setPageScene, setSceneLoaded, setActiveScene, setSceneObjectsLoaded } = threeSlice.actions;
+export const { setSceneLoaded, setActiveScene, setSceneObjectsLoaded } = threeSlice.actions;
 export default threeSlice.reducer;

@@ -62,12 +62,12 @@ function CameramanControls() {
   // https://sbcode.net/threejs/annotations/
   useFrame((_, delta) => {
     if (!action) {
-      console.log("Not rendering");
+      // console.log("Not rendering");
       return;
     }
 
     if (cameramanRef.current) {
-      console.log("rendeding");
+      // console.log("rendeding");
       const cameraman: Mesh = cameramanRef.current;
 
       // Check that our ref objects exist
