@@ -1,7 +1,6 @@
 "use client";
-import { ThreeInput } from "@/components/three/tunnel/ThreeInput";
 import Scene1 from "@/components/three/scenes/Scene1";
-
+import { ThreeInput } from "@/components/three/tunnel/ThreeInput";
 export default function HomePage() {
   return (
     <>

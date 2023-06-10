@@ -1,7 +1,6 @@
 "use client";
 import Scene2 from "@/components/three/scenes/Scene2";
 import { ThreeInput } from "@/components/three/tunnel/ThreeInput";
-
 export default function Test() {
   return (
     <>

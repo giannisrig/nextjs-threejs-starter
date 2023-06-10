@@ -70,7 +70,7 @@ const CameraTarget = ({ setChanged }) => {
       // Mutate the target position, the cameraman will detect the change
       targetRef.current.position.set(cameramanState.targetPosition.x, cameramanState.targetPosition.y, cameramanState.targetPosition.z);
       setChanged(true);
-      console.log("target position state changed");
+      console.log("target position state changed", cameramanState.targetPosition);
     }
   }, [targetRef, cameramanState.targetPosition, setChanged]);
 

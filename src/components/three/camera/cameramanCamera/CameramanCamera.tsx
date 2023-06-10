@@ -30,7 +30,7 @@ const CameramanCamera = ({ setChanged }) => {
       // Mutate the camera position, the cameraman will detect the change
       cameraRef.current.position.set(cameramanState.cameraPosition.x, cameramanState.cameraPosition.y, cameramanState.cameraPosition.z);
       setChanged(true);
-      console.log("camera position state changed");
+      console.log("camera position state changed", cameramanState.cameraPosition);
     }
   }, [cameraRef, cameramanState.cameraPosition, setChanged]);
 

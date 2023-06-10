@@ -2,19 +2,19 @@
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
 import { useAppDispatch } from "@/libs/store/store";
 import { useCallback, useEffect, useState } from "react";
-import { setActiveScene, setCameraControls } from "@/slices/threeSlice";
+import { setCameraControls } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
 import { Vector3 } from "three";
 import { CameramanState } from "@/types/three/state";
+import { ThreeInput } from "@/components/three/tunnel/ThreeInput";
 
 interface SceneContainerProps extends ReactNodeWrapper {
-  scene: number;
   objects?: number;
   targetPosition: Vector3;
   cameraPosition: Vector3;
 }
 
-const Scene = ({ scene, objects = 0, targetPosition, cameraPosition, children }: SceneContainerProps) => {
+const Scene = ({ objects = 0, targetPosition, cameraPosition, children }: SceneContainerProps) => {
   // const [cameraman, setCameraman] = useState(false);
 
   // Set up the Redux State dispatch
