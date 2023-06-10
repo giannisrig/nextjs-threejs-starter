@@ -18,8 +18,8 @@ const scenes: ThreeSceneState[] = threeSettings.scenes.map((item: ThreeSceneStat
 
 // Set up the initial state for Three
 const initialState: ThreeState = {
-  activeScene: null,
-  pageScene: null,
+  activeScene: 0,
+  pageScene: 0,
   scenes: scenes,
   default: {
     camera: { ...threeSettings.default.camera, name: "default" },
@@ -47,7 +47,11 @@ export const threeSlice = createSlice({
     },
     setSceneObjectsLoaded(state, action: PayloadAction<ThreeStateObjectsLoadedAction>) {
       const { scene, value } = action.payload;
-      state.scenes[scene].objectsLoaded.push(value);
+      if (state.scenes[scene].objectsLoaded) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        state.scenes[scene].objectsLoaded.push(value);
+      }
     },
   },
 });
