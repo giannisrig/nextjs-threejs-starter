@@ -1,7 +1,7 @@
 "use client";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import { useRef, useEffect } from "react";
-import { MeshStandardMaterial, PerspectiveCamera } from "three";
+import { PerspectiveCamera as PerspectiveCameraImpl } from "three";
 import { useControls } from "leva";
 
 const CameramanCamera = ({ setChanged }) => {
@@ -9,7 +9,7 @@ const CameramanCamera = ({ setChanged }) => {
   const { cameramanState } = useThreeCameramanState();
 
   // Our camera ref object
-  const cameraRef = useRef<PerspectiveCamera>(null);
+  const cameraRef = useRef<PerspectiveCameraImpl>(null);
 
   const [{ cameraPosition }, set] = useControls("Camera Cameraman", () => ({
     cameraPosition: {

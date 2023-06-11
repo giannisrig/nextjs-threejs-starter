@@ -27,7 +27,6 @@ const DefaultCameraGUI = (defaultCameraState: CameraState) => {
   );
 
   const cameraSettings: CameraState = {
-    name: defaultCameraState.name,
     position: new Vector3(...position),
     rotation: new Euler(...rotation),
     fov: fov,

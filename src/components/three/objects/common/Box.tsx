@@ -3,28 +3,26 @@ import { Mesh } from "three";
 import React, { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useAppDispatch } from "@/libs/store/store";
-import { setSceneObjectsLoaded } from "@/slices/threeSlice";
-import { ThreeStateObjectsLoadedAction } from "@/types/three/state";
 
-const Box = ({ color = 0xf5d9d4, stateScene, name, ...props }) => {
+const Box = ({ color = 0xf5d9d4, ...props }) => {
   const ref = useRef<Mesh>(null);
 
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    // If we can access the object then it's loaded
-    if (ref.current) {
-      // Set up the objects loaded action for state
-      const objectLoaded: ThreeStateObjectsLoadedAction = {
-        scene: stateScene,
-        value: name,
-      };
-
-      // add the object name to the scene state
-      dispatch(setSceneObjectsLoaded(objectLoaded));
-    }
-  }, [dispatch, name, stateScene, ref]);
+  // useEffect(() => {
+  //   // If we can access the object then it's loaded
+  //   if (ref.current) {
+  //     // Set up the objects loaded action for state
+  //     const objectLoaded: ThreeStateObjectsLoadedAction = {
+  //       scene: stateScene,
+  //       value: name,
+  //     };
+  //
+  //     // add the object name to the scene state
+  //     dispatch(setSceneObjectsLoaded(objectLoaded));
+  //   }
+  // }, [dispatch, name, stateScene, ref]);
 
   useFrame((state, delta) => {
     if (ref.current) {

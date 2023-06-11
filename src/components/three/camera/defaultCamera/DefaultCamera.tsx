@@ -1,20 +1,24 @@
 "use client";
-import { PerspectiveCamera } from "three";
+import { Euler, PerspectiveCamera, Vector3 } from "three";
 import { useThree } from "@react-three/fiber";
-import { CameraState, ThreeState } from "@/types/three/state";
+import { CameraState } from "@/types/three/state";
 import DefaultCameraGUI from "@/components/three/camera/defaultCamera/DefaultCameraGUI";
-import useThreeState from "@/libs/hooks/useThreeState";
 import { useEffect } from "react";
 
 const DefaultCamera = ({ showGUI = true }) => {
   // Get the Scene camera
   const { camera }: { camera: PerspectiveCamera } = useThree();
 
-  // Get the Three State
-  const threeState = useThreeState() as ThreeState;
-
   // Set the default camera state
-  const defaultCameraState: CameraState = threeState.default.camera;
+  const defaultCameraState: CameraState = {
+    position: new Vector3(150, 11, 77),
+    rotation: new Euler(0, 0, 0, "XYZ"),
+    fov: 37,
+    near: 0.1,
+    far: 4000,
+    zoom: 1,
+    focus: 20,
+  };
 
   // Set up the default camera settings
   const defaultCameraSettings: CameraState = showGUI ? DefaultCameraGUI(defaultCameraState) : defaultCameraState;
