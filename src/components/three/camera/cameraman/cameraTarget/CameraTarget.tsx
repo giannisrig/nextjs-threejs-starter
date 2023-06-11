@@ -1,7 +1,7 @@
 "use client";
 import { Mesh, MeshStandardMaterial } from "three";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
-import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraTarget/cameraTargetSettings";
+import cameraTargetSettings, { CameraTarget } from "@/components/three/camera/cameraman/cameraTarget/cameraTargetSettings";
 import { useControls } from "leva";
 import { useEffect, useRef } from "react";
 
@@ -18,46 +18,53 @@ const CameraTarget = ({ setChanged }) => {
   // Set up the camera target controls from Leva
   // The controls have the default values of the state
   // They mutate the object on value changes except the targetPosition which is used for the camera transition
-  const [{ targetPosition }, set] = useControls("Camera Target", () => ({
-    show: {
-      value: targetSettings.show,
-      onChange: (show) => {
-        if (targetRef.current) {
-          // Define the mesh standard material for ts reference
-          const material = targetRef.current.material as MeshStandardMaterial;
-          material.visible = show;
-        }
+  const [{ targetPosition }, set] = useControls(
+    "Cameraman Controls",
+    () => ({
+      targetPosition: {
+        label: "Target Position",
+        value: cameramanState.targetPosition.toArray(),
+        step: 1,
       },
-    },
-    targetPosition: {
-      value: cameramanState.targetPosition.toArray(),
-      step: 1,
-    },
-    scale: {
-      value: targetSettings.scale,
-      step: 1,
-      min: 1,
-      max: 10,
-      onChange: (scale) => {
-        if (targetRef.current) {
-          targetRef.current.scale.set(scale, scale, scale);
-        }
+      show: {
+        label: "Show Target",
+        value: targetSettings.show,
+        onChange: (show) => {
+          if (targetRef.current) {
+            // Define the mesh standard material for ts reference
+            const material = targetRef.current.material as MeshStandardMaterial;
+            material.visible = show;
+          }
+        },
       },
-    },
-    color: {
-      value: "#" + targetSettings.color.getHexString(),
-      onChange: (color) => {
-        if (targetRef.current) {
-          // Define the mesh standard material for ts reference
-          const material = targetRef.current.material as MeshStandardMaterial;
+      scale: {
+        label: "Target Size",
+        value: targetSettings.scale,
+        step: 1,
+        min: 1,
+        max: 10,
+        onChange: (scale) => {
+          if (targetRef.current) {
+            targetRef.current.scale.set(scale, scale, scale);
+          }
+        },
+      },
+      color: {
+        label: "Target Color",
+        value: "#" + targetSettings.color.getHexString(),
+        onChange: (color) => {
+          if (targetRef.current) {
+            // Define the mesh standard material for ts reference
+            const material = targetRef.current.material as MeshStandardMaterial;
 
-          // Change the color
-          material.color.set(color);
-        }
+            // Change the color
+            material.color.set(color);
+          }
+        },
       },
-    },
-    collapsed: true,
-  }));
+    }),
+    { collapsed: true }
+  );
 
   // Triggered every time the redux state target position changes
   useEffect(() => {

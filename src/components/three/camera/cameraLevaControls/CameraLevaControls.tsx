@@ -2,10 +2,10 @@
 import { Euler, PerspectiveCamera, Vector3 } from "three";
 import { useThree } from "@react-three/fiber";
 import { CameraState } from "@/types/three/state";
-import DefaultCameraGUI from "@/components/three/camera/defaultCamera/DefaultCameraGUI";
+import CameraGUI from "@/components/three/camera/cameraLevaControls/CameraGUI";
 import { useEffect } from "react";
 
-const DefaultCamera = ({ showGUI = true }) => {
+const CameraLevaControls = ({ showGUI = true }) => {
   // Get the Scene camera
   const { camera }: { camera: PerspectiveCamera } = useThree();
 
@@ -21,11 +21,11 @@ const DefaultCamera = ({ showGUI = true }) => {
   };
 
   // Set up the default camera settings
-  const defaultCameraSettings: CameraState = showGUI ? DefaultCameraGUI(defaultCameraState) : defaultCameraState;
+  const defaultCameraSettings: CameraState = showGUI ? CameraGUI(defaultCameraState) : defaultCameraState;
 
   useEffect(() => {
     // update camera properties
-    camera.position.set(...defaultCameraSettings.position.toArray());
+    // camera.position.set(...defaultCameraSettings.position.toArray());
     camera.rotation.set(defaultCameraSettings.rotation.x, defaultCameraSettings.rotation.y, defaultCameraSettings.rotation.z);
     camera.fov = defaultCameraSettings.fov;
     camera.zoom = defaultCameraSettings.zoom;
@@ -39,4 +39,4 @@ const DefaultCamera = ({ showGUI = true }) => {
   return <></>;
 };
 
-export default DefaultCamera;
+export default CameraLevaControls;

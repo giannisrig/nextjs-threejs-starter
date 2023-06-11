@@ -4,20 +4,24 @@ import { useRef, useEffect } from "react";
 import { PerspectiveCamera as PerspectiveCameraImpl } from "three";
 import { useControls } from "leva";
 
-const CameramanCamera = ({ setChanged }) => {
+const CameraPosition = ({ setChanged }) => {
   // Redux Cameraman State
   const { cameramanState } = useThreeCameramanState();
 
   // Our camera ref object
   const cameraRef = useRef<PerspectiveCameraImpl>(null);
 
-  const [{ cameraPosition }, set] = useControls("Camera Cameraman", () => ({
-    cameraPosition: {
-      value: cameramanState.cameraPosition.toArray(),
-      step: 1,
-    },
-    collapsed: true,
-  }));
+  const [{ cameraPosition }, set] = useControls(
+    "Cameraman Controls",
+    () => ({
+      cameraPosition: {
+        label: "Camera Position",
+        value: cameramanState.cameraPosition.toArray(),
+        step: 1,
+      },
+    }),
+    { collapsed: true }
+  );
 
   // Triggered every time the camera position state changes
   useEffect(() => {
@@ -45,4 +49,4 @@ const CameramanCamera = ({ setChanged }) => {
   return <perspectiveCamera ref={cameraRef} fov={45} position={cameraPosition} />;
 };
 
-export default CameramanCamera;
+export default CameraPosition;

@@ -1,15 +1,15 @@
 "use client";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
-import CameraTarget from "@/components/three/camera/cameraTarget/CameraTarget";
-import CameramanCamera from "@/components/three/camera/cameramanCamera/CameramanCamera";
+import CameraTarget from "@/components/three/camera/cameraman/cameraTarget/CameraTarget";
+import CameraPosition from "@/components/three/camera/cameraman/cameraPosition/CameraPosition";
 import useThreeCameramanState from "@/libs/hooks/useThreeCameramanState";
 import { OrbitControls } from "@react-three/drei";
 import { Mesh } from "three";
 import * as React from "react";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib/controls/OrbitControls";
 
-function CameramanControls() {
+function Cameraman() {
   // Get the ThreeJS camera and the gl object from Canvas
   const { camera, gl } = useThree();
 
@@ -93,7 +93,7 @@ function CameramanControls() {
   return (
     <group ref={cameramanRef}>
       {/* This component is used for the cameraman's camera position and for zoom/fov */}
-      <CameramanCamera setChanged={setChanged} />
+      <CameraPosition setChanged={setChanged} />
       {/* This component is used for the cameraman's target position to look at */}
       <CameraTarget setChanged={setChanged} />
       {/* This component is used to actually handling the look at action */}
@@ -102,4 +102,4 @@ function CameramanControls() {
   );
 }
 
-export default CameramanControls;
+export default Cameraman;

@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
-import DefaultCamera from "@/components/three/camera/defaultCamera/DefaultCamera";
-import CameramanControls from "@/components/three/camera/cameraman/CameramanControls";
+import CameraLevaControls from "@/components/three/camera/cameraLevaControls/CameraLevaControls";
+import Cameraman from "@/components/three/camera/cameraman/Cameraman";
 
 const CameraControls = () => {
   return (
     <>
-      <CameramanControls />
-      {/*<DefaultCamera />*/}
+      <Cameraman />
+      <CameraLevaControls />
     </>
   );
 };

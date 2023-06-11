@@ -3,9 +3,9 @@ import { useControls } from "leva";
 import { Euler, Vector3 } from "three";
 import { CameraState } from "@/types/three/state";
 
-const DefaultCameraGUI = (defaultCameraState: CameraState) => {
+const CameraGUI = (defaultCameraState: CameraState) => {
   const { position, rotation, fov, zoom, near, far, focus } = useControls(
-    "Default Camera Settings",
+    "Perspective Camera",
     {
       position: {
         value: [defaultCameraState.position.x, defaultCameraState.position.y, defaultCameraState.position.z],
@@ -39,4 +39,4 @@ const DefaultCameraGUI = (defaultCameraState: CameraState) => {
   return cameraSettings;
 };
 
-export default DefaultCameraGUI;
+export default CameraGUI;
