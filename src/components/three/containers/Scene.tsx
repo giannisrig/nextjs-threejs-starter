@@ -1,39 +1,37 @@
 "use client";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
+import { CameramanState, ThreeState } from "@/types/three/state";
 import { useAppDispatch } from "@/libs/store/store";
-import { useCallback, useEffect, useState } from "react";
-import { setCameraControls } from "@/slices/threeSlice";
+import { useEffect, useState } from "react";
+import { setCameraControls, setSceneLoaded } from "@/slices/threeSlice";
 import { setLoading } from "@/slices/loadingSlice";
 import { Vector3 } from "three";
-import { CameramanState } from "@/types/three/state";
-import { ThreeInput } from "@/components/three/tunnel/ThreeInput";
+import useThreeState from "@/libs/hooks/useThreeState";
 
 interface SceneContainerProps extends ReactNodeWrapper {
-  objects?: number;
   targetPosition: Vector3;
   cameraPosition: Vector3;
+  objectsDeps: number;
 }
 
-const Scene = ({ objects = 0, targetPosition, cameraPosition, children }: SceneContainerProps) => {
-  // const [cameraman, setCameraman] = useState(false);
-
+const Scene = ({ targetPosition, cameraPosition, objectsDeps, children }: SceneContainerProps) => {
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
 
-  const handleRect = useCallback(
-    (node) => {
-      if (node && node.children.length >= objects) {
-        console.log("Scene objects loaded", node.children);
-        // dispatch(setActiveScene(scene));
-        dispatch(setLoading(false));
-      }
-    },
-    [dispatch, objects]
-  );
+  const { objectsLoaded } = useThreeState() as ThreeState;
+
+  // Set the scene loaded to false
+  // dispatch(setSceneLoaded(false));
 
   useEffect(() => {
-    dispatch(setLoading(false));
+    if (objectsDeps === objectsLoaded) {
+      console.log("Scene Objects loaded");
+      // Remove the loading screen
+      dispatch(setLoading(false));
+    }
+  }, [objectsLoaded, objectsDeps, dispatch]);
 
+  useEffect(() => {
     // Update the camera controls
     const newCameraman: CameramanState = {
       targetPosition: targetPosition,
@@ -43,7 +41,7 @@ const Scene = ({ objects = 0, targetPosition, cameraPosition, children }: SceneC
     dispatch(setCameraControls(newCameraman));
   }, [cameraPosition, dispatch, targetPosition]);
 
-  return <group ref={handleRect}>{children}</group>;
+  return <group>{children}</group>;
 };
 
 export default Scene;

@@ -17,5 +17,6 @@ export interface CameramanState {
 
 export interface ThreeState {
   cameraman: CameramanState;
+  sceneLoaded?: boolean;
   objectsLoaded?: number;
 }
