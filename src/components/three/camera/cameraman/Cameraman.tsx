@@ -55,7 +55,7 @@ function Cameraman() {
 
         // Set the changed back to false
         setChanged(false);
-      }, 2500);
+      }, 7000);
     }
   }, [action, camera, changed, setAction]);
 

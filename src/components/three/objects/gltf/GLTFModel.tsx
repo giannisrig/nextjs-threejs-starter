@@ -51,14 +51,13 @@ function GLTFModel({ url, name, modelPosition, modelScale = 1, ...props }: GLTFM
 
   useEffect(() => {
     if (!rendered) return;
-    console.log("rendered");
+    // console.log("rendered");
     dispatch(addObjectsLoaded());
   }, [dispatch, rendered]);
 
   const onRendered = () => {
     if (!rendered) {
       setRendered(true);
-      // dispatch(addObjectsLoaded());
     }
   };
 

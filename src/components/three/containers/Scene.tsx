@@ -1,10 +1,9 @@
 "use client";
 import { ReactNodeWrapper } from "@/types/ReactNodeWrapper";
 import { CameramanState, ThreeState } from "@/types/three/state";
-import { useAppDispatch } from "@/libs/store/store";
-import { useEffect, useState } from "react";
-import { setCameraControls, setSceneLoaded } from "@/slices/threeSlice";
-import { setLoading } from "@/slices/loadingSlice";
+import { RootState, useAppDispatch, useAppSelector } from "@/libs/store/store";
+import { useEffect } from "react";
+import { setCameraControls, setSceneLoaded, setObjectsLoaded } from "@/slices/threeSlice";
 import { Vector3 } from "three";
 import useThreeState from "@/libs/hooks/useThreeState";
 
@@ -18,28 +17,56 @@ const Scene = ({ targetPosition, cameraPosition, objectsDeps, children }: SceneC
   // Set up the Redux State dispatch
   const dispatch = useAppDispatch();
 
-  const { objectsLoaded } = useThreeState() as ThreeState;
+  // Get the Redux state for the objects loaded and scene loaded
+  const { objectsLoaded, sceneLoaded } = useThreeState() as ThreeState;
 
-  // Set the scene loaded to false
-  // dispatch(setSceneLoaded(false));
+  // Get the Redux state for the enteredWebsite
+  const enteredWebsite = useAppSelector((state: RootState) => state.loading.entered); // updated
+
+  // This code runs to reset the sceneLoaded & objectsLoaded state
+  useEffect(() => {
+    // Update the camera controls
+    dispatch(setSceneLoaded(false));
+    dispatch(setObjectsLoaded(0));
+
+    // Create a new camera position that is slightly away from the one that will be set
+    // We need this so that we can have a nice camera transition when entering the website for first time
+    // Set up the new cameraman state
+    const newCameraman: CameramanState = {
+      targetPosition: new Vector3(targetPosition.x, targetPosition.y, targetPosition.z + 70),
+      cameraPosition: new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z + 70),
+    };
+
+    // Update the state
+    dispatch(setCameraControls(newCameraman));
+    console.log("Set scene loaded to false");
+    console.log("Set scene objects to 0");
+  }, [cameraPosition, dispatch, targetPosition]);
 
   useEffect(() => {
     if (objectsDeps === objectsLoaded) {
       console.log("Scene Objects loaded");
-      // Remove the loading screen
-      dispatch(setLoading(false));
+
+      // Set the scene loaded to true
+      dispatch(setSceneLoaded(true));
     }
   }, [objectsLoaded, objectsDeps, dispatch]);
 
   useEffect(() => {
-    // Update the camera controls
-    const newCameraman: CameramanState = {
-      targetPosition: targetPosition,
-      cameraPosition: cameraPosition,
-    };
+    // When the scene is loaded and the user has entered the website
+    if (sceneLoaded && enteredWebsite) {
+      console.log("Updating the cameraman state");
 
-    dispatch(setCameraControls(newCameraman));
-  }, [cameraPosition, dispatch, targetPosition]);
+      // Set up the new cameraman state
+      const newCameraman: CameramanState = {
+        targetPosition: targetPosition,
+        cameraPosition: cameraPosition,
+      };
+
+      // Update the state
+      dispatch(setCameraControls(newCameraman));
+    }
+  }, [cameraPosition, dispatch, targetPosition, sceneLoaded, enteredWebsite]);
 
   return <group>{children}</group>;
 };
