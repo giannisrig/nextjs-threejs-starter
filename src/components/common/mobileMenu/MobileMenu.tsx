@@ -39,7 +39,7 @@ export default function MobileMenu() {
   }, [dispatch, pathname]);
 
   return (
-    <header className={`fixed right-0 top-0 z-30 h-screen w-[300px] bg-mirage transition-all duration-200 ` + mobileMenuClass}>
+    <header className={`fixed right-0 top-0 z-30 h-screen w-full bg-white  transition-all duration-1000 ` + mobileMenuClass}>
       <div className="flex h-full w-full flex-col">
         <div className="flex items-center justify-between border-b-2 border-bleached px-30px py-10px pb-5px">
           <div className="py-10px xl:py-20px">Logo Here</div>

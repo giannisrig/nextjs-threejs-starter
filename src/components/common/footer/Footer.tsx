@@ -5,7 +5,6 @@ import Overlay from "@/components/common/overlay/Overlay";
 export default function Footer() {
   return (
     <>
-      <Overlay />
       <footer className="relative z-2 flex w-full flex-col backdrop-blur-md">
         <MainFooter />
         <SubFooter />

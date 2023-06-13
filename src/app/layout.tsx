@@ -1,3 +1,5 @@
+import Overlay from "@/components/common/overlay/Overlay";
+
 process.env.NODE_NO_WARNINGS = "stream/web";
 import React from "react";
 import { Metadata } from "next";
@@ -21,7 +23,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Wrapper>
           <Header />
           <main>{children}</main>
-          <Footer />
+          <Overlay />
+          {/*<Footer />*/}
         </Wrapper>
       </body>
     </html>
