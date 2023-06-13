@@ -40,8 +40,8 @@ const LoadingScreen = () => {
           <div className="flex w-max flex-col items-center justify-center gap-25px">
             <LogosTimeline />
             <div className="flex w-max flex-col items-center justify-center gap-5px">
-              <h1 className="text-4xl font-bold">NextJS & ThreeJS Starter Template</h1>
-              <p className="text-lg">A starter template for NextJS with ThreeJS and @react-three/fiber</p>
+              <h1 className=" font-secondary text-4xl font-bold ">NextJS & ThreeJS Starter Template</h1>
+              <p className="font-secondary text-lg ">A starter template for NextJS with ThreeJS and @react-three/fiber</p>
             </div>
             <div className="h-[56px]">
               {sceneLoaded && (

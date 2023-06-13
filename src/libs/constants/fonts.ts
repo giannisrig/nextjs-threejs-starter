@@ -24,10 +24,27 @@ const drallen = localFont({
   variable: "--font-secondary",
 });
 
+// load the local fonts
+const spiritedAway = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/SpiritedAway/SpiritedAway.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/SpiritedAway/SpiritedAwayBold.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-secondary",
+});
+
 //define the fonts object
 const fonts: AppFonts = {
   primary: unna,
-  secondary: drallen,
+  secondary: spiritedAway,
 };
 
 export default fonts;
