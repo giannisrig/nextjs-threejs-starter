@@ -39,13 +39,13 @@ const Scene = ({ targetPosition, cameraPosition, objectsDeps, children }: SceneC
 
     // Update the state
     dispatch(setCameraControls(newCameraman));
-    console.log("Set scene loaded to false");
-    console.log("Set scene objects to 0");
+    // console.log("Set scene loaded to false");
+    // console.log("Set scene objects to 0");
   }, [cameraPosition, dispatch, targetPosition]);
 
   useEffect(() => {
     if (objectsDeps === objectsLoaded) {
-      console.log("Scene Objects loaded");
+      // console.log("Scene Objects loaded");
 
       // Set the scene loaded to true
       dispatch(setSceneLoaded(true));
@@ -55,7 +55,7 @@ const Scene = ({ targetPosition, cameraPosition, objectsDeps, children }: SceneC
   useEffect(() => {
     // When the scene is loaded and the user has entered the website
     if (sceneLoaded && enteredWebsite) {
-      console.log("Updating the cameraman state");
+      // console.log("Updating the cameraman state");
 
       // Set up the new cameraman state
       const newCameraman: CameramanState = {

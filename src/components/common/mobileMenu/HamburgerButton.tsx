@@ -15,7 +15,7 @@ export default function HamburgerButton() {
 
   return (
     <a href="#" className="flex items-center gap-7px transition-colors duration-200  hover:text-green" onClick={(e) => openMobileMenu(e)}>
-      <Image className="invert" src="/images/hamburger.svg" alt="Menu Icon" width={20} height={20} />
+      <Image className="invert" src="/images/hamburger.svg" alt="Menu Icon" width={20} height={13} />
       <span className="text-sm">Menu</span>
     </a>
   );
