@@ -47,6 +47,7 @@ module.exports = {
         'mirage': '#1D1528',
         'bleached': '#302440',
         'silver': '#acacac',
+        'gray': "#666",
         'basicGray': '#eee',
       },
       backgroundImage: {
